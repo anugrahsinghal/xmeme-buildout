@@ -6,8 +6,6 @@ import com.anugrah.projects.xmeme.crio.exchanges.MemeCreatedResponse;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.service.MemeRetrievalService;
 import com.anugrah.projects.xmeme.crio.service.MemeStorageService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
@@ -77,6 +75,7 @@ public class MemesController {
 	@GetMapping("/memes/{id}")
 	public ResponseEntity<Meme> retrieveMemes(@PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
+		log.info("meme found = {}", meme);
 
 		return ResponseEntity.ok().body(meme);
 	}
@@ -102,7 +101,8 @@ public class MemesController {
 	@PatchMapping("/memes/{id}")
 	public ResponseEntity<MemeCreatedResponse> updateMeme(UpdateMemeRequest updateMemeRequest, @PathVariable Long id) {
 		final MemeCreatedResponse memeUpdated = memeStorageService.updateMeme(id, updateMemeRequest);
-
+		log.info("memeUpdated = {}", memeUpdated);
+		
 		return ResponseEntity.ok().body(memeUpdated);
 	}
 

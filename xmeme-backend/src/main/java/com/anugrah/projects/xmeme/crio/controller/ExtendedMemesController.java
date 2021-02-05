@@ -1,6 +1,7 @@
 package com.anugrah.projects.xmeme.crio.controller;
 
 import com.anugrah.projects.xmeme.crio.entity.Meme;
+import com.anugrah.projects.xmeme.crio.ratelimiter.RateLimit;
 import com.anugrah.projects.xmeme.crio.service.MemeRetrievalService;
 import com.anugrah.projects.xmeme.crio.service.MemeStorageService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -33,6 +34,7 @@ public class ExtendedMemesController {
 	@ApiImplicitParams( {@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0"),
 			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int", example = "20"),
 			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string", example = "id")})
+	@RateLimit(value = 10, key = "Throttle Retrieval of memes paged")
 	public ResponseEntity<List<Meme>> retrieveMemesPaged(
 			@PageableDefault(size = 100, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		final List<Meme> memes = memeRetrievalService.retrieveMemes(pageable);
