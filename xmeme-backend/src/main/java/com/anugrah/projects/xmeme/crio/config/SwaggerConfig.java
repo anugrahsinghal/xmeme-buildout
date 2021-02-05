@@ -1,5 +1,9 @@
 package com.anugrah.projects.xmeme.crio.config;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +26,20 @@ public class SwaggerConfig {
 	private int serverPort;
 
 	@Bean
-	public Docket api() {
+	public Docket api() throws SocketException {
+
+		final Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+		while (networkInterfaces.hasMoreElements()) {
+			final Enumeration<InetAddress> inetAddresses = networkInterfaces.nextElement().getInetAddresses();
+			while (inetAddresses.hasMoreElements()) {
+				final InetAddress inetAddress = inetAddresses.nextElement();
+				System.out.println("inetAddress.getHostAddress() = " + inetAddress.getHostAddress());
+				System.out.println("inetAddress.getHostName() = " + inetAddress.getHostName());
+				System.out.println("inetAddress.getCanonicalHostName() = " + inetAddress.getCanonicalHostName());
+			}
+		}
+
+
 		return new Docket(DocumentationType.SWAGGER_2)
 				// .host("localhost:" + serverPort)
 				.ignoredParameterTypes(Pageable.class)

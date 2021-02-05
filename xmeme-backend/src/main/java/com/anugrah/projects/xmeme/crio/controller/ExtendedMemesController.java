@@ -29,8 +29,8 @@ public class ExtendedMemesController {
 	private MemeRetrievalService memeRetrievalService;
 
 	@GetMapping("/memes")
-    @ApiOperation(value = "retrieveMemesPaged", nickname = "retrieveMemesPaged")
-    @ApiImplicitParams( {@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0"),
+	@ApiOperation(value = "retrieveMemesPaged", nickname = "retrieveMemesPaged")
+	@ApiImplicitParams( {@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0"),
 			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int", example = "20"),
 			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string", example = "id")})
 	public ResponseEntity<List<Meme>> retrieveMemesPaged(

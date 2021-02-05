@@ -26,8 +26,8 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 
 		validateThatMemeIsUnique(name, url, caption);
 
-        final Meme savedMeme = memeRepository.saveAndFlush(meme);
-        log.info("MEME SAVED");
+		final Meme savedMeme = memeRepository.saveAndFlush(meme);
+		log.info("MEME SAVED");
 
 		return new MemeCreatedResponse(savedMeme.getId());
 	}
@@ -40,7 +40,7 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 		if (memeExists) {
 			log.error("Meme already exists -> Caption [{}], URL [{}], Name [{}]",captionExists,urlExists,nameExists);
 			throw new DuplicateMemeException("Meme already exists");
-        }
+		}
         log.info("Meme is unique");
 	}
 

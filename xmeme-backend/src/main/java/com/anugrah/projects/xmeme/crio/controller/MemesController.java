@@ -58,7 +58,7 @@ public class MemesController {
 	public ResponseEntity<MemeCreatedResponse> postMeme(@RequestParam("name") String name, @RequestParam("url") String url,
 	                                                    @RequestParam("caption") String caption) {
 
-        final MemeCreatedResponse memeCreated = memeStorageService.createMeme(name, url, caption);
+		final MemeCreatedResponse memeCreated = memeStorageService.createMeme(name, url, caption);
         log.info("Meme Created {}", memeCreated);
 
 		return ResponseEntity.ok().body(memeCreated);
@@ -68,7 +68,7 @@ public class MemesController {
 	@ApiOperation(value = "retrieveMemes", nickname = "retrieveMemes")
 	public ResponseEntity<List<Meme>> retrieveMemes() {
 		final List<Meme> memes = memeRetrievalService.retrieveMemes();
-		log.info("Meme Object Size {}", memes.size());
+		log.info("Memes Fetched Size {}", memes.size());
 
 		return ResponseEntity.ok().body(memes);
 	}
