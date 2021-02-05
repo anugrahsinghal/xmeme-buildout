@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MemeCreatedResponse {
-	Long id;
+	private Long id;
 }
