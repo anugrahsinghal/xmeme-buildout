@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Data
@@ -16,6 +17,7 @@ public class Meme implements Serializable {
 	private Long id;
 
 	private String name;
+	@URL
 	private String url;
 	private String caption;
 

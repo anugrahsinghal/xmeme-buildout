@@ -7,5 +7,7 @@ import org.springframework.data.domain.Pageable;
 public interface MemeRetrievalService {
 	List<Meme> retrieveMemes(Pageable pageable);
 
+	List<Meme> retrieveMemes();
+
 	Meme retrieveMeme(Long id);
 }

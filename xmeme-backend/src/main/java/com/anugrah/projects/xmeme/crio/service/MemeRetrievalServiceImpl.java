@@ -26,6 +26,11 @@ public class MemeRetrievalServiceImpl implements MemeRetrievalService {
 	}
 
 	@Override
+	public List<Meme> retrieveMemes() {
+		return memeRepository.findTop100ByOrderByIdDesc();
+	}
+
+	@Override
 	public Meme retrieveMeme(Long id) {
 		Meme meme;
 		final Optional<Meme> memeOptional = memeRepository.findById(id);

@@ -1,16 +1,20 @@
 package com.anugrah.projects.xmeme.crio.service;
 
 import com.anugrah.projects.xmeme.crio.entity.Meme;
+import com.anugrah.projects.xmeme.crio.exceptions.DuplicateMemeException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeNotFoundException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeUpdateException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeCreatedResponse;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.repository.MemeRepository;
 import java.util.Optional;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class MemeStorageServiceImpl implements MemeStorageService {
 
 	@Autowired
@@ -20,9 +24,31 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 	public MemeCreatedResponse createMeme(final String name, final String url, final String caption) {
 		final Meme meme = new Meme(name, url, caption);
 
+		validateThatMemeIsUnique(name, url, caption);
+
 		final Meme savedMeme = memeRepository.save(meme);
 
 		return new MemeCreatedResponse(savedMeme.getId());
+	}
+
+	private void validateThatMemeIsUnique(String name, String url, String caption) {
+		final boolean captionExists = memeRepository.existsMemeByCaption(caption);
+		final boolean urlExists = memeRepository.existsMemeByUrl(url);
+		final boolean nameExists = memeRepository.existsMemeByName(name);
+		final boolean memeExists = captionExists || urlExists || nameExists;
+		if (memeExists) {
+			log.error("Meme already exists -> Caption [{}], URL [{}], Name [{}]",captionExists,urlExists,nameExists);
+			throw new DuplicateMemeException("Meme already exists");
+		}
+	}
+
+	private void validateThatMemeIsUnique(Meme meme) {
+		final boolean memeExists = memeRepository.exists(Example.of(meme));
+		log.info("Meme already memeExists {}", memeExists);
+
+		if (memeExists) {
+			throw new DuplicateMemeException("Meme already exists");
+		}
 	}
 
 	@Override

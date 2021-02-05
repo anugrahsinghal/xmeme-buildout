@@ -10,9 +10,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
+@Log4j2
 public class MemesController {
 
 	@Autowired
@@ -65,14 +64,10 @@ public class MemesController {
 	}
 
 	@GetMapping("/memes")
-	@ApiOperation(value = "retrieveMemesPaged", nickname = "retrieveMemesPaged")
-	@ApiImplicitParams( {@ApiImplicitParam(name = "page", paramType = "query", dataType = "int"),
-			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int"),
-			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string")})
-	public ResponseEntity<List<Meme>> retrieveMemesPaged(
-			@ApiIgnore("Ignored because swagger ui shows the wrong params, instead they are explained in the implicit params")
-			@PageableDefault(size = 100) Pageable pageable) {
-		final List<Meme> memes = memeRetrievalService.retrieveMemes(pageable);
+	@ApiOperation(value = "retrieveMemes", nickname = "retrieveMemes")
+	public ResponseEntity<List<Meme>> retrieveMemes() {
+		final List<Meme> memes = memeRetrievalService.retrieveMemes();
+		log.info("Meme Object Size {}", memes.size());
 
 		return ResponseEntity.ok().body(memes);
 	}
