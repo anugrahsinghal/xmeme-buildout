@@ -26,25 +26,19 @@ public class SwaggerConfig {
 	private int serverPort;
 
 	@Value("#{systemEnvironment['GITPOD_WORKSPACE_URL']}")
-	private String hostname;
+	private String gitpodHostName;
 
 	@Bean
 	public Docket api() throws SocketException {
-
-		final Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
-		while (networkInterfaces.hasMoreElements()) {
-			final Enumeration<InetAddress> inetAddresses = networkInterfaces.nextElement().getInetAddresses();
-			while (inetAddresses.hasMoreElements()) {
-				final InetAddress inetAddress = inetAddresses.nextElement();
-				System.out.println("inetAddress.getHostAddress() = " + inetAddress.getHostAddress());
-				System.out.println("inetAddress.getHostName() = " + inetAddress.getHostName());
-				System.out.println("inetAddress.getCanonicalHostName() = " + inetAddress.getCanonicalHostName());
-			}
-		}
-
-        final String newHost = hostname.replace("https://", "");
-        String host = serverPort + "-" + newHost;
-        System.err.println(host);
+        String host;
+        if(gitpodHostName!=null && !gitpodHostName.isEmpty()) {
+            final String newHost = gitpodHostName.replace("https://", "");
+            host = serverPort + "-" + newHost;    
+        } else {
+            host = "localhost:" + serverPort;
+        }
+        
+        
 		return new Docket(DocumentationType.SWAGGER_2)
 				.host(host)
 				.ignoredParameterTypes(Pageable.class)
