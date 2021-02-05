@@ -58,7 +58,8 @@ public class MemesController {
 	public ResponseEntity<MemeCreatedResponse> postMeme(@RequestParam("name") String name, @RequestParam("url") String url,
 	                                                    @RequestParam("caption") String caption) {
 
-		final MemeCreatedResponse memeCreated = memeStorageService.createMeme(name, url, caption);
+        final MemeCreatedResponse memeCreated = memeStorageService.createMeme(name, url, caption);
+        log.info("Meme Created {}", memeCreated);
 
 		return ResponseEntity.ok().body(memeCreated);
 	}

@@ -24,7 +24,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.host("localhost:" + serverPort)
+				// .host("localhost:" + serverPort)
 				.ignoredParameterTypes(Pageable.class)
 				.select()
 				.apis(RequestHandlerSelectors.any())

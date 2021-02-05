@@ -55,7 +55,7 @@ public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<Tom
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:" + swaggerPort);
+				registry.addMapping("/**");
 			}
 		};
 	}
