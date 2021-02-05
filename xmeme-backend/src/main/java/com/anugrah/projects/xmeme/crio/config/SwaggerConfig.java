@@ -25,6 +25,9 @@ public class SwaggerConfig {
 	@Value("${server.port}")
 	private int serverPort;
 
+	@Value("#{systemEnvironment['GITPOD_WORKSPACE_URL']}")
+	private String hostname;
+
 	@Bean
 	public Docket api() throws SocketException {
 
@@ -39,9 +42,11 @@ public class SwaggerConfig {
 			}
 		}
 
-
+        final String newHost = hostname.replace("https://", "");
+        String host = serverPort + "-" + newHost;
+        System.err.println(host);
 		return new Docket(DocumentationType.SWAGGER_2)
-				// .host("localhost:" + serverPort)
+				.host(host)
 				.ignoredParameterTypes(Pageable.class)
 				.select()
 				.apis(RequestHandlerSelectors.any())

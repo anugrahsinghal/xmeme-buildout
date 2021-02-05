@@ -5,6 +5,9 @@
 
 # cd to the cloned repo directory
 
+### Kill Server
+kill -9 `sudo lsof -t -i:8080`
+kill -9 `sudo lsof -t -i:8081`
 
 # Run the user’s installation steps which will install any necessary dependencies required for the server to run, with sudo permission
 
