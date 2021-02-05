@@ -1,13 +1,15 @@
 #!/bin/bash
 
 
-# git clone the repo
-
-# cd to the cloned repo directory
-
-### Kill Server
+### Kill Server on ports
 kill -9 `sudo lsof -t -i:8080`
 kill -9 `sudo lsof -t -i:8081`
+rm meme_db*
+
+# git clone the repo
+# git clone https://gitlab.crio.do/COHORT_ME_BUILDOUT_XMEME_ENROLL_1612436694845/anugrahsinghal1-ME_BUILDOUT_XMEME
+# cd to the cloned repo directory
+# cd anugrahsinghal1-ME_BUILDOUT_XMEME
 
 # Run the user’s installation steps which will install any necessary dependencies required for the server to run, with sudo permission
 
