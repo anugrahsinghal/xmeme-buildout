@@ -1,9 +1,5 @@
 package com.anugrah.projects.xmeme.crio.config;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,21 +25,21 @@ public class SwaggerConfig {
 	private String gitpodHostName;
 
 	@Bean
-	public Docket api() throws SocketException {
-        String host;
-        if(gitpodHostName!=null && !gitpodHostName.isEmpty()) {
-            final String newHost = gitpodHostName.replace("https://", "");
-            host = serverPort + "-" + newHost;    
-        } else {
-            host = "localhost:" + serverPort;
-        }
-        
-        
+	public Docket api() {
+		String host;
+		if (gitpodHostName != null && !gitpodHostName.isEmpty()) {
+			final String newHost = gitpodHostName.replace("https://", "");
+			host = serverPort + "-" + newHost;
+		} else {
+			host = "localhost:" + serverPort;
+		}
+
+
 		return new Docket(DocumentationType.SWAGGER_2)
 				.host(host)
 				.ignoredParameterTypes(Pageable.class)
 				.select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.anugrah.projects.xmeme.crio"))
 				.paths(PathSelectors.any())
 				.build();
 	}
