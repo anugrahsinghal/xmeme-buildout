@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+:root {
+  --primary-color: purple;
+  --dark-gray: #6b7280;
+  --off-white: #f3f4f6;
+}
+
+body {
+  font-family: "Monsterrat", sans-serif;
+  margin: 0;
+}
+
+.header {
+  background-color: var(--primary-color);
+}
+
+.header h2 {
+  margin: 0;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--off-white);
+}
+
+hr {
+  margin: 1rem 0;
+  border: none;
+  /* visibility: hidden; */
+}
+
+#submit-meme {
+  box-sizing: border-box;
+  text-decoration: none;
+  color: var(--off-white);
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  /* margin: 2rem 2rem 0; */
+  display: inline-block;
+}
+
+#content {
+  margin-left: 2rem;
+}
+
+label {
+  display: none;
+}
+input {
+  font-family: "Monsterrat";
+  font-size: medium;
+  font-weight: bold;
+  border: none;
+  border-bottom:1px solid rgba(0, 0, 0, 0.322);
+  padding: 1rem;
+  width: 70%;
+}
+
+#meme_created_msg {
+  display: none;
+}
+
+.container {
+  /* margin: 1rem;
+  margin-left: 2rem; */
+  /* width: fit-content;
+  height: fit-content; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-container {
+  /* display: inline; */
+  /*flex-direction: column; */
+
+  margin: 4px;
+  /*flex: 0 1 calc(20% - 8px);  */
+  max-width: 40%;
+  max-height: 30%;
+}
+
+.image-container img {
+  max-width: 300px;
+  max-height: 300px;
+}
