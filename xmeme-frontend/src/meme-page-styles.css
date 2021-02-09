@@ -85,13 +85,13 @@ body::-webkit-scrollbar-thumb {
   padding: 2px 16px;
 }
 
-.container h4 {
+.container .name {
   margin: 0;
   margin-top: 1rem;
 }
 
 /* edit meme btn */
-#edit-meme {
+.edit-meme {
   box-sizing: border-box;
   text-decoration: none;
   color: var(--off-white);
@@ -118,12 +118,111 @@ body::-webkit-scrollbar-thumb {
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
   /*Flexbox*/
+  display: none;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  /* Font */
+  font-family: "Monsterrat";
+}
+
+#overlay-content {
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
+  /* background-color: rgba(223, 208, 208, 0.322); */
+  background-color: var(--off-white);
+  border: 1px solid var(--dark-gray);
+  border-radius: 5rem;
+  margin: 1rem;
 }
 
+#overlay-content #overlay-image-container,
+#edit-meme-form {
+  margin: 2rem;
+  padding: 1rem;
+}
+
+#edit-meme-form input {
+  font-family: "Monsterrat";
+  font-size: medium;
+  font-weight: bold;
+  border: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.322);
+  padding: 1rem;
+  width: 70%;
+  background-color: unset;
+}
+
+#submit-edit-meme-btn,
 #exit-overlay {
-  color: red;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: var(--off-white);
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  /* margin: 2rem 2rem 0; */
+  display: flex;
+
+  margin: 0.2rem 0.5rem;
+}
+
+.edit-label {
+  font-family: "Monsterrat";
+  font-size: medium;
+  border: none;
+  width: 70%;
+  background-color: unset;
+  text-overflow: wrap;
+}
+
+#meme-info-container {
+  flex-direction: row;
+}
+
+.name-title,
+.caption-title {
+  font-family: "Monsterrat";
+  font-style: italic;
+  font-size: small;
+  font-weight: lighter;
+  word-wrap: break-word;
+}
+
+.caption {
+  display: inline;
+}
+
+.name {
+  display: inline;
+}
+
+.overlay-img {
+  object-fit: contain;
+  height: auto;
+}
+
+#overlay-image-container {
+  /* display: none; */
+}
+
+#meme_notification {
+  transition: 1s;
+  transform-origin: left;
+
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  bottom: 16px;
+  left: 16px;
+  border: none;
+  max-width: 360px;
+  height: 36px;
+  z-index: 9999999999999;
 }
