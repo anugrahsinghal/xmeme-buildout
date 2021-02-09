@@ -4,6 +4,8 @@
   --primary-color: purple;
   --dark-gray: #6b7280;
   --off-white: #f3f4f6;
+  --scrollbarBG: var(var(--off-white));
+  --thumbBG: var(--dark-gray);
 }
 
 body {
@@ -11,10 +13,6 @@ body {
   margin: 0;
 }
 
-html {
-  --scrollbarBG: var(var(--off-white));
-  --thumbBG: var(--dark-gray);
-}
 div.card::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: 6px;
@@ -52,33 +50,40 @@ body::-webkit-scrollbar-thumb {
 .parent-meme-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 50px 0px 0px 0px;
-  margin-bottom: 10px;
+  /* Remving padding from parent-container */
+  /* padding: 50px 0px 0px 0px; */
+  margin-bottom: 1rem;
   justify-content: space-evenly;
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.2);
   transition: 0.3s;
+  /* doesn't seem to make any difference when removed and flex-basis is kept */
   max-width: 30%;
   border-radius: 5px;
   margin: 5px;
-  padding: 10px 5px;
+  padding: 5px 5px;
+  /* Ordering and sizing */
   flex-basis: 30%;
-  max-height: 110vh;
+  max-height: 80vh;
+  min-height: 42vh;
   overflow: scroll;
-  align-items: flex-start;
+  align-items: flex-end;
+  /* noticed that it made no difference */
+  align-items: center;
+  background-color: khaki;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
 }
 
 .card img {
   border-radius: 5px 5px 0 0;
   width: 100%;
   max-height: 70%;
-  object-fit: contain;
+  /* object-fit: contain; */
 }
 
 .container {
@@ -140,12 +145,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 #overlay-content #overlay-image-container,
-#edit-meme-form {
-  margin: 2rem;
+.edit-meme-form {
+  margin: 1rem;
   padding: 1rem;
 }
 
-#edit-meme-form input {
+.edit-meme-form input {
   font-family: "Monsterrat";
   font-size: medium;
   font-weight: bold;
@@ -171,6 +176,12 @@ body::-webkit-scrollbar-thumb {
   display: flex;
 
   margin: 0.2rem 0.5rem;
+  display: inline;
+}
+
+#exit-overlay {
+  background-color: var(--off-white);
+  color: var(--primary-color);
 }
 
 .edit-label {
@@ -195,10 +206,6 @@ body::-webkit-scrollbar-thumb {
   word-wrap: break-word;
 }
 
-.caption {
-  display: inline;
-}
-
 .name {
   display: inline;
 }
@@ -210,7 +217,8 @@ body::-webkit-scrollbar-thumb {
 
 #meme_notification {
   transition: 1s;
-  transform-origin: left;
+  transition-delay: 1s;
+  transition-duration: 2s;
 
   position: fixed;
   margin: 0;
@@ -221,4 +229,68 @@ body::-webkit-scrollbar-thumb {
   max-width: 360px;
   height: 36px;
   z-index: 9999999999999;
+}
+
+.container > button {
+  margin-left: 35%;
+  margin-right: 33%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.name > .name-title {
+  /* margin-left: 30%; */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.container > .name {
+  /* margin: auto; */
+}
+
+.container {
+  border-spacing: 10px;
+  /* overflow: scroll; */
+}
+
+.container > .caption {
+  /* margin: auto; */
+  overflow-wrap: break-word;
+  /* overflow: hidden; */
+  /* word-break: break-all; */
+  /* text-overflow: clip; */
+  /* white-space: nowrap; */
+  /* text-overflow: ellipsis; */
+
+  /* display: inline-block; */
+  /* max-width: 70vw; */
+  /* overflow: scroll; */
+  /* text-overflow: ellipsis; */
+  /* vertical-align: top; */
+  /* white-space: nowrap; */
+  /* color: red; */
+}
+
+/* .caption:hover {
+  overflow: visible;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-all; 
+} */
+
+.container > button {
+  margin: auto;
+  padding: 0.7rem;
+  margin-bottom: 0px;
+}
+
+.container {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }

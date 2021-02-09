@@ -1,33 +1,38 @@
 let log = console.log;
 
-let cardTemplate = `
+const cardTemplate = `
 {{#each memes}}
 <div class="card" id={{this.id}}>
-<img src="{{url}}"	alt="url"/>
+<img src="{{url}}"	alt="url"/ >
 <div class="container">
-	<button class="edit-meme">Edit Meme</button><br>
-	<h4 class="name">
+	<div class="name">
 		<span class="name-title">Posted By: </span><b>{{name}}</b>
-	</h4>
+	</div>
 	<br>
-	<p class="caption">
+	<div class="caption">
 		<span class="caption-title">Caption: </span>{{caption}}
-	</p>
+	</div><br>
+	<button class="edit-meme">Edit Meme</button><br>
 </div>
 </div>
 {{/each}}
 `;
 
+const overlayImageContainer = `
+<div id="overlay-image-container">
+<form class="edit-meme-form" id={{id}}>
+	<input type="text" id="edited-caption" placeholder="enter new caption" maxlength="254"/>
+	<input type="text" id="edited-name" placeholder="enter new name" maxlength="254"/>
+	<br>
+	<button type="submit" id="submit-edit-meme-btn">Submit</button>
+	<button type="submit" id="exit-overlay">Close</button>
+</form>
+`;
+
 const template = Handlebars.compile(cardTemplate);
-// execute the compiled template and print the output to the console
-// console.log(template({ doesWhat: "rocks!" }));
+const overlayTemplate = Handlebars.compile(overlayImageContainer);
+const xmemeBackendUrl = "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
 
-// const xmemeBackendUrl = "http://localhost:8082/memes";
-const xmemeBackendUrl =
-  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
-
-attachExitOverlayBtn();
-handleFormReload();
 loadMemes();
 
 function attachExitOverlayBtn() {
@@ -37,8 +42,8 @@ function attachExitOverlayBtn() {
 }
 
 function handleFormReload() {
-  var form = document.querySelector("#edit-meme-form");
-  form.addEventListener("submit", (event) => event.preventDefault());
+  var form = document.querySelector(".edit-meme-form");
+	form.addEventListener("submit", (event) => event.preventDefault());
 }
 
 function loadMemes() {
@@ -59,7 +64,6 @@ function loadMemes() {
     .then((data) => {
       log(JSON.stringify(data));
       let cards = template({ memes: data });
-      log(cards);
       parentContainer.innerHTML = cards;
     })
     .then(() => {
@@ -72,6 +76,7 @@ function loadMemes() {
     });
 }
 
+/*
 function brkLine() {
   let breakLine = document.createElement("br");
   return breakLine;
@@ -152,6 +157,7 @@ function makeCaption(caption) {
 
   return captionElem;
 }
+*/
 
 function attachButtonsToTheLoadedMemes() {
   log("attach buttons");
@@ -167,13 +173,30 @@ function attachButtonsToTheLoadedMemes() {
 function editMeme(event) {
   log(event);
   let cardToEdit = event.target.parentElement.parentElement;
-  let memeUnqiueId =
-    cardToEdit.getAttribute("id") != null ? cardToEdit.getAttribute("id") : 2;
-  log(memeUnqiueId);
-  showOverlayForm(memeUnqiueId);
+	
+	// let imageToShow = cardToEdit.querySelector("img");
+	// let imgUrl = imageToShow.getAttribute('src');
+	
+  // let caption = cardToEdit.querySelector("caption");
+  
+  // let name = cardToEdit.querySelector("name");
+  
+	let memeUnqiueId = cardToEdit.getAttribute("id");
+  let v = overlayTemplate({
+    id: memeUnqiueId
+  });
 
+  document.querySelector("#overlay-content").innerHTML = v;
+
+	handleFormReload();
+	attachExitOverlayBtn();
+	
+	
+	showOverlayForm();
+	
   let submitMemeBtn = document.querySelector("#submit-edit-meme-btn");
-  submitMemeBtn.addEventListener("click", perforMemeEdit);
+	submitMemeBtn.addEventListener("click", perforMemeEdit);
+	
 }
 
 function showOverlayForm() {
@@ -181,7 +204,8 @@ function showOverlayForm() {
   document.querySelector("#overlay").style.display = "flex";
 
   document.querySelector("#edited-name").value = "";
-  document.querySelector("#edited-caption").value = "";
+	document.querySelector("#edited-caption").value = "";
+
 }
 
 function hideOverlayForm() {
@@ -193,9 +217,10 @@ function hideOverlayForm() {
 }
 
 function perforMemeEdit() {
-  let memeUnqiueId = 2;
 
-  // take input
+	let memeUnqiueId = document.querySelector('.edit-meme-form').getAttribute('id')
+
+    // take input
   let editedName = document.querySelector("#edited-name").value;
   let editedCaption = document.querySelector("#edited-caption").value;
 
@@ -254,6 +279,7 @@ function triggerIframe(isSuccess) {
     console.log("Hide I frame start");
     let frame = document.querySelector("#meme_notification");
     frame.style.display = "none";
-    console.log("Hide I frame complete");
+		console.log("Hide I frame complete");
+		location.reload();
   }, 5000);
 }
