@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController/*(value = "/memes")*/
-@Log4j2
 public class MemesController {
 
+	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemesController.class);
 	@Autowired
 	private MemeStorageService memeStorageService;
 

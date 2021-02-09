@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/extended")
-@Log4j2
 public class ExtendedMemesController {
 
+	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(ExtendedMemesController.class);
 	@Autowired
 	private MemeStorageService memeStorageService;
 

@@ -9,7 +9,7 @@ import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.repository.MemeRepository;
 import java.util.Optional;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -17,10 +17,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
-@Log4j2
 @Primary
 public class MemeStorageServiceImplLocal implements MemeStorageService {
 
+	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemeStorageServiceImplLocal.class);
 	@Autowired
 	private MemeRepository memeRepository;
 
