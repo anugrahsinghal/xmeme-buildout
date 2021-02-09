@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Monsterrat", sans-serif;
+}
+
+:root {
+  /* color from tail-wind-css */
+  --primary-color: purple;
+  --off-white: #f3f4f6;
+  --dark-gray: #6b7280;
+  --scrollbarBG: var(var(--off-white));
+  --thumbBG: var(--dark-gray);
+  /* avg phone size width is 320-414px */
+  --post-items-width: 330px;
+  --post-items-max-width: 414px;
+  --post-items-height: 400px;
+  --post-items-max-height: 640px;
+}
+
+div.card::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 6px;
+}
+div.card,
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+div.card::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+div.card::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+.header {
+  background-color: var(--primary-color);
+  border-bottom-left-radius: 1rem;
+}
+.header h2 {
+  margin: 0;
+  padding: 1rem;
+  /* margin-bottom: 2rem;
+  margin-left: 2rem; */
+  text-align: start;
+  color: var(--off-white);
+  font-weight: bolder;
+  line-height: 2;
+}
