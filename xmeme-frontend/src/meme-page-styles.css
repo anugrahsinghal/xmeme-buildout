@@ -208,10 +208,6 @@ body::-webkit-scrollbar-thumb {
   height: auto;
 }
 
-#overlay-image-container {
-  /* display: none; */
-}
-
 #meme_notification {
   transition: 1s;
   transform-origin: left;
