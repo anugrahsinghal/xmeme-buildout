@@ -12,12 +12,14 @@ import java.util.Optional;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
 @Log4j2
-public class MemeStorageServiceImpl implements MemeStorageService {
+@Primary
+public class MemeStorageServiceImplLocal implements MemeStorageService {
 
 	@Autowired
 	private MemeRepository memeRepository;
@@ -27,7 +29,7 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 
 	@Override
 	public MemeCreatedResponse createMeme(MemeDto memeDto) {
-		validateThatMemeIsUnique(memeDto);
+//		validateThatMemeIsUnique(memeDto);
 
 		final Meme meme = modelMapper.map(memeDto, Meme.class);
 

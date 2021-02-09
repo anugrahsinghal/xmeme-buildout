@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-@RestController
+@RestController/*(value = "/memes")*/
 @Log4j2
 public class MemesController {
 
@@ -37,7 +37,7 @@ public class MemesController {
 	@Autowired
 	private AppConfig appConfig;
 
-	@GetMapping
+	@GetMapping("/ping")
 	@ApiIgnore
 	public String ping() {
 		return "X-MEME is up and running";
@@ -61,7 +61,7 @@ public class MemesController {
 	 */
 	@PostMapping("/memes")
 	@ApiResponses(value = {
-			@ApiResponse(code = 409, message = "Duplicate Request")
+			@ApiResponse(code = 409, message = "Duplicate Meme")
 	})
 	public ResponseEntity<MemeCreatedResponse> postMeme(@RequestBody MemeDto memeDto) {
 
@@ -81,7 +81,7 @@ public class MemesController {
 	}
 
 
-	@GetMapping("/memes/{id}")
+	@GetMapping("memes/{id}")
 	public ResponseEntity<Meme> retrieveMemes(@PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
 		log.info("meme found = {}", meme);
@@ -107,8 +107,11 @@ public class MemesController {
 	 * "url": “new url”
 	 * }
 	 */
-	@PatchMapping("/memes/{id}")
+	@PatchMapping("memes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ApiResponses(value = {
+			@ApiResponse(code = 404, message = "Meme Not Found")
+	})
 	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest, @PathVariable Long id) {
 		memeStorageService.updateMeme(id, updateMemeRequest);
 	}
