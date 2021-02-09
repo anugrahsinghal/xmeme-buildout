@@ -2,36 +2,52 @@ let log = console.log;
 
 // const xmemeBackendUrl = "http://localhost:8082/memes";
 const xmemeBackendUrl =
-  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+	"https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+	
+document.querySelector("#exit-overlay").addEventListener("click", hideOverlayForm)
 
-let editMemeBtn = document.querySelector("#edit-meme");
-log(editMemeBtn);
+let editMemeBtns = document.querySelectorAll("#edit-meme");
+log(editMemeBtns);
 
-editMemeBtn.addEventListener("click", editMeme);
+editMemeBtns.forEach((item) => {
+  item.addEventListener("click", editMeme);
+});
 
-function editMeme() {
-  let cardToEdit = editMemeBtn.parentElement.parentElement;
-  let memeUid = cardToEdit.getAttribute("id");
+function editMeme(event) {
+  let cardToEdit = event.target.parentElement.parentElement;
+  let memeUnqiueId =
+    cardToEdit.getAttribute("id") != null ? cardToEdit.getAttribute("id") : 2;
+  log(memeUnqiueId);
+  showOverlayForm(memeUnqiueId);
 
-  showFormToEdit(memeUid);
+  let submitMemeBtn = document.querySelector("#submit-meme");
+  submitMemeBtn.addEventListener("click", perforMemeEdit(memeUnqiueId));
 }
 
-function showFormToEdit(memeUid) {
-  // show form
+function showOverlayForm(memeUnqiueId) {
+  // maybe fetch and show
+  document.querySelector("#overlay").style.display = "block";
+}
 
+function hideOverlayForm() {
+  document.querySelector("#overlay").style.display = "none";
+  // clear data
+}
+
+function perforMemeEdit(memeUnqiueId) {
   // take input
   let editedName = document.querySelector("#edited-name").value;
-  let editedCaption = document.querySelector("#meme-edited-caption").value;
+  let editedCaption = document.querySelector("#edited-caption").value;
 
-	let editMemeData = {}
-	if(editedName != undefined) {
-		editMemeData['name'] = editedName;
-	}
-	if(editedCaption != undefined) {
-		editMemeData['caption'] = editedCaption;
-	}
+  let editMemeData = {};
+  if (editedName != undefined) {
+    editMemeData["name"] = editedName;
+  }
+  if (editedCaption != undefined) {
+    editMemeData["caption"] = editedCaption;
+  }
 
-	fetch(encodeURI(xmemeBackendUrl + "/" + memeUid), {
+  fetch(encodeURI(xmemeBackendUrl + "/" + memeUnqiueId), {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -42,72 +58,22 @@ function showFormToEdit(memeUid) {
     .then((response) => {
       log(response.body);
       log(response);
-      if (response.status === 409 || response.status === "409") {
-        console.error("Duplicate Meme Posted");
+      if (response.status === 404 || response.status === "404") {
+        console.error("Meme Not Found");
         triggerIframe(false);
-        throw new Error("Please post an original Meme");
-      } else if (!response.ok) {
-        console.error(
-          "Response is not OK, SOME ERROR OCCURED, Error with Server Response"
-        );
-        throw new Error("Error with Server Response");
-      } else if (response.ok) {
+        throw new Error("Meme Not Found");
+      } else if (response.status === "204" || response.status === "204") {
         triggerIframe(true);
         return response.json();
+      } else {
+        throw new Error(response.status);
       }
     })
     .then((data) => {
-      console.log("Meme Posted Successfully:", JSON.stringify(data));
+      console.log("Meme Edited Successfully:", JSON.stringify(data));
     })
     .catch((error) => {
-      console.error("Error while posting meme:", error);
-    });
-}
-
-function createMeme() {
-  console.log("Creating Meme");
-  let inputName = document.querySelector("#input-name").value;
-  let inputUrl = document.querySelector("#input-url").value;
-  let inputCaption = document.querySelector("#meme-input-caption").value;
-
-  const memeData = {
-    name: inputName,
-    url: inputUrl,
-    caption: inputCaption,
-  };
-
-  console.log(JSON.stringify(memeData));
-
-  fetch(encodeURI(xmemeBackendUrl), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      charset: "UTF-8",
-    },
-    body: JSON.stringify(memeData),
-  })
-    .then((response) => {
-      log(response.body);
-      log(response);
-      if (response.status === 409 || response.status === "409") {
-        console.error("Duplicate Meme Posted");
-        triggerIframe(false);
-        throw new Error("Please post an original Meme");
-      } else if (!response.ok) {
-        console.error(
-          "Response is not OK, SOME ERROR OCCURED, Error with Server Response"
-        );
-        throw new Error("Error with Server Response");
-      } else if (response.ok) {
-        triggerIframe(true);
-        return response.json();
-      }
-    })
-    .then((data) => {
-      console.log("Meme Posted Successfully:", JSON.stringify(data));
-    })
-    .catch((error) => {
-      console.error("Error while posting meme:", error);
+      console.error("Error while editing meme:", error);
     });
 }
 
@@ -121,7 +87,6 @@ function triggerIframe(isSuccess) {
     frame.setAttribute("src", "success-data.html");
   }
   frame.style.display = "inline";
-  // frame.style.display='block'
 
   console.log("END IFRAME TRIGGER " + isSuccess);
 

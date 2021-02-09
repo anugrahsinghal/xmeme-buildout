@@ -6,109 +6,187 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Show Memes</title>
     <link rel="stylesheet" href="src/meme-page-styles.css" />
+    <script async defer src="src/memes.js"></script>
   </head>
   <body>
     <header class="header">
       <h2>X Meme</h2>
     </header>
+    <div id="overlay">
+      <div id="overlay-content">
+        <i id="exit-overlay">Exit</i><br>
+        <img
+          src="https://placehold.it/100x400"
+          alt="url"
+          max-height="400px"
+          max-width="400px"
+        />
+        <form>
+          <input type="text" id="edited-caption" value="something" /><br />
+          <input type="text" id="edited-name" value="something" /><br />
+          <button type="submit" id="submit-meme">Submit</button>
+        </form>
+      </div>
+    </div>
 
-  <div class="parent-meme-container">
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <button id="edit-meme">Edit Meme</button> 
-        <h4><b>Jane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane</b></h4> 
-        <p>Interior DesignerJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJaneInterior DesignerJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane</p> 
+    <div class="parent-meme-container">
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <button id="edit-meme">Edit Meme</button>
+          <h4>
+            <b
+              >Jane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane
+              DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane</b
+            >
+          </h4>
+          <p>
+            Interior DesignerJane DoeJane DoeJane DoeJane DoeJane DoeJane
+            DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane
+            DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane
+            DoeJane DoeJaneInterior DesignerJane DoeJane DoeJane DoeJane DoeJane
+            DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane
+            DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane DoeJane
+            DoeJane DoeJane DoeJane
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <button id="edit-meme">Edit Meme</button>
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.it/100x400" alt="url" />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg"
+          alt="url"
+        />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.it/40x40" alt="url" />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.it/400x100" alt="url" />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.it/600x200" alt="url" />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://placehold.it/400x400" alt="url" />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://c1.staticflickr.com/5/4023/5154094149_8c1345f634.jpg"
+        />
+        <div class="container">
+          <h4><b>Jane Doe</b></h4>
+          <p>Interior Designer</p>
+          <button id="edit-meme">Edit Meme</button>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <button id="edit-meme">Edit Meme</button> 
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://placehold.it/100x400" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://placehold.it/400x400" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://placehold.it/400x100" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://placehold.it/600x200" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://placehold.it/400x400" alt="url" style="width:100%">
-      <div class="container">
-        <h4><b>Jane Doe</b></h4> 
-        <p>Interior Designer</p>
-        <button id="edit-meme">Edit Meme</button> 
-      </div>
-    </div>
-  </div>
-</body>
-</html> 
+
+    <iframe
+      id="meme_created_msg"
+      style="
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        bottom: 16px;
+        left: 16px;
+        border: none;
+        max-width: 360px;
+        height: 36px;
+        z-index: 9999999999999;
+      "
+      src="success-data.html"
+    >
+    </iframe>
+  </body>
+</html>
