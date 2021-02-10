@@ -13,7 +13,8 @@
     <header class="header">
       <h2>X Meme</h2>
     </header>
-    <div class="form-container-with-preview overlay hidden">
+    <!-- <div id="overlay"> -->
+    <div class="form-container-with-preview hidden">
       <div class="wrapper">
         <div class="meme-view-container">
           <img
@@ -22,16 +23,19 @@
           />
           <ul>
             <li class="hidden">
-              <i class="fa fa-user"></i><span id="form-meme-author-name"></span>
+              <i class="fa fa-user"></i
+              ><span id="form-meme-author-name">Anugrah</span>
             </li>
+            <br />
             <li class="hidden">
-              <i class="fa fa-pencil"></i><span id="form-meme-caption"></span>
+              <i class="fa fa-pencil"></i
+              ><span id="form-meme-caption">Caption</span>
             </li>
           </ul>
         </div>
         <div class="create-update-form">
           <h3 class="edit-create">create meme</h3>
-          <form>
+          <form class="create-update-form-obj">
             <p class="hidden">
               <label for="Name">name</label>
               <input type="text" name="Name" />
@@ -44,19 +48,20 @@
               <label for="URL">url</label>
               <input type="text" name="URL" />
             </p>
-            <p class="half">
+            <p class="half" id="submit-data">
               <button>Submit</button>
             </p>
-            <p class="half">
+            <p class="half" id="cancel-form">
               <button>Cancel</button>
             </p>
           </form>
         </div>
       </div>
     </div>
+    <!-- </div> -->
     <div class="parent-meme-view-container">
-      <!-- Dynamically populated content here -->
       <div class="meme-post-wrapper">
+        <!-- Dynamically populated content here -->
         <div class="meme-view-container">
           <img
             src="https://placehold.it/300x300"
@@ -129,5 +134,37 @@
         </div>
       </div>
     </div>
+
+    <script>
+      let log = console.log;
+      let editForm = document.querySelector(".create-update-form-obj");
+      editForm.addEventListener("click", (e) => e.preventDefault());
+
+      let editCreatePreview = document.querySelector(
+        ".form-container-with-preview"
+      );
+      let editMemeBtns = document.querySelectorAll(".edit-meme-btn");
+      editMemeBtns.forEach((item) => {
+        item.addEventListener("click", showEditForm);
+      });
+      function showEditForm(event) {
+        console.log(event);
+        editCreatePreview.style.display = "unset";
+        scroll(0, 0);
+      }
+      let cancelBtn = document.querySelector("#cancel-form");
+      cancelBtn.addEventListener("click", () => {
+        editCreatePreview.style.display = "none";
+      });
+      let submitBtn = document.querySelector("#submit-data");
+      submitBtn.addEventListener("click", sendDataAndReload);
+      function sendDataAndReload(event) {
+        // validate and send data to backend
+        setTimeout(() => {
+          editCreatePreview.style.display = "none"
+          location.reload();
+        }, 300);
+      }
+    </script>
   </body>
 </html>
