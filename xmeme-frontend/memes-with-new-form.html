@@ -18,18 +18,18 @@
       <div class="wrapper">
         <div class="meme-view-container">
           <img
-            src="https://placehold.it/300x300"
+            src="src/placeholder-xmeme.jpg"
             alt="Image could not be loaded"
           />
           <ul>
-            <li class="hidden">
-              <i class="fa fa-user"></i
+            <li>
+              <!-- <i class="fa fa-user"></i
               ><span id="form-meme-author-name">Anugrah</span>
-            </li>
+            </li> -->
             <br />
-            <li class="hidden">
-              <i class="fa fa-pencil"></i
-              ><span id="form-meme-caption">Caption</span>
+            <li>
+              <!-- <i class="fa fa-pencil"></i
+              ><span id="form-meme-caption">caption</span> -->
             </li>
           </ul>
         </div>
@@ -37,22 +37,22 @@
           <h3 class="edit-create">create meme</h3>
           <form name="meme-create-update-form">
             <p class="hidden">
-              <label for="Name">name</label>
-              <input type="text" name="Name" />
+              <label for="name">name</label>
+              <input type="text" name="name" />
             </p>
             <p>
-              <label for="Caption">caption</label>
-              <input type="text" name="Caption" />
+              <label for="caption">caption</label>
+              <input type="text" name="caption" />
             </p>
             <p class="full">
-              <label for="URL">url</label>
-              <input type="text" name="URL" />
+              <label for="url">url</label>
+              <input type="text" name="url" />
             </p>
             <p class="half" id="submit-data">
-              <button>Submit</button>
+              <button type="submit">Submit</button>
             </p>
             <p class="half" id="cancel-form">
-              <button>Cancel</button>
+              <button type="reset">Cancel</button>
             </p>
           </form>
         </div>
@@ -62,7 +62,7 @@
     <div class="parent-meme-view-container">
       <div class="meme-post-wrapper">
         <!-- Dynamically populated content here -->
-        <div class="meme-view-container">
+        <div class="meme-view-container" id="1">
           <img
             src="https://placehold.it/300x300"
             alt="Image could not be loaded"
@@ -176,141 +176,6 @@
       ></a>
     </p>
 
-    <script>
-      let log = console.log;
-      let editForm = document.querySelector(".create-update-form-obj");
-      document.forms["meme-create-update-form"].addEventListener("click", (e) =>
-        e.preventDefault()
-      );
-
-      let editCreatePreview = document.querySelector(
-        ".form-container-with-preview"
-      );
-      let cancelBtn = document.querySelector("#cancel-form");
-      cancelBtn.addEventListener("click", () => {
-        editCreatePreview.style.display = "none";
-        document.querySelector("#create-meme-iframe").style.display = "unset";
-      });
-      let submitBtn = document.querySelector("#submit-data");
-      submitBtn.addEventListener("click", sendDataAndReload);
-      function sendDataAndReload(event) {
-        sendDataToPersist();
-
-        setTimeout(() => {
-          editCreatePreview.style.display = "none";
-          location.reload();
-        }, 300);
-      }
-    </script>
-    <script>
-      const xmemeBackendUrl =
-        "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
-
-      function sendDataToPersist() {
-        let inputs = document.forms[
-          "meme-create-update-form"
-        ].getElementsByTagName("input");
-        let nameInput = inputs['Name'];
-        if(nameInput == '') {
-          makePatchRequest(inputs);
-        } else {
-          makePostRequest(inputs)
-        }
-      }
-
-      loadMemes();
-      // load memes
-      const cardTemplate = `
-      {{#each memes}}
-      <div class="meme-view-container">
-          <img
-            src="{{url}}"
-            alt="Image could not be loaded"
-          />
-          <ul>
-            <li class="meme-author">
-              <i class="fa fa-user"></i>
-              <span id="meme-author-name">
-                {{name}}
-              </span>
-            </li>
-            <li class="meme-caption">
-              <i class="fa fa-pencil"></i>
-              <span>
-                {{caption}}
-              </span>
-            </li>
-          </ul>
-          <p class="edit-meme-btn">
-            <button>Edit</button>
-          </p>
-        </div>
-        {{/each}}
-        `;
-
-      const template = Handlebars.compile(cardTemplate);
-
-      function loadMemes() {
-        let parentContainer = document.querySelector(".parent-meme-container");
-
-        fetch(encodeURI(xmemeBackendUrl))
-          .then((response) => {
-            log(response.body);
-            log(response);
-            if (response.ok) {
-              console.log("Memes Loaded Successfully");
-              // parentContainer.innerHTML = "";
-              return response.json();
-            } else {
-              throw new Error(response.status);
-            }
-          })
-          .then((data) => {
-            log(JSON.stringify(data));
-            let cards = template({ memes: data });
-            log(cards);
-            document.querySelector(".meme-post-wrapper").innerHTML = cards;
-          })
-          .then(() => {
-            log("rendering complete");
-            attachButtonsToTheLoadedMemes();
-            log("attached buttons");
-          })
-          .catch((error) => {
-            console.error("Error while Loading memes:", error);
-          });
-      }
-      function attachButtonsToTheLoadedMemes() {
-        log("attach buttons");
-
-        let editMemeBtns = document.querySelectorAll(".edit-meme-btn");
-        log(editMemeBtns.length);
-
-        editMemeBtns.forEach((item) => {
-          item.addEventListener("click", showEditForm);
-        });
-      }
-
-      function showEditForm(event) {
-        console.log(event);
-        editCreatePreview.style.display = "unset";
-        scroll(0, 0);
-      }
-    </script>
-    <script>
-      // add new meme
-      let creationIframeLink = document.querySelector(
-        "#create-meme-iframe-link"
-      );
-      // log(creationIframeLink)
-      creationIframeLink.addEventListener("click", showCreateForm);
-      function showCreateForm(event) {
-        document.querySelectorAll(".hidden").forEach((item) => {
-          item.style.display = "unset";
-        });
-        showEditForm();
-        document.querySelector("#create-meme-iframe").style.display = "none";
-      }
-    </script>
+    <script src="src/new-controls.js"></script>
   </body>
 </html>
