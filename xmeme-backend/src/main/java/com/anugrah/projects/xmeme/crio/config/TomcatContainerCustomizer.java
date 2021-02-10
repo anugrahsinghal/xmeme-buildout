@@ -15,8 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @implNote Swagger running on different port than application was accomplished by help of<br>
@@ -51,17 +49,58 @@ public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<Tom
 	}
 
 	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedMethods("GET", "POST", "HEAD", "OPTIONS", "PATCH")
-						.allowedHeaders("*")
-				;
-			}
-		};
+	public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
+
+		FilterRegistrationBean<CorsFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+		filterRegistrationBean.setFilter(new CorsFilter());
+		filterRegistrationBean.setOrder(100);
+		filterRegistrationBean.setName("CorsFilter");
+
+		return filterRegistrationBean;
 	}
+
+	//	@Component
+	private class CorsFilter extends OncePerRequestFilter {
+
+		@Override
+		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+			System.out.println("CORS REQUEST came here outer");
+			response.setHeader("Access-Control-Allow-Methods", "GET, PATCH, POST, PUT, DELETE, OPTIONS");
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("Access-Control-Max-Age", "3600");
+			response.setHeader("Access-Control-Allow-Headers", "*");
+			response.addHeader("Access-Control-Expose-Headers", "*");
+			if ("OPTIONS".equals(request.getMethod())) {
+				System.out.println("CORS REQUEST came here");
+				response.setStatus(HttpServletResponse.SC_OK);
+				response.setHeader("Access-Control-Allow-Methods", "GET, PATCH, POST, PUT, DELETE, OPTIONS");
+				System.out.println(response);
+			} else {
+				filterChain.doFilter(request, response);
+			}
+		}
+	}
+
+	//	@Bean
+//	public CorsFilter corsFilter() {
+//
+//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		CorsConfiguration config = new CorsConfiguration();
+//		//config.setAllowCredentials(true); // you USUALLY want this
+//		config.addAllowedOrigin("*");
+//		config.addAllowedHeader("*");
+//
+//		config.addAllowedMethod("OPTIONS");
+//		config.addAllowedMethod("HEAD");
+//		config.addAllowedMethod("GET");
+//		config.addAllowedMethod("PUT");
+//		config.addAllowedMethod("POST");
+//		config.addAllowedMethod("DELETE");
+//		config.addAllowedMethod("PATCH");
+//		source.registerCorsConfiguration("/**", config);
+//		return new CorsFilter(source);
+//	}
+
 
 	private class SwaggerFilter extends OncePerRequestFilter {
 
