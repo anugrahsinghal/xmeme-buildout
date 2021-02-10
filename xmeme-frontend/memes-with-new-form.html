@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="src/style-common.css" />
     <link rel="stylesheet" href="src/form-feature.css" />
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <style>
+      .meme-view-container {
+        border-radius: 1em;
+        box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
+        transition: 0.3s;
+        outline: none;
+        border: none;
+      }
+      .meme-view-container:hover {
+        box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
+      }
+      .meme-view-container-form:hover {
+        box-shadow: none;
+      }
+      .meme-view-container-form {
+        border-radius: none;
+        box-shadow: none;
+        transition: none;
+      }
+      .wrapper {
+        box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
+      }
+    </style>
   </head>
   <body>
     <header class="header">
@@ -16,7 +39,7 @@
 
     <div class="form-container-with-preview hidden">
       <div class="wrapper">
-        <div class="meme-view-container">
+        <div class="meme-view-container meme-view-container-form">
           <img
             src="src/placeholder-xmeme.jpg"
             alt="Image could not be loaded"
@@ -24,9 +47,10 @@
           <ul>
             <li>
               <!-- <i class="fa fa-user"></i
-              ><span id="form-meme-author-name">Anugrah</span>
-            </li> -->
-            <br />
+              ><span id="form-meme-author-name">Anugrah</span> -->
+            </li>
+              <br />
+            </li>
             <li>
               <!-- <i class="fa fa-pencil"></i
               ><span id="form-meme-caption">caption</span> -->
@@ -174,6 +198,45 @@
         onclick="showCreateForm(event)"
         ><i class="fa fa-pencil"></i
       ></a>
+    </p>
+
+    <p
+      id="meme-notification"
+      style="
+        display: none;
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        bottom: 9px;
+        left: 0px;
+        border: none;
+        /* width: 100px; */
+        height: 36px;
+        z-index: 9999999999999;
+      ">
+      <a
+        style="
+          display: inline-flex;
+          align-items: center;
+          height: 32px;
+          margin-left: 1em;
+          padding: 0 12px;
+          font-size: 13px;
+          font-weight: 500;
+          color: white;
+          background-color: rgb(21, 21, 21);
+          cursor: pointer;
+          border: 1px solid rgb(52, 52, 52);
+          border-radius: 4px;
+          text-decoration: none;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+            Roboto, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: antialiased;
+          z-index: 99999999999;
+        "
+        id="meme-notification-message"
+        >Lorem ipsum dolor sit amet. Lorem, ipsum.</a>
     </p>
 
     <script src="src/new-controls.js"></script>

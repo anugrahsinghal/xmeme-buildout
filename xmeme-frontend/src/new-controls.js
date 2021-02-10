@@ -63,6 +63,7 @@ const cardTemplate = `
         <img
           src="{{url}}"
           alt="Image could not be loaded"
+          onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
         />
         <ul>
           <li class="meme-author">
