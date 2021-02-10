@@ -94,3 +94,94 @@ i {
     padding: 2em;
   }
 }
+
+/* ==================================================================================== */
+
+/* Displaying Meme Cards CSS */
+.parent-meme-view-container {
+  padding: 2em;
+  margin: 2em;
+  margin-top: 0em;
+  max-width: 1170px;
+}
+.meme-post-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1em;
+  column-gap: 1em;
+  justify-content: center;
+  /* align-items: end; */
+}
+
+.meme-post-wrapper > * {
+  padding: 1em;
+}
+
+.meme-view-container {
+  border: 1px dotted var(--primary-color);
+  padding-bottom: 0;
+}
+.meme-view-container img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--post-items-max-width);
+  max-height: var(--post-items-max-height);
+  width: var(--post-items-width);
+  height: var(--post-items-height);
+}
+.meme-view-container ul {
+  text-align: center;
+  margin: 0 0 1rem 0;
+}
+.meme-view-container .edit-meme-btn {
+  display: block;
+  text-align: center;
+  padding: 0.2em;
+  background: var(--primary-color-light);
+  margin: 0 0 1em 0;
+  font-weight: bold;
+  font-size: small;
+  text-transform: lowercase;
+}
+.edit-meme-btn:hover,
+.edit-meme-btn:focus {
+  background-color: var(--primary-color);
+  transition: background-color 0.5s ease-out;
+}
+
+.meme-view-container .edit-meme-btn button {
+  background: unset;
+  outline: none;
+}
+/* captions and buttons */
+.meme-caption {
+  line-height: 1.2;
+  font-size: small;
+  padding: 0;
+  text-align: left;
+  height: 5em;
+}
+.meme-author {
+  height: 2em;
+}
+
+/* Large Screen */
+@media (min-width: 768px) {
+  .meme-post-wrapper {
+    /* border: 1px solid black; */
+    grid-template-columns: 1fr 1fr;
+    /* column-gap: 1em; */
+  }
+}
+
+@media (min-width: 1170px) {
+  .parent-meme-view-container {
+    max-width: 100%;
+  }
+  .meme-post-wrapper {
+    /* border: 1px solid black; */
+    grid-template-columns: 1fr 1fr 1fr;
+    /* column-gap: 1.2em; */
+  }
+}
