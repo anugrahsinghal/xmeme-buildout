@@ -36,8 +36,9 @@ function showEditForm(event) {
   scroll(0, 0);
 }
 
-const xmemeBackendUrl = "http://localhost:8082/memes";
-// "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+const xmemeBackendUrl =
+  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+// "http://localhost:8082/memes";
 
 function sendDataToPersist() {
   let inputs = document.forms["meme-create-update-form"].getElementsByTagName(
@@ -111,7 +112,7 @@ function loadMemes() {
     })
     .catch((error) => {
       console.error("Error while Loading memes:", error);
-      location.reload();
+      //   location.reload();
     });
 }
 function attachButtonsToTheLoadedMemes() {
@@ -171,12 +172,12 @@ function makePatchRequest(inputs) {
         }
       })
       .then(() => {
-        location.reload();
+        // location.reload();
       })
       .catch((error) => {
         console.error("Error while editing meme:", error);
         triggerIframe(false);
-        location.reload();
+        // location.reload();
       });
   }
 
@@ -185,25 +186,22 @@ function makePatchRequest(inputs) {
 }
 
 function triggerIframe(message) {
-  /* console.log("IFRAME TRIGGER " + message);
-      let frame = document.querySelector("#meme_notification");
+  console.log("IFRAME TRIGGER " + message);
+  let notification = document.querySelector("#meme-notification");
+  let notificationMsg = document.querySelector("#meme-notification-message");
+  notificationMsg.innerText = message + "[Page will reload]";
 
-      if (message === false) {
-        frame.setAttribute("src", "error.html");
-      } else {
-        frame.setAttribute("src", "success-data.html");
-      }
-      frame.style.display = "inline";
+  notification.style.display = "unset";
 
-      console.log("END IFRAME TRIGGER " + message);
+  console.log("END IFRAME TRIGGER " + message);
 
-      setTimeout(() => {
-        console.log("Hide I frame start");
-        let frame = document.querySelector("#meme_notification");
-        frame.style.display = "none";
-        console.log("Hide I frame complete");
-        location.reload();
-      }, 5000); */
+  setTimeout(() => {
+    console.log("Hide I frame start");
+    let notification = document.querySelector("#meme-notification");
+    notification.style.display = "none";
+    console.log("Hide I frame complete");
+    location.reload();
+  }, 2000);
 }
 
 function makePostRequest() {
@@ -251,12 +249,12 @@ function makePostRequest() {
         console.log("Meme Posted Successfully:", JSON.stringify(data));
       })
       .then(() => {
-        location.reload();
+        // location.reload();
       })
       .catch((error) => {
         triggerIframe("Something went wrong! Please try again.");
         console.error("Error while posting meme:", error);
-        location.reload();
+        // location.reload();
       });
   }
   console.groupEnd();
