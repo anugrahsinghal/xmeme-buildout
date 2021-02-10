@@ -35,7 +35,7 @@
         </div>
         <div class="create-update-form">
           <h3 class="edit-create">create meme</h3>
-          <form class="create-update-form-obj">
+          <form name="meme-create-update-form">
             <p class="hidden">
               <label for="Name">name</label>
               <input type="text" name="Name" />
@@ -179,20 +179,13 @@
     <script>
       let log = console.log;
       let editForm = document.querySelector(".create-update-form-obj");
-      editForm.addEventListener("click", (e) => e.preventDefault());
+      document.forms["meme-create-update-form"].addEventListener("click", (e) =>
+        e.preventDefault()
+      );
 
       let editCreatePreview = document.querySelector(
         ".form-container-with-preview"
       );
-      let editMemeBtns = document.querySelectorAll(".edit-meme-btn");
-      editMemeBtns.forEach((item) => {
-        item.addEventListener("click", showEditForm);
-      });
-      function showEditForm(event) {
-        console.log(event);
-        editCreatePreview.style.display = "unset";
-        scroll(0, 0);
-      }
       let cancelBtn = document.querySelector("#cancel-form");
       cancelBtn.addEventListener("click", () => {
         editCreatePreview.style.display = "none";
@@ -201,7 +194,8 @@
       let submitBtn = document.querySelector("#submit-data");
       submitBtn.addEventListener("click", sendDataAndReload);
       function sendDataAndReload(event) {
-        // validate and send data to backend
+        sendDataToPersist();
+
         setTimeout(() => {
           editCreatePreview.style.display = "none";
           location.reload();
@@ -209,12 +203,102 @@
       }
     </script>
     <script>
+      const xmemeBackendUrl =
+        "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+
+      function sendDataToPersist() {
+        let inputs = document.forms[
+          "meme-create-update-form"
+        ].getElementsByTagName("input");
+        let nameInput = inputs['Name'];
+        if(nameInput == '') {
+          makePatchRequest(inputs);
+        } else {
+          makePostRequest(inputs)
+        }
+      }
+
+      loadMemes();
       // load memes
+      const cardTemplate = `
+      {{#each memes}}
+      <div class="meme-view-container">
+          <img
+            src="{{url}}"
+            alt="Image could not be loaded"
+          />
+          <ul>
+            <li class="meme-author">
+              <i class="fa fa-user"></i>
+              <span id="meme-author-name">
+                {{name}}
+              </span>
+            </li>
+            <li class="meme-caption">
+              <i class="fa fa-pencil"></i>
+              <span>
+                {{caption}}
+              </span>
+            </li>
+          </ul>
+          <p class="edit-meme-btn">
+            <button>Edit</button>
+          </p>
+        </div>
+        {{/each}}
+        `;
+
+      const template = Handlebars.compile(cardTemplate);
+
+      function loadMemes() {
+        let parentContainer = document.querySelector(".parent-meme-container");
+
+        fetch(encodeURI(xmemeBackendUrl))
+          .then((response) => {
+            log(response.body);
+            log(response);
+            if (response.ok) {
+              console.log("Memes Loaded Successfully");
+              // parentContainer.innerHTML = "";
+              return response.json();
+            } else {
+              throw new Error(response.status);
+            }
+          })
+          .then((data) => {
+            log(JSON.stringify(data));
+            let cards = template({ memes: data });
+            log(cards);
+            document.querySelector(".meme-post-wrapper").innerHTML = cards;
+          })
+          .then(() => {
+            log("rendering complete");
+            attachButtonsToTheLoadedMemes();
+            log("attached buttons");
+          })
+          .catch((error) => {
+            console.error("Error while Loading memes:", error);
+          });
+      }
+      function attachButtonsToTheLoadedMemes() {
+        log("attach buttons");
+
+        let editMemeBtns = document.querySelectorAll(".edit-meme-btn");
+        log(editMemeBtns.length);
+
+        editMemeBtns.forEach((item) => {
+          item.addEventListener("click", showEditForm);
+        });
+      }
+
+      function showEditForm(event) {
+        console.log(event);
+        editCreatePreview.style.display = "unset";
+        scroll(0, 0);
+      }
     </script>
     <script>
       // add new meme
-      let creationIframe = document.querySelector("#create-meme-iframe");
-      creationIframe.addEventListener("click", showCreateForm);
       let creationIframeLink = document.querySelector(
         "#create-meme-iframe-link"
       );
@@ -222,7 +306,6 @@
       creationIframeLink.addEventListener("click", showCreateForm);
       function showCreateForm(event) {
         document.querySelectorAll(".hidden").forEach((item) => {
-          log(item);
           item.style.display = "unset";
         });
         showEditForm();
