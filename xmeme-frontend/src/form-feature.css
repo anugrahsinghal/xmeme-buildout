@@ -2,12 +2,10 @@
   box-sizing: border-box;
 }
 :root {
-  --color-primary: cornflowerblue;
-  --color-primary-light: #c9e6ff;
+  --primary-color-light: #c9e6ff;
 }
 body {
-  background: var(--color-primary);
-  line-height: 1.6;
+  line-height: 1.8;
 }
 .form-container-with-preview {
   padding: 1em;
@@ -19,6 +17,11 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+.hidden {
+  display: none;
+}
+
 .wrapper {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1);
 }
@@ -28,7 +31,7 @@ ul {
 }
 
 .meme-container {
-  background-color: var(--color-primary);
+  background-color: var(--primary-color);
 }
 .meme-container img {
   display: block;
@@ -43,6 +46,9 @@ ul {
   background: #f9feff;
 }
 /* FORM STYLES */
+i {
+  padding: 0.2em;
+}
 .create-update-form form input {
   border: 0.01px solid black;
 }
@@ -54,6 +60,7 @@ ul {
 }
 .create-update-form form label {
   display: block;
+  font-weight: bold;
 }
 .create-update-form form p {
   margin: 0;
@@ -62,15 +69,15 @@ ul {
 .create-update-form form input {
   width: 100%;
   padding: 1em;
-  border: 1px solid var(--color-primary-light);
+  border: 1px solid var(--primary-color-light);
 }
 .create-update-form form button {
-  background: var(--color-primary-light);
+  background: var(--primary-color-light);
   text-transform: uppercase;
 }
 .create-update-form form button:hover,
 .create-update-form form button:focus {
-  background: var(--color-primary);
+  background: var(--primary-color);
   outline: 0;
   transition: background-color 0.5s ease-out;
 }

@@ -19,6 +19,8 @@
   --post-items-max-width: 414px;
   --post-items-height: 400px;
   --post-items-max-height: 640px;
+  /* for responsive scaling */
+  --max-body-width: 1170px;
 }
 
 div.card::-webkit-scrollbar,

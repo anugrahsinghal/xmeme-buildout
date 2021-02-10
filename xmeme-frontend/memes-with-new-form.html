@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Show Memes</title>
+    <link rel="stylesheet" href="src/style-common.css" />
+    <link rel="stylesheet" href="src/form-feature.css" />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <!-- <script async defer src="src/memes.js"></script> -->
+    <style>
+      /* .overlay {
+        max-width: 1170px;
+      } */
+    </style>
+    <style>
+      /* .header {
+        width: 100%;
+        max-width: 100%;
+      } */
+      .parent-meme-view-container {
+        padding: 2em;
+        margin: 2em;
+        max-width: 1170px;
+      }
+      .meme-post-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1em;
+        column-gap: 1em;
+        justify-content: center;
+      }
+
+      .meme-post-wrapper > * {
+        padding: 1em;
+      }
+
+      .meme-view-container {
+        border: 1px dotted var(--primary-color);
+        padding-bottom: 0;
+      }
+      .meme-view-container img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--post-items-max-width);
+        max-height: var(--post-items-max-height);
+        width: var(--post-items-width);
+        height: var(--post-items-height);
+      }
+      .meme-view-container ul {
+        text-align: center;
+        margin: 0 0 1rem 0;
+      }
+
+      /* Large Screen */
+      @media (min-width: 768px) {
+        .meme-post-wrapper {
+          /* border: 1px solid black; */
+          grid-template-columns: 1fr 1fr;
+          /* column-gap: 1em; */
+        }
+      }
+
+      @media (min-width: 1170px) {
+        .parent-meme-view-container {
+          max-width: 100%;
+        }
+        .meme-post-wrapper {
+          /* border: 1px solid black; */
+          grid-template-columns: 1fr 1fr 1fr;
+          /* column-gap: 1.2em; */
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h2>X Meme</h2>
+    </header>
+    <div class="form-container-with-preview overlay hidden">
+      <div class="wrapper">
+        <div class="meme-view-container">
+          <img
+            src="https://placehold.it/300x300"
+            alt="Image could not be loaded"
+          />
+          <ul>
+            <li class="hidden">
+              <i class="fa fa-user"></i><span id="meme-author-name"></span>
+            </li>
+            <li class="hidden">
+              <i class="fa fa-pencil"></i><span id="meme-caption"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="create-update-form">
+          <h3 class="edit-create">create meme</h3>
+          <form>
+            <p class="hidden">
+              <label for="Name">name</label>
+              <input type="text" name="Name" />
+            </p>
+            <p>
+              <label for="Caption">caption</label>
+              <input type="text" name="Caption" />
+            </p>
+            <p class="full">
+              <label for="URL">url</label>
+              <input type="text" name="URL" />
+            </p>
+            <p class="full">
+              <button>Submit</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="parent-meme-view-container">
+      <!-- Dynamically populated content here -->
+      <div class="meme-post-wrapper">
+        <div class="meme-view-container">
+          <img
+            src="https://placehold.it/300x300"
+            alt="Image could not be loaded"
+          />
+          <ul>
+            <li>
+              <i class="fa fa-user"></i
+              ><span id="meme-author-name">Anugrah</span>
+            </li>
+            <li>
+              <i class="fa fa-pencil"></i><span id="meme-caption"></span> Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Similique
+              dolores eos explicabo maiores expedita culpa sit in aperiam
+              repellendus molestiae quidem, quisquam nobis veniam odit
+              consequatur sapiente iste id quibusdam aut odio assumenda delectus
+              architecto!
+            </li>
+          </ul>
+        </div>
+        <div class="meme-view-container">
+          <img
+            src="https://placehold.it/400x400"
+            alt="Image could not be loaded"
+          />
+          <ul>
+            <li>
+              <i class="fa fa-user"></i
+              ><span id="meme-author-name">Anugrah</span>
+            </li>
+            <li>
+              <i class="fa fa-pencil"></i><span id="meme-caption"></span> Lorem,
+              ipsum dolor sit amet consectetur adipisicing elit. Architecto in
+              quam fugiat, consectetur natus excepturi debitis. Consectetur
+              totam saepe mollitia!
+            </li>
+          </ul>
+        </div>
+        <div class="meme-view-container">
+          <img
+            src="https://placehold.it/400x500"
+            alt="Image could not be loaded"
+          />
+          <ul>
+            <li>
+              <i class="fa fa-user"></i
+              ><span id="meme-author-name">Tikesh</span>
+            </li>
+            <li>
+              <i class="fa fa-pencil"></i><span id="meme-caption"></span>Lorem
+              ipsum dolor sit amet.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
