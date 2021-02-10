@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --color-primary: cornflowerblue;
+  --color-primary-light: #c9e6ff;
+}
+body {
+  background: var(--color-primary);
+  line-height: 1.6;
+}
+.form-container-with-preview {
+  padding: 1em;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+.wrapper {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1);
+}
+
+.wrapper > * {
+  padding: 1em;
+}
+
+.meme-container {
+  background-color: var(--color-primary);
+}
+.meme-container img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.meme-container ul {
+  text-align: center;
+  margin: 0 0 1rem 0;
+}
+.create-update-form {
+  background: #f9feff;
+}
+/* FORM STYLES */
+.create-update-form form input {
+  border: 0.01px solid black;
+}
+.create-update-form form {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+.create-update-form form label {
+  display: block;
+}
+.create-update-form form p {
+  margin: 0;
+}
+.create-update-form form button,
+.create-update-form form input {
+  width: 100%;
+  padding: 1em;
+  border: 1px solid var(--color-primary-light);
+}
+.create-update-form form button {
+  background: var(--color-primary-light);
+  text-transform: uppercase;
+}
+.create-update-form form button:hover,
+.create-update-form form button:focus {
+  background: var(--color-primary);
+  outline: 0;
+  transition: background-color 0.5s ease-out;
+}
+.create-update-form h3 {
+  text-align: center;
+}
+/* Large Screen */
+@media (min-width: 700px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+  .wrapper > * {
+    padding: 2em;
+  }
+}
