@@ -22,6 +22,7 @@
       .parent-meme-view-container {
         padding: 2em;
         margin: 2em;
+        margin-top: 0em;
         max-width: 1170px;
       }
       .meme-post-wrapper {
@@ -30,6 +31,7 @@
         row-gap: 1em;
         column-gap: 1em;
         justify-content: center;
+        /* align-items: end; */
       }
 
       .meme-post-wrapper > * {
@@ -53,6 +55,37 @@
         text-align: center;
         margin: 0 0 1rem 0;
       }
+      .meme-view-container .edit-meme-btn {
+        display: block;
+        text-align: center;
+        padding: 0.2em;
+        background: var(--primary-color-light);
+        margin: 0 0 1em 0;
+        font-weight: bold;
+        font-size: small;
+        text-transform: lowercase;
+      }
+      .edit-meme-btn:hover,
+      .edit-meme-btn:focus {
+        background-color: var(--primary-color);
+        transition: background-color 0.5s ease-out;
+      }
+
+      .meme-view-container .edit-meme-btn button {
+        background: unset;
+        outline: none;
+      }
+      /* captions and buttons */
+      .meme-caption {
+        line-height: 1.2;
+        font-size: small;
+        padding: 0;
+        text-align: left;
+        height: 5em;
+      }
+      .meme-author {
+        height: 2em;
+      }
 
       /* Large Screen */
       @media (min-width: 768px) {
@@ -73,7 +106,6 @@
           /* column-gap: 1.2em; */
         }
       }
-      
     </style>
   </head>
   <body>
@@ -89,10 +121,10 @@
           />
           <ul>
             <li class="hidden">
-              <i class="fa fa-user"></i><span id="meme-author-name"></span>
+              <i class="fa fa-user"></i><span id="form-meme-author-name"></span>
             </li>
             <li class="hidden">
-              <i class="fa fa-pencil"></i><span id="meme-caption"></span>
+              <i class="fa fa-pencil"></i><span id="form-meme-caption"></span>
             </li>
           </ul>
         </div>
@@ -111,8 +143,11 @@
               <label for="URL">url</label>
               <input type="text" name="URL" />
             </p>
-            <p class="full">
+            <p class="half">
               <button>Submit</button>
+            </p>
+            <p class="half">
+              <button>Cancel</button>
             </p>
           </form>
         </div>
@@ -127,19 +162,24 @@
             alt="Image could not be loaded"
           />
           <ul>
-            <li>
+            <li class="meme-author">
               <i class="fa fa-user"></i
               ><span id="meme-author-name">Anugrah</span>
             </li>
-            <li>
-              <i class="fa fa-pencil"></i><span id="meme-caption"></span> Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Similique
-              dolores eos explicabo maiores expedita culpa sit in aperiam
-              repellendus molestiae quidem, quisquam nobis veniam odit
-              consequatur sapiente iste id quibusdam aut odio assumenda delectus
-              architecto!
+            <li class="meme-caption">
+              <i class="fa fa-pencil"></i>
+              <span>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Similique dolores eos explicabo maiores expedita culpa sit in
+                aperiam repellendus molestiae quidem, quisquam nobis veniam odit
+                consequatur sapiente iste id quibusdam aut odio assumenda
+                delectus architecto!
+              </span>
             </li>
           </ul>
+          <p class="edit-meme-btn">
+            <button>Edit</button>
+          </p>
         </div>
         <div class="meme-view-container">
           <img
@@ -147,17 +187,22 @@
             alt="Image could not be loaded"
           />
           <ul>
-            <li>
+            <li class="meme-author">
               <i class="fa fa-user"></i
               ><span id="meme-author-name">Anugrah</span>
             </li>
-            <li>
-              <i class="fa fa-pencil"></i><span id="meme-caption"></span> Lorem,
-              ipsum dolor sit amet consectetur adipisicing elit. Architecto in
-              quam fugiat, consectetur natus excepturi debitis. Consectetur
-              totam saepe mollitia!
+            <li class="meme-caption">
+              <i class="fa fa-pencil"></i>
+              <span>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Architecto in quam fugiat, consectetur natus excepturi debitis.
+                Consectetur totam saepe mollitia!
+              </span>
             </li>
           </ul>
+          <p class="edit-meme-btn">
+            <button>Edit</button>
+          </p>
         </div>
         <div class="meme-view-container">
           <img
@@ -165,15 +210,21 @@
             alt="Image could not be loaded"
           />
           <ul>
-            <li>
-              <i class="fa fa-user"></i
-              ><span id="meme-author-name">Tikesh</span>
+            <li class="meme-author">
+              <i class="fa fa-user"></i>
+              <span id="meme-author-name">Tikesh</span>
             </li>
-            <li>
-              <i class="fa fa-pencil"></i><span id="meme-caption"></span>Lorem
-              ipsum dolor sit amet.
+            <li class="meme-caption">
+              <i class="fa fa-pencil"></i>
+              <span> Lorem ipsum dolor sit amet. </span>
             </li>
+            <!-- <li class="edit-meme-btn">
+              <button class="edit-meme-btn">Edit</button>
+            </li> -->
           </ul>
+          <p class="edit-meme-btn">
+            <button>Edit</button>
+          </p>
         </div>
       </div>
     </div>
