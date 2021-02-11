@@ -85,11 +85,17 @@ loadMemes();
 const cardTemplate = `
     {{#each memes}}
     <div class="meme-view-container">
-        <img
-          src="{{url}}"
-          alt="Image could not be loaded"
-          onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
-        />
+        <div class="image-edit-container edit-meme-btn">
+          <img
+            src="{{url}}"
+            alt="Image could not be loaded"
+            class="image-to-edit"
+            onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
+          />
+          <div class="image-edit-view-overlay">
+            <div class="text rounded-corners"><i class="fa fa-pencil"></i>Edit</div>
+          </div>
+        </div>
         <ul>
           <li class="meme-author">
             <i class="fa fa-user"></i>
@@ -97,7 +103,7 @@ const cardTemplate = `
               {{name}}
             </span>
           </li>
-          <br>
+          <!-- br -->
           <li class="meme-caption">
             <i class="fa fa-pencil"></i>
             <span>
@@ -105,9 +111,9 @@ const cardTemplate = `
             </span>
           </li>
         </ul>
-        <p class="edit-meme-btn rounded-corners" id={{id}}>
+        <!--p class="edit-meme-btn rounded-corners" id={{id}}>
           <button id={{id}}>Edit</button>
-        </p>
+        </p-->
       </div>
       {{/each}}
       `;
@@ -154,7 +160,7 @@ function attachButtonsToTheLoadedMemes() {
 }
 
 // add new meme
-let creationIframeLink = document.querySelectoAll(".create-meme-iframe-link").forEach(item => {
+let creationIframeLink = document.querySelectorAll(".create-meme-iframe-link").forEach(item => {
   item.addEventListener("click", showCreateForm);
 });
 function showCreateForm() {

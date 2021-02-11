@@ -3,6 +3,7 @@
 }
 body {
   line-height: 1.8;
+  background: var(--off-white);
 }
 .form-container-with-preview {
   padding: 1em;
@@ -39,50 +40,51 @@ ul {
   text-align: center;
   margin: 0 0 1rem 0;
 }
+
+/* #region FORM STYLES For Create/Update Form*/
 .create-update-form {
-  background: #f9feff;
+  background: var(--plain-white-form-color);
 }
-/* FORM STYLES */
-i {
-  padding: 0.2em;
-}
-.create-update-form form input {
-  border: 0.01px solid black;
-}
+
 .create-update-form form {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 1rem;
   column-gap: 1rem;
 }
-.create-update-form form label {
-  display: block;
-  font-weight: bold;
-}
 .create-update-form form p {
   margin: 0;
+}
+.create-update-form form label {
+  display: block;
+  font-weight: 500;
+}
+.create-update-form form input {
+  border: 1px solid var(--primary-color-light);
+}
+.create-update-form form button {
+  background: var(--primary-color-shade);
+  text-transform: uppercase;
 }
 .create-update-form form button,
 .create-update-form form input {
   width: 100%;
   padding: 1em;
-  border: 1px solid var(--primary-color-light);
-}
-.create-update-form form button {
-  background: var(--primary-color-light);
-  text-transform: uppercase;
+  /* border: 1px solid var(--primary-color-light); */
 }
 .create-update-form form button:hover,
 .create-update-form form button:focus {
   background: var(--primary-color);
   color: white;
   outline: 0;
-  transition: background-color 0.5s ease-out;
+  transition: background-color 2s ease-out;
 }
 .create-update-form h3 {
   text-align: center;
 }
-/* Large Screen */
+/* #endregion */
+
+/* #region Large Screen FORM STYLES For Create/Update Form */
 @media (min-width: 700px) {
   .wrapper {
     display: grid;
@@ -92,6 +94,7 @@ i {
     padding: 2em;
   }
 }
+/* #endregion */
 
 /* ==================================================================================== */
 
@@ -112,7 +115,7 @@ i {
 }
 
 .meme-post-wrapper > * {
-  padding: 1em;
+  padding: 0.5em;
 }
 
 .meme-view-container {
@@ -132,12 +135,12 @@ i {
 }
 .meme-view-container ul {
   text-align: center;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0rem 0;
 }
-.meme-view-container .edit-meme-btn {
+/* .meme-view-container .edit-meme-btn {
   padding: 0.2em;
   background: var(--primary-color-shade);
-  margin: 0 0 1em 0;
+  margin: 0 0 0.6em 0;
 }
 
 .meme-view-container .edit-meme-btn button {
@@ -160,20 +163,27 @@ i {
 .meme-view-container .edit-meme-btn button {
   background: unset;
   outline: none;
-}
+} */
+
 /* captions and buttons */
+.meme-author {
+  height: 2em;
+  margin-bottom: 0.6em;
+}
 .meme-caption {
   line-height: 1.2;
   font-size: small;
-  padding: 0;
-  text-align: left;
   height: 5em;
+  margin-top: 1em;
 }
-.meme-author {
-  height: 2em;
+.meme-author,
+.meme-caption {
+  /* height: 2em; */
+  padding-left: 1em;
+  text-align: left;
 }
 
-/* Large Screen */
+/* #region Large Screen */
 @media (min-width: 768px) {
   .meme-post-wrapper {
     /* border: 1px solid black; */
@@ -182,7 +192,7 @@ i {
   }
 }
 
-@media (min-width: 1170px) {
+@media (min-width: 970px) {
   .parent-meme-view-container {
     max-width: 100%;
   }
@@ -192,7 +202,11 @@ i {
     /* column-gap: 1.2em; */
   }
 }
+/* #endregion */
 
+/* #region  rounded-corners */
+
+/* adding rounded corners */
 .rounded-corners {
   border-radius: 1em;
 }
@@ -217,3 +231,48 @@ i {
 .create-update-form form p button:hover {
   cursor: pointer;
 }
+/* #endregion */
+
+/* #region  notification message and helpers */
+.helper-icon {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  font-weight: 500;
+  color: var(--text-color-default);
+  background-color: rgb(21, 21, 21);
+  cursor: pointer;
+  border: 1px solid rgb(52, 52, 52);
+  border-radius: 4px;
+  text-decoration: none;
+  -moz-osx-font-smoothing: antialiased;
+  z-index: 99999999999;
+}
+
+.helper-icon-wrapper {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 50px;
+  height: 36px;
+  z-index: 9999999999999;
+}
+
+.helper-icon-top {
+  top: 10px;
+  right: 10px;
+}
+.helper-icon-bottom {
+  bottom: 10px;
+  right: 0px;
+}
+#meme-notification {
+  display: none;
+  width: auto;
+}
+.helper-icon-bottom i {
+  padding: 0.2em;
+}
+/* #endregion */

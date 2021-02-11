@@ -12,56 +12,74 @@
     <title>X Meme | Meme Stream</title>
     <link rel="stylesheet" href="src/style-common.css" />
     <link rel="stylesheet" href="src/main.css" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link rel="stylesheet" href="src/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <style>
-.helper-icon-wrapper {
-  position: fixed;
-        margin: 0;
-        padding: 0;
-        bottom: 9px;
-        right: 0px;
-        border: none;
-        width: 50px;
-        height: 36px;
-        z-index: 9999999999999;
-}
-#meme-notification {
-  display: none;
-  left: 10px;
-  width: auto;
-}
-      .helper-icon {
-        display: inline-flex;
-        align-items: center;
-        height: 32px;
-        padding: 0 12px;
-        font-size: 13px;
-        font-weight: 500;
+      .image-edit-container {
+        position: relative;
+        /* width: 50%; */
+      }
+      .image-edit-view-overlay {
+        
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+        position: absolute;
+        /* bottom: 5%; */
+        /* left: 0;
+        right: 0; */
+        /* background-color: #008CBA; */
+        overflow: hidden;
+        width: 100%;
+        padding: 1.5em;
+        /* height: 100%; */
+        /* transform: scale(0); */
+        transition: 0.5s ease;
+      }
+      .image-edit-container:hover .image-edit-view-overlay {
+        /* transform: scale(1); */
+        opacity: 0.9;
+      }
+      .text i {
+        margin: 0.2em;
+      }
+      .text {
+        background-color: var(--dark-gray);
         color: white;
-        background-color: rgb(21, 21, 21);
+        font-weight: bold;
+        /* font-size: 16px; */
+        padding: 1.2em 2.2em;
+        padding-left: 1.9em;
+        display: inline;
+        border-radius: 1em;
+              
+        /* color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center; */
+      }
+
+      .edit-meme-btn {
         cursor: pointer;
-        border: 1px solid rgb(52, 52, 52);
-        border-radius: 4px;
-        text-decoration: none;
-        font-family: Monsterrat, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
-          Roboto, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: antialiased;
-        z-index: 99999999999;
       }
-      body {
-        background: var(--off-white);
-      }
+
       .meme-view-container {
         border-radius: 1em;
         box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
         transition: 0.3s;
         outline: none;
         border: none;
+        max-width: 350px;
+      }
+      .meme-view-container-form  {
+        max-width: unset;
       }
       .meme-view-container:hover, 
       .meme-view-container:focus {
@@ -82,38 +100,14 @@
         box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
       }
     </style>
-    <style>
-      .navigation {
-        background-color: var(--primary-color);
-        padding: 1rem;
-        color: var(--off-white);
-        border-bottom-left-radius: 1rem;
-      }
-      .navigation .brand {
-        font-weight: bolder;
-        font-size: larger;
-      }
-      .navigation ul {
-        text-align: right;
-      }
-      .list-unordered {
-        list-style-type: none;
-      }
-      .navigation .link-active {
-        font-weight: bold;
-      }
-      .navigation .link {
-        color: var(--text-color-default);
-      }
-    </style>
   </head>
   <body>
     <nav class="navigation">
-      <div class="brand">xmeme by anugrah</div>
+      <div class="brand">xmeme by <span class="brand-user">anugrah</span></div>
       <ul class="list-unordered list-inline">
-        <!-- <li>
+        <li>
           <a class="link link-active" href="/">home</a>
-        </li> -->
+        </li>
         <li>
           <a class="link create-meme-iframe-link" onclick="showCreateForm()">create</a>
         </li>
@@ -123,7 +117,7 @@
       </ul>
     </nav>
 
-    <div class="form-container-with-preview hidden animate__animated animate__bounce">
+    <div class="form-container-with-preview hidden" style="display: none;">
       <div class="wrapper">
         <div class="meme-view-container meme-view-container-form">
           <img
@@ -150,15 +144,15 @@
           <form name="meme-create-update-form">
             <p class="hidden">
               <label for="name">name</label>
-              <input type="text" name="name" placeholder="what's your name buddy?"/>
+              <input class="rounded-corners" type="text" name="name" placeholder="what's your name buddy?"/>
             </p>
-            <p>
+            <p c>
               <label for="caption">caption</label>
-              <input type="text" name="caption" placeholder="let your creativity run wild"/>
+              <input class="rounded-corners" type="text" name="caption" placeholder="let your creativity run wild"/>
             </p>
             <p class="full">
               <label for="url">url</label>
-              <input type="text" name="url" placeholder="what meme we postin' today?"/>
+              <input class="rounded-corners" type="text" name="url" placeholder="what meme we postin' today?"/>
             </p>
             <p class="half" id="submit-data">
               <button class="rounded-corners" type="submit">Submit</button>
@@ -177,66 +171,19 @@
       </div>
     </div>
 
-    <p class="helper-icon-wrapper" id="create-meme-iframe">
+    <p class="helper-icon-wrapper helper-icon-bottom" id="create-meme-iframe">
       <a class="helper-icon create-meme-iframe-link" onclick="showCreateForm()">
-          <i class="fa fa-pencil"></i>
+          <!-- <i class="fa fa-pencil"></i> -->
+          <i class="fa fa-plus-circle fa-6" aria-hidden="true"></i>
       </a>
     </p>
 
-    <p class="helper-icon-wrapper" id="meme-notification">
+    <p class="helper-icon-wrapper helper-icon-top" id="meme-notification" style="display:unset">
       <a class="helper-icon" id="meme-notification-message">
+        Lorem ipsum dolor sit amet consectetur.
       </a>
     </p>
 
-    
-    <style>
-      .footer {
-    background-color: var(--primary-color);
-    padding: 1rem;
-    color: var(--text-color-default);
-    border-top-right-radius: 1rem;
-    text-align: center;
-}
-footer {
-  display: block;
-}
-.container {
-    margin: auto;
-    padding: 1rem 1rem;
-    max-width: var(--post-items-max-width);
-    display: block;
-}
-.footer .heading {
-    font-weight: bold;
-    font-size: large;
-    color: var(--off-white);
-}
-.footer ul {
-    padding-inline-start: 0px;
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
-}
-.list-unordered {
-    list-style-type: none;
-}
-.list-inline li {
-    display: inline;
-}
-.footer .link {
-    color: var(--off-white);
-}
-
-.link {
-    text-decoration: none;
-    border-radius: 0.5rem;
-    padding: 0.5rem 0.5rem;
-}
-    </style>
     <footer class="footer">
       <div class="container">
         <div class="heading">Social Media Presence</div>
