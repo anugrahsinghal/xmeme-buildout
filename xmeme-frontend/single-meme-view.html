@@ -34,6 +34,9 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
     <style>
+      .qr-code {
+        grid-column: 3/4;
+      }
       .create-update-form form {
         grid-template-columns: 1fr 1fr;
       }
@@ -160,6 +163,12 @@
             <p>
               <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="I posted this awesome meme on X Meme" data-via="anugrah_singhal" data-hashtags="#crio #xmeme" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </p>
+            <p>
+              <a class="qr-share-button">Share as QR</a>
+            </p>
+            <p class="qr-code">
+              hey
+            </p>
           </div>
         </div>
       </div>
@@ -198,5 +207,19 @@
       </div>
     </footer>
     <script src="src/app.js"></script>
+    <script>
+      function getCurrentWindowData() {
+        let memeId = window.location.search.substr(3);
+        log(memeId)
+        // fetch memeById
+        // render meme
+      }
+      function generateQrCode() {
+        let finalURL = 'https://chart.googleapis.com/chart?cht=qr&chl=' + encodeURI(window.location.href) + '&chs=160x160&chld=L|0'
+        log(finalURL)
+      }
+      generateQrCode();
+      getCurrentWindowData();
+    </script>
   </body>
 </html>

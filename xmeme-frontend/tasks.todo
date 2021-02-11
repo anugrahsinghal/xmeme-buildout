@@ -9,7 +9,8 @@ Todo - completed:
 
 
 @critical Fixes:
-    [] text color for iframe buttons
+    [] text color for helper buttons
+    [] font size of header and footer for phones
     
 
 @high Priority 1 - Features that add value:
@@ -18,10 +19,11 @@ Todo - completed:
         [] choose colors for dark mode
         [] js for darkmode toggle
         [] test to check if all buttons render correctly with dark mode on
-    [] on dbl click > new page
-        [] new page has all details
-        [] ?? on that give share, QR share
-    [] share to insta/twitter
+    [] on open click
+        ✔ new page @done(21-02-12 03:44)
+        ✔ new page has all details @done(21-02-12 03:43)
+        ✔ on that give share, QR share @done(21-02-12 03:43)
+        ✔ share to insta/twitter @done(21-02-12 03:44)
         
     [] tool-tip - to show data on hover
     [] card -> 

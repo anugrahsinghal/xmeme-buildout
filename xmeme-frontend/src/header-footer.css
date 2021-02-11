@@ -8,9 +8,13 @@
   color: var(--off-white);
   border-bottom-left-radius: 1rem;
 }
+nav.navigation {
+  padding-top: 0;
+  padding-bottom: 0.3em;
+}
 .navigation .brand {
-  font-weight: bolder;
-  font-size: larger;
+  font-weight: bold;
+  font-size: large;
 }
 .navigation ul {
   text-align: right;
@@ -73,3 +77,16 @@ footer {
 .footer i {
   margin: 5px;
 }
+
+/* @media(mIN-width:600px) {
+  .navigation .brand {
+    font-weight: bolder;
+    font-size: larger;
+  }
+  .navigation ul {
+    text-align: right;
+  }
+  .navigation .link-active {
+    font-weight: bold;
+  } 
+} */
