@@ -12,6 +12,10 @@
     <title>X Meme | Meme Stream</title>
     <link rel="stylesheet" href="src/style-common.css" />
     <link rel="stylesheet" href="src/main.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <style>
 .helper-icon-wrapper {
@@ -78,13 +82,48 @@
         box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
       }
     </style>
+    <style>
+      .navigation {
+        background-color: var(--primary-color);
+        padding: 1rem;
+        color: var(--off-white);
+        border-bottom-left-radius: 1rem;
+      }
+      .navigation .brand {
+        font-weight: bolder;
+        font-size: larger;
+      }
+      .navigation ul {
+        text-align: right;
+      }
+      .list-unordered {
+        list-style-type: none;
+      }
+      .navigation .link-active {
+        font-weight: bold;
+      }
+      .navigation .link {
+        color: var(--text-color-default);
+      }
+    </style>
   </head>
   <body>
-    <header class="header">
-      <h2>X Meme</h2>
-    </header>
+    <nav class="navigation">
+      <div class="brand">xmeme by anugrah</div>
+      <ul class="list-unordered list-inline">
+        <!-- <li>
+          <a class="link link-active" href="/">home</a>
+        </li> -->
+        <li>
+          <a class="link create-meme-iframe-link" onclick="showCreateForm()">create</a>
+        </li>
+        <!-- <li>
+          <a class="link" href="/blogs.html">blogs</a>
+        </li> -->
+      </ul>
+    </nav>
 
-    <div class="form-container-with-preview hidden">
+    <div class="form-container-with-preview hidden animate__animated animate__bounce">
       <div class="wrapper">
         <div class="meme-view-container meme-view-container-form">
           <img
@@ -122,10 +161,10 @@
               <input type="text" name="url" placeholder="what meme we postin' today?"/>
             </p>
             <p class="half" id="submit-data">
-              <button class="rounded-button" type="submit">Submit</button>
+              <button class="rounded-corners" type="submit">Submit</button>
             </p>
             <p class="half" id="cancel-form">
-              <button class="rounded-button" type="reset">Cancel</button>
+              <button class="rounded-corners" type="reset">Cancel</button>
             </p>
           </form>
         </div>
@@ -139,7 +178,7 @@
     </div>
 
     <p class="helper-icon-wrapper" id="create-meme-iframe">
-      <a class="helper-icon" id="create-meme-iframe-link" onclick="showCreateForm(event)">
+      <a class="helper-icon create-meme-iframe-link" onclick="showCreateForm()">
           <i class="fa fa-pencil"></i>
       </a>
     </p>

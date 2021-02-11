@@ -148,12 +148,12 @@ i {
   width: 100%;
 }
 .edit-meme-btn:hover,
-.edit-meme-btn:focus{
+.edit-meme-btn:focus {
   background-color: var(--primary-color);
-  transition: background-color 0.5s ease-out;
+  transition: background-color 2s ease-out;
 }
 .edit-meme-btn:hover button,
-.edit-meme-btn:focus button{
+.edit-meme-btn:focus button {
   color: white;
 }
 
@@ -195,4 +195,25 @@ i {
 
 .rounded-corners {
   border-radius: 1em;
+}
+
+.meme-view-container:hover,
+.meme-view-container:focus {
+  transform: scale(1.02);
+}
+
+.rounded-corners:hover,
+.rounded-corners:active {
+  transform: scale(1.035);
+}
+/* Hand on hover */
+.create-meme-iframe-link:hover,
+.create-meme-iframe-link:focus,
+.edit-meme-btn button:hover,
+.edit-meme-btn button:focus,
+.edit-meme-btn button:active,
+.create-update-form form p button:active,
+.create-update-form form p button:focus,
+.create-update-form form p button:hover {
+  cursor: pointer;
 }

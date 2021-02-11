@@ -97,6 +97,7 @@ const cardTemplate = `
               {{name}}
             </span>
           </li>
+          <br>
           <li class="meme-caption">
             <i class="fa fa-pencil"></i>
             <span>
@@ -104,7 +105,7 @@ const cardTemplate = `
             </span>
           </li>
         </ul>
-        <p class="edit-meme-btn rounded-button" id={{id}}>
+        <p class="edit-meme-btn rounded-corners" id={{id}}>
           <button id={{id}}>Edit</button>
         </p>
       </div>
@@ -153,10 +154,10 @@ function attachButtonsToTheLoadedMemes() {
 }
 
 // add new meme
-let creationIframeLink = document.querySelector("#create-meme-iframe-link");
-
-creationIframeLink.addEventListener("click", showCreateForm);
-function showCreateForm(event) {
+let creationIframeLink = document.querySelectoAll(".create-meme-iframe-link").forEach(item => {
+  item.addEventListener("click", showCreateForm);
+});
+function showCreateForm() {
   modifyElemenetsWithClassHidden("unset");
   editCreatePreview.style.display = "unset";
   let heading = document.querySelector('.edit-create')
