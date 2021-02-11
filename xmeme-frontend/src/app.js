@@ -14,13 +14,15 @@ function clearForm() {
 }
 
 function renderPreview(event) {
-  let urlToShow = event.target.value
-  
-  log("url to show" + urlToShow)
-  let renderTarget = document.querySelector('#image-render')
-  log("before src set" + renderTarget)
-  renderTarget.setAttribute('src',urlToShow)
-  log("after src set" + renderTarget.getAttribute('src'))
+  let urlToRender = event.target.value
+  renderImageInForm(urlToRender)
+}
+function renderImageInForm(urlToRender) {
+  log("url to show" + urlToRender);
+  let renderTarget = document.querySelector('#image-render');
+  log("before src set" + renderTarget);
+  renderTarget.setAttribute('src', urlToRender);
+  log("after src set" + renderTarget.getAttribute('src'));
 }
 
 let editCreatePreview = document.querySelector(".form-container-with-preview");
@@ -56,13 +58,22 @@ function showEditForm(event) {
   log("meme-id" + localStorage.getItem("memeId"));
   let heading = document.querySelector('.edit-create')
   heading.innerText = 'edit meme'
-
+  renderPreviewOfImageToBeEdited(event);
   editCreatePreview.style.display = "unset";
   scroll(0, 0);
 }
 
+function renderPreviewOfImageToBeEdited(event) {
+  let children = event.target.parentNode.parentNode.children
+  let existingImgUrl = children[0].src
+  
+  renderImageInForm(existingImgUrl);
+}
+
 const xmemeBackendUrl =
-  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+"https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+
+
 // "http://localhost:8082/memes";
 
 function sendDataToPersist() {
@@ -85,7 +96,7 @@ loadMemes();
 const cardTemplate = `
     {{#each memes}}
     <div class="meme-view-container">
-        <div class="image-edit-container edit-meme-btn">
+        <div class="image-edit-container" id={{id}}>
           <img
             src="{{url}}"
             alt="Image could not be loaded"
@@ -93,7 +104,7 @@ const cardTemplate = `
             onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
           />
           <div class="image-edit-view-overlay">
-            <div class="text rounded-corners"><i class="fa fa-pencil"></i>Edit</div>
+            <div class="text rounded-corners edit-meme-btn" id={{id}}><i class="fa fa-pencil"></i>Edit</div>
           </div>
         </div>
         <ul>

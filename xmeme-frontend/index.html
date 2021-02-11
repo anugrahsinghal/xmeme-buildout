@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="src/header-footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-    <style>
+    <style name="image-edit-overlay0-styling">
       .image-edit-container {
         position: relative;
         /* width: 50%; */
@@ -40,7 +40,8 @@
         /* transform: scale(0); */
         transition: 0.5s ease;
       }
-      .image-edit-container:hover .image-edit-view-overlay {
+      .image-edit-container:hover .image-edit-view-overlay ,
+      .image-edit-container:focus .image-edit-view-overlay {
         /* transform: scale(1); */
         opacity: 0.9;
       }
@@ -69,7 +70,8 @@
       .edit-meme-btn {
         cursor: pointer;
       }
-
+</style>
+<style name="single meme view container styles">
       .meme-view-container {
         border-radius: 1em;
         box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
@@ -98,6 +100,14 @@
       }
       .wrapper {
         box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
+      }
+    </style>
+    <style name="reduce padding and margin between author name and caption">
+      .meme-author {
+        margin-bottom: 0;
+      }
+      .meme-caption {
+        margin-top: 0;
       }
     </style>
   </head>
@@ -158,7 +168,7 @@
               <button class="rounded-corners" type="submit">Submit</button>
             </p>
             <p class="half" id="cancel-form">
-              <button class="rounded-corners" type="reset">Cancel</button>
+              <button class="rounded-corners" type="reset">Close</button>
             </p>
           </form>
         </div>
