@@ -1,0 +1,48 @@
+
+Todo - completed:
+    ✔ [DONE]set cursor to hand @done(21-02-12 00:59)
+    ✔ [DONE]pencil from caption @done(21-02-12 00:59)
+    ✔ [DONE]edit on image @done(21-02-12 00:59)
+    ✔ [DONE]name left-aligh @done(21-02-12 00:59)
+    ✔ [DONE]pencit to plus icon @done(21-02-12 00:59)
+    ✔ [DONE]btn to create on navbar @done(21-02-12 00:59)
+
+
+@critical Fixes:
+    [] text color for iframe buttons
+    
+
+@high Priority 1 - Features that add value:
+    [] DARK MODE
+        [] migrate props from :root to body
+        [] choose colors for dark mode
+        [] js for darkmode toggle
+        [] test to check if all buttons render correctly with dark mode on
+    [] on dbl click > new page
+        [] new page has all details
+        [] ?? on that give share, QR share
+    [] share to insta/twitter
+        
+    [] tool-tip - to show data on hover
+    [] card -> 
+        ✔ shadow @done(21-02-12 01:01)
+        ✔ width+height smaller @done(21-02-12 01:01)
+        [] on click -> 
+            [] expand -> square in
+            [] REDIRECT TO NEW PAGE
+
+
+@low Priority 2 - good to have:
+    [] on dbl click - > big oimage on click and clo   
+    [] on card click
+    [] hide all card and show info pf that card only
+    [] submit/cancel on the side
+    
+@low Priority 3 - Fixes:
+    [] image being edited should remain till form is open
+
+
+
+
+	
+

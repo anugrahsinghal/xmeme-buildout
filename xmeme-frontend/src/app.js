@@ -2,27 +2,27 @@ let log = console.log;
 let editFormWrapper = document.querySelector(".create-update-form-obj");
 let memeForm = document.forms["meme-create-update-form"];
 memeForm.addEventListener("click", (e) => e.preventDefault());
-memeForm['url'].addEventListener('change', renderPreview)
+memeForm["url"].addEventListener("change", renderPreview);
 
 function clearForm() {
-  let inputs = memeForm.getElementsByTagName('input')
-  inputs['name'].value = ""
-  inputs['url'].value = ""
-  inputs['caption'].value = ""
-  let renderTarget = document.querySelector('#image-render')
-  renderTarget.setAttribute('src','src/placeholder-xmeme.jpg')
+  let inputs = memeForm.getElementsByTagName("input");
+  inputs["name"].value = "";
+  inputs["url"].value = "";
+  inputs["caption"].value = "";
+  let renderTarget = document.querySelector("#image-render");
+  renderTarget.setAttribute("src", "src/placeholder-xmeme.jpg");
 }
 
 function renderPreview(event) {
-  let urlToRender = event.target.value
-  renderImageInForm(urlToRender)
+  let urlToRender = event.target.value;
+  renderImageInForm(urlToRender);
 }
 function renderImageInForm(urlToRender) {
   log("url to show" + urlToRender);
-  let renderTarget = document.querySelector('#image-render');
+  let renderTarget = document.querySelector("#image-render");
   log("before src set" + renderTarget);
-  renderTarget.setAttribute('src', urlToRender);
-  log("after src set" + renderTarget.getAttribute('src'));
+  renderTarget.setAttribute("src", urlToRender);
+  log("after src set" + renderTarget.getAttribute("src"));
 }
 
 let editCreatePreview = document.querySelector(".form-container-with-preview");
@@ -52,27 +52,26 @@ function sendDataAndReload(event) {
 function showEditForm(event) {
   console.log(event);
   /* save meme id to local storage */
-  let memeToBeEdited = event.target.id
-  log("element captured = " + memeToBeEdited)
+  let memeToBeEdited = event.target.id;
+  log("element captured = " + memeToBeEdited);
   localStorage.setItem("memeId", memeToBeEdited);
   log("meme-id" + localStorage.getItem("memeId"));
-  let heading = document.querySelector('.edit-create')
-  heading.innerText = 'edit meme'
+  let heading = document.querySelector(".edit-create");
+  heading.innerText = "edit meme";
   renderPreviewOfImageToBeEdited(event);
   editCreatePreview.style.display = "unset";
   scroll(0, 0);
 }
 
 function renderPreviewOfImageToBeEdited(event) {
-  let children = event.target.parentNode.parentNode.children
-  let existingImgUrl = children[0].src
-  
+  let children = event.target.parentNode.parentNode.children;
+  let existingImgUrl = children[0].src;
+
   renderImageInForm(existingImgUrl);
 }
 
 const xmemeBackendUrl =
-"https://pettywaterycookie.anugrahsinghal.repl.co/memes";
-
+  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
 
 // "http://localhost:8082/memes";
 
@@ -104,19 +103,24 @@ const cardTemplate = `
             onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
           />
           <div class="image-edit-view-overlay">
-            <div class="text rounded-corners edit-meme-btn" id={{id}}><i class="fa fa-pencil"></i>Edit</div>
+            <div class="text rounded-corners edit-meme-btn" id={{id}}>
+              <i class="fa fa-pencil"></i>Edit
+            </div>            
+            <div class="text rounded-corners open-meme-btn" id={{id}}>
+              Open
+            </div>
           </div>
         </div>
         <ul>
           <li class="meme-author">
-            <i class="fa fa-user"></i>
+          <i class="fa fa-user-circle-o" aria-hidden="true"></i>
             <span id="meme-author-name">
               {{name}}
             </span>
           </li>
           <!-- br -->
           <li class="meme-caption">
-            <i class="fa fa-pencil"></i>
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <span>
               {{caption}}
             </span>
@@ -163,22 +167,32 @@ function attachButtonsToTheLoadedMemes() {
   log("attach buttons");
 
   let editMemeBtns = document.querySelectorAll(".edit-meme-btn");
+  let openMemeBtns = document.querySelectorAll(".open-meme-btn");
   log(editMemeBtns.length);
+  log(openMemeBtns.length);
 
   editMemeBtns.forEach((item) => {
     item.addEventListener("click", showEditForm);
   });
+  openMemeBtns.forEach((item) => {
+    item.addEventListener("click", openMemeInNewPage);
+  });
+}
+function openMemeInNewPage(event) {
+  window.location.assign("single-meme-view.html?q=" + event.target.id);
 }
 
 // add new meme
-let creationIframeLink = document.querySelectorAll(".create-meme-iframe-link").forEach(item => {
-  item.addEventListener("click", showCreateForm);
-});
+let creationIframeLink = document
+  .querySelectorAll(".create-meme-iframe-link")
+  .forEach((item) => {
+    item.addEventListener("click", showCreateForm);
+  });
 function showCreateForm() {
   modifyElemenetsWithClassHidden("unset");
   editCreatePreview.style.display = "unset";
-  let heading = document.querySelector('.edit-create')
-  heading.innerText = 'create meme'
+  let heading = document.querySelector(".edit-create");
+  heading.innerText = "create meme";
   scroll(0, 0);
   document.querySelector("#create-meme-iframe").style.display = "none";
 }

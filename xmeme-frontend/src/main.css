@@ -168,13 +168,15 @@ ul {
 /* captions and buttons */
 .meme-author {
   height: 2em;
-  margin-bottom: 0.6em;
+  margin-bottom: 0;
 }
 .meme-caption {
   line-height: 1.2;
-  font-size: small;
   height: 5em;
-  margin-top: 1em;
+  margin-top: 0em;
+}
+.meme-caption span {
+  font-size: small;
 }
 .meme-author,
 .meme-caption {

@@ -7,71 +7,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="src/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="src/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>X Meme | Meme Stream</title>
     <link rel="stylesheet" href="src/style-common.css" />
     <link rel="stylesheet" href="src/main.css" />
     <link rel="stylesheet" href="src/header-footer.css">
+    <link rel="stylesheet" href="src/image-overlay-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-    <style name="image-edit-overlay0-styling">
-      .image-edit-container {
-        position: relative;
-        /* width: 50%; */
-      }
-      .image-edit-view-overlay {
-        
-        opacity: 0;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        text-align: center;
-        position: absolute;
-        /* bottom: 5%; */
-        /* left: 0;
-        right: 0; */
-        /* background-color: #008CBA; */
-        overflow: hidden;
-        width: 100%;
-        padding: 1.5em;
-        /* height: 100%; */
-        /* transform: scale(0); */
-        transition: 0.5s ease;
-      }
-      .image-edit-container:hover .image-edit-view-overlay ,
-      .image-edit-container:focus .image-edit-view-overlay {
-        /* transform: scale(1); */
-        opacity: 0.9;
-      }
-      .text i {
-        margin: 0.2em;
-      }
-      .text {
-        background-color: var(--dark-gray);
-        color: white;
-        font-weight: bold;
-        /* font-size: 16px; */
-        padding: 1.2em 2.2em;
-        padding-left: 1.9em;
-        display: inline;
-        border-radius: 1em;
-              
-        /* color: white;
-        font-size: 20px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center; */
-      }
-
-      .edit-meme-btn {
-        cursor: pointer;
-      }
-</style>
-<style name="single meme view container styles">
+    <style name="single meme view container styles">
       .meme-view-container {
         border-radius: 1em;
         box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
@@ -102,14 +46,7 @@
         box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
       }
     </style>
-    <style name="reduce padding and margin between author name and caption">
-      .meme-author {
-        margin-bottom: 0;
-      }
-      .meme-caption {
-        margin-top: 0;
-      }
-    </style>
+    
   </head>
   <body>
     <nav class="navigation">

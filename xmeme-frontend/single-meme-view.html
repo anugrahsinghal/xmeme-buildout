@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="src/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="src/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="src/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>X Meme | Meme Stream</title>
+    <link rel="stylesheet" href="src/style-common.css" />
+    <link rel="stylesheet" href="src/main.css" />
+    <link rel="stylesheet" href="src/header-footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <style>
+      .create-update-form form {
+        grid-template-columns: 1fr 1fr;
+      }
+      .full {
+        grid-column: 1/3;
+      }
+      .share-to-social {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-auto-flow: column;
+        column-gap: 1em;
+        row-gap: 1em;
+      }
+
+      /* #region icon-colors*/
+      .share-to-social {
+          margin-top: 1em;
+      }
+
+      .share-to-social .fa {
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+        font-size: 30px;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        margin: 0;
+      }
+
+      .share-to-social .fa:hover {
+        opacity: 0.65;
+      }
+      .share-to-social .fa-twitter {
+        background: lightskyblue;
+        color: white;
+      }
+      .share-to-social .fa-linkedin {
+        background: rgba(17, 131, 207);
+        color: white;
+      }
+      .share-to-social .fa-instagram {
+        background: #125688;
+        color: white;
+      }
+      .share-to-social .fa-reddit {
+        background: rgb(233, 83, 28);
+        color: white;
+      }
+
+      /* #endregion */
+    </style>
+  </head>
+  <body>
+    <nav class="navigation">
+      <div class="brand">xmeme by <span class="brand-user">anugrah</span></div>
+      <ul class="list-unordered list-inline">
+        <li>
+          <a class="link link-active" href="/">home</a>
+        </li>
+        <li>
+          <a class="link create-meme-iframe-link" onclick="showCreateForm()">
+            create
+          </a>
+        </li>
+        <li>
+          <a class="link link-active" href="mailto:anugrahsinghal@gmail.com">contact me</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="form-container-with-preview hidden" style="display: unset">
+      <div class="wrapper">
+        <div class="meme-view-container meme-view-container-form">
+          <img
+            src="src/placeholder-xmeme.jpg"
+            alt="Image could not be loaded"
+            id="image-render"
+            onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
+          />
+          <ul>
+            <li></li>
+            <br />
+            <li></li>
+          </ul>
+        </div>
+        <div class="create-update-form">
+          <h3 class="edit-create">edit meme</h3>
+          <form name="meme-create-update-form">
+            <p class="hidden full">
+              <label for="name">name</label>
+              <input
+                class="rounded-corners"
+                type="text"
+                name="name"
+                placeholder="what's your name buddy?"
+              />
+            </p>
+            <p class="full">
+              <label for="caption">caption</label>
+              <input
+                class="rounded-corners"
+                type="text"
+                name="caption"
+                placeholder="let your creativity run wild"
+              />
+            </p>
+            <p class="full">
+              <label for="url">url</label>
+              <input
+                class="rounded-corners"
+                type="text"
+                name="url"
+                placeholder="what meme we postin' today?"
+              />
+            </p>
+            <p id="submit-data">
+              <button class="rounded-corners" type="submit">Submit</button>
+            </p>
+            <p id="cancel-form">
+              <button class="rounded-corners" type="reset">Close</button>
+            </p>
+          </form>
+          <div class="share-to-social">
+            <p>
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="I posted this awesome meme on X Meme" data-via="anugrah_singhal" data-hashtags="#crio #xmeme" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="helper-icon-wrapper helper-icon-bottom" id="create-meme-iframe">
+      <a class="helper-icon create-meme-iframe-link" onclick="showCreateForm()">
+        <i class="fa fa-plus-circle fa-6" aria-hidden="true"></i>
+      </a>
+    </p>
+
+    <p class="helper-icon-wrapper helper-icon-top" id="meme-notification">
+      <a class="helper-icon" id="meme-notification-message">
+        Lorem ipsum dolor sit amet consectetur.
+      </a>
+    </p>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="heading">Social Media Presence</div>
+        <ul class="list-unordered list-inline">
+          <li>
+            <a class="link" href="https://www.github.com/anugrahsinghal">
+              <i class="fa fa-github"></i>github</a
+            >
+          </li>
+          <li>
+            <a class="link" href="https://www.linkedin.com/in/anugrah-singhal">
+              <i class="fa fa-linkedin"></i>linkedIn</a
+            >
+          </li>
+          <!-- <li>
+            <a class="link" href="/">social3</a>
+          </li> -->
+        </ul>
+      </div>
+    </footer>
+    <script src="src/app.js"></script>
+  </body>
+</html>
