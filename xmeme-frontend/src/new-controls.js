@@ -28,8 +28,9 @@ function sendDataAndReload(event) {
 function showEditForm(event) {
   console.log(event);
   /* save meme id to local storage */
-  let memeToBeEdited = event.target.parentElement;
-  localStorage.setItem("memeId", memeToBeEdited.getAttribute("id"));
+  let memeToBeEdited = event.target.id
+  log("element captured = " + memeToBeEdited)
+  localStorage.setItem("memeId", memeToBeEdited);
   log("meme-id" + localStorage.getItem("memeId"));
 
   editCreatePreview.style.display = "unset";
@@ -59,7 +60,7 @@ loadMemes();
 // load memes
 const cardTemplate = `
     {{#each memes}}
-    <div class="meme-view-container" id={{id}}>
+    <div class="meme-view-container">
         <img
           src="{{url}}"
           alt="Image could not be loaded"
@@ -79,8 +80,8 @@ const cardTemplate = `
             </span>
           </li>
         </ul>
-        <p class="edit-meme-btn">
-          <button>Edit</button>
+        <p class="edit-meme-btn" id={{id}}>
+          <button id={{id}}>Edit</button>
         </p>
       </div>
       {{/each}}
