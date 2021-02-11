@@ -3,60 +3,219 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="src/styles.css" />
-    <title>X Meme</title>
-  </head>
+    <link rel="apple-touch-icon" sizes="180x180" href="src/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>X Meme | Meme Stream</title>
+    <link rel="stylesheet" href="src/style-common.css" />
+    <link rel="stylesheet" href="src/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <style>
+.helper-icon-wrapper {
+  position: fixed;
+        margin: 0;
+        padding: 0;
+        bottom: 9px;
+        right: 0px;
+        border: none;
+        width: 50px;
+        height: 36px;
+        z-index: 9999999999999;
+}
+#meme-notification {
+  display: none;
+  left: 10px;
+  width: auto;
+}
+      .helper-icon {
+        display: inline-flex;
+        align-items: center;
+        height: 32px;
+        padding: 0 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: white;
+        background-color: rgb(21, 21, 21);
+        cursor: pointer;
+        border: 1px solid rgb(52, 52, 52);
+        border-radius: 4px;
+        text-decoration: none;
+        font-family: Monsterrat, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: antialiased;
+        z-index: 99999999999;
+      }
+      body {
+        background: var(--off-white);
+      }
+      .meme-view-container {
+        border-radius: 1em;
+        box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
+        transition: 0.3s;
+        outline: none;
+        border: none;
+      }
+      .meme-view-container:hover, 
+      .meme-view-container:focus {
+        box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
+        /* background: #000; */
+        /* color: blanchedalmond; */
+        /* transition: transform 0.5s ease-in-out; */
+      }
+      .meme-view-container-form:hover {
+        box-shadow: none;
+      }
+      .meme-view-container-form {
+        border-radius: none;
+        box-shadow: none;
+        transition: none;
+      }
+      .wrapper {
+        box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
+      }
+    </style>
+  </head>
   <body>
     <header class="header">
       <h2>X Meme</h2>
     </header>
 
-    <div id="content">
-      <form id="create-meme">
-        <!-- <label for="input-name">Name</label><br> -->
-        <input type="text" id="input-name" placeholder="enter your name" maxlength="254" />
-        <hr />
-        <!-- <label for="meme-input-caption">Caption</label><br> -->
-        <input
-          type="text"
-          id="meme-input-caption"
-          placeholder="enter caption"
-          maxlength="254"
-        />
-        <hr />
-        <!-- <label for="input-url">URL</label><br> -->
-        <input type="text" id="input-url" placeholder="enter meme url" />
-        <hr />
-        <button type="submit" id="submit-meme">Create Meme!</button>
-      </form>
+    <div class="form-container-with-preview hidden">
+      <div class="wrapper">
+        <div class="meme-view-container meme-view-container-form">
+          <img
+            src="src/placeholder-xmeme.jpg"
+            alt="Image could not be loaded"
+            id="image-render"
+            onerror="this.onerror=null; this.src='src/placeholder-xmeme.jpg'"
+          />
+          <ul>
+            <li>
+              <!-- <i class="fa fa-user"></i
+              ><span id="form-meme-author-name">Anugrah</span> -->
+            </li>
+              <br />
+            </li>
+            <li>
+              <!-- <i class="fa fa-pencil"></i
+              ><span id="form-meme-caption">caption</span> -->
+            </li>
+          </ul>
+        </div>
+        <div class="create-update-form">
+          <h3 class="edit-create"></h3>
+          <form name="meme-create-update-form">
+            <p class="hidden">
+              <label for="name">name</label>
+              <input type="text" name="name" placeholder="what's your name buddy?"/>
+            </p>
+            <p>
+              <label for="caption">caption</label>
+              <input type="text" name="caption" placeholder="let your creativity run wild"/>
+            </p>
+            <p class="full">
+              <label for="url">url</label>
+              <input type="text" name="url" placeholder="what meme we postin' today?"/>
+            </p>
+            <p class="half" id="submit-data">
+              <button class="rounded-button" type="submit">Submit</button>
+            </p>
+            <p class="half" id="cancel-form">
+              <button class="rounded-button" type="reset">Cancel</button>
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <iframe 
-      src="memes.html" 
-      style="
-      display: block;
-      width: 100vw;
-      height: 100vh;
-      "> </iframe>
+    <div class="parent-meme-view-container">
+      <div class="meme-post-wrapper">
+        <!-- Dynamically populated content here -->
+      </div>
+    </div>
 
-    <iframe
-      id="meme_created_msg"
-      style="
-        position: fixed;
-        margin: 0;
-        padding: 0;
-        bottom: 16px;
-        left: 16px;
-        border: none;
-        max-width: 360px;
-        height: 36px;
-        z-index: 9999999999999;
-      "
-    >
-    </iframe>
+    <p class="helper-icon-wrapper" id="create-meme-iframe">
+      <a class="helper-icon" id="create-meme-iframe-link" onclick="showCreateForm(event)">
+          <i class="fa fa-pencil"></i>
+      </a>
+    </p>
 
-    <script src="src/index.js"></script>
+    <p class="helper-icon-wrapper" id="meme-notification">
+      <a class="helper-icon" id="meme-notification-message">
+      </a>
+    </p>
+
+    
+    <style>
+      .footer {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    color: var(--text-color-default);
+    border-top-right-radius: 1rem;
+    text-align: center;
+}
+footer {
+  display: block;
+}
+.container {
+    margin: auto;
+    padding: 1rem 1rem;
+    max-width: var(--post-items-max-width);
+    display: block;
+}
+.footer .heading {
+    font-weight: bold;
+    font-size: large;
+    color: var(--off-white);
+}
+.footer ul {
+    padding-inline-start: 0px;
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+.list-unordered {
+    list-style-type: none;
+}
+.list-inline li {
+    display: inline;
+}
+.footer .link {
+    color: var(--off-white);
+}
+
+.link {
+    text-decoration: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.5rem;
+}
+    </style>
+    <footer class="footer">
+      <div class="container">
+        <div class="heading">Social Media Presence</div>
+        <ul class="list-unordered list-inline">
+          <li>
+            <a class="link" href="https://www.github.com/anugrahsinghal">
+              <i class="fa fa-github"></i>github</a>
+          </li>
+          <li>
+            <a class="link" href="https://www.linkedin.com/in/anugrah-singhal">
+             <i class="fa fa-linkedin"></i>linkedIn</a>
+          </li>
+          <!-- <li>
+            <a class="link" href="/">social3</a>
+          </li> -->
+        </ul>
+      </div>
+    </footer>
+    <script src="src/app.js"></script>
   </body>
 </html>

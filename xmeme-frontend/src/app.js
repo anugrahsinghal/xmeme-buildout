@@ -2,6 +2,26 @@ let log = console.log;
 let editFormWrapper = document.querySelector(".create-update-form-obj");
 let memeForm = document.forms["meme-create-update-form"];
 memeForm.addEventListener("click", (e) => e.preventDefault());
+memeForm['url'].addEventListener('change', renderPreview)
+
+function clearForm() {
+  let inputs = memeForm.getElementsByTagName('input')
+  inputs['name'].value = ""
+  inputs['url'].value = ""
+  inputs['caption'].value = ""
+  let renderTarget = document.querySelector('#image-render')
+  renderTarget.setAttribute('src','src/placeholder-xmeme.jpg')
+}
+
+function renderPreview(event) {
+  let urlToShow = event.target.value
+  
+  log("url to show" + urlToShow)
+  let renderTarget = document.querySelector('#image-render')
+  log("before src set" + renderTarget)
+  renderTarget.setAttribute('src',urlToShow)
+  log("after src set" + renderTarget.getAttribute('src'))
+}
 
 let editCreatePreview = document.querySelector(".form-container-with-preview");
 let cancelBtn = document.querySelector("#cancel-form");
@@ -9,6 +29,7 @@ cancelBtn.addEventListener("click", () => {
   editCreatePreview.style.display = "none";
   document.querySelector("#create-meme-iframe").style.display = "unset";
   modifyElemenetsWithClassHidden("none");
+  clearForm();
 });
 
 function modifyElemenetsWithClassHidden(displayState) {
@@ -22,6 +43,7 @@ submitBtn.addEventListener("click", sendDataAndReload);
 function sendDataAndReload(event) {
   memeForm.addEventListener("click", (e) => {
     sendDataToPersist();
+    clearForm();
   });
 }
 
@@ -32,6 +54,8 @@ function showEditForm(event) {
   log("element captured = " + memeToBeEdited)
   localStorage.setItem("memeId", memeToBeEdited);
   log("meme-id" + localStorage.getItem("memeId"));
+  let heading = document.querySelector('.edit-create')
+  heading.innerText = 'edit meme'
 
   editCreatePreview.style.display = "unset";
   scroll(0, 0);
@@ -80,7 +104,7 @@ const cardTemplate = `
             </span>
           </li>
         </ul>
-        <p class="edit-meme-btn" id={{id}}>
+        <p class="edit-meme-btn rounded-button" id={{id}}>
           <button id={{id}}>Edit</button>
         </p>
       </div>
@@ -135,6 +159,8 @@ creationIframeLink.addEventListener("click", showCreateForm);
 function showCreateForm(event) {
   modifyElemenetsWithClassHidden("unset");
   editCreatePreview.style.display = "unset";
+  let heading = document.querySelector('.edit-create')
+  heading.innerText = 'create meme'
   scroll(0, 0);
   document.querySelector("#create-meme-iframe").style.display = "none";
 }

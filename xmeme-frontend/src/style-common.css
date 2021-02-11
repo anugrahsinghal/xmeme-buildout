@@ -9,7 +9,11 @@
 
 :root {
   /* color from tail-wind-css */
-  --primary-color: purple;
+  /* --primary-color: purple; */
+  --primary-color: #4C1D95;
+  --primary-color-shade:#C4B5FD;
+  --primary-color-light: #ede9fe;
+  /* --primary-color-light: #A78BFA; */
   --off-white: #f3f4f6;
   --dark-gray: #6b7280;
   --scrollbarBG: var(var(--off-white));
@@ -18,7 +22,8 @@
   --post-items-width: 330px;
   --post-items-max-width: 414px;
   --post-items-height: 400px;
-  --post-items-max-height: 640px;
+  /* --post-items-max-height: 640px; */
+  --post-items-max-height: 5000px;
   /* for responsive scaling */
   --max-body-width: 1170px;
 }

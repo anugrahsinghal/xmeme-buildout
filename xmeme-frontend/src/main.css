@@ -1,9 +1,6 @@
 * {
   box-sizing: border-box;
 }
-:root {
-  --primary-color-light: #c9e6ff;
-}
 body {
   line-height: 1.8;
 }
@@ -78,6 +75,7 @@ i {
 .create-update-form form button:hover,
 .create-update-form form button:focus {
   background: var(--primary-color);
+  color: white;
   outline: 0;
   transition: background-color 0.5s ease-out;
 }
@@ -118,15 +116,17 @@ i {
 }
 
 .meme-view-container {
-  border: 1px dotted var(--primary-color);
+  /* border: 1px dotted var(--primary-color); */
   padding-bottom: 0;
 }
 .meme-view-container img {
+  background: var(--primary-color-light);
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: var(--post-items-max-width);
   max-height: var(--post-items-max-height);
+  object-fit: contain;
   width: var(--post-items-width);
   height: var(--post-items-height);
 }
@@ -135,19 +135,26 @@ i {
   margin: 0 0 1rem 0;
 }
 .meme-view-container .edit-meme-btn {
-  display: block;
-  text-align: center;
   padding: 0.2em;
-  background: var(--primary-color-light);
+  background: var(--primary-color-shade);
   margin: 0 0 1em 0;
-  font-weight: bold;
-  font-size: small;
-  text-transform: lowercase;
+}
+
+.meme-view-container .edit-meme-btn button {
+  text-align: center;
+  background: var(--primary-color-shade);
+  font-weight: 790;
+  text-transform: uppercase;
+  width: 100%;
 }
 .edit-meme-btn:hover,
-.edit-meme-btn:focus {
+.edit-meme-btn:focus{
   background-color: var(--primary-color);
   transition: background-color 0.5s ease-out;
+}
+.edit-meme-btn:hover button,
+.edit-meme-btn:focus button{
+  color: white;
 }
 
 .meme-view-container .edit-meme-btn button {
@@ -184,4 +191,8 @@ i {
     grid-template-columns: 1fr 1fr 1fr;
     /* column-gap: 1.2em; */
   }
+}
+
+.rounded-corners {
+  border-radius: 1em;
 }
