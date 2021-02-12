@@ -21,7 +21,7 @@ ul {
 }
 
 .wrapper {
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1);
+  box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
 }
 
 .wrapper > * {
@@ -121,6 +121,12 @@ ul {
 .meme-view-container {
   /* border: 1px dotted var(--primary-color); */
   padding-bottom: 0;
+  border-radius: 1em;
+  box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  max-width: 350px;
 }
 .meme-view-container img {
   background: var(--primary-color-light);
@@ -136,6 +142,14 @@ ul {
 .meme-view-container ul {
   text-align: center;
   margin: 0 0 0rem 0;
+}
+
+.meme-view-container:hover,
+.meme-view-container:focus {
+  box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
+  background-color: var(--primary-color-shade);
+  /* filter: blur(2px); */
+  transition: background-color 0.5s ease-in-out;
 }
 /* .meme-view-container .edit-meme-btn {
   padding: 0.2em;
@@ -206,7 +220,6 @@ ul {
 }
 /* #endregion */
 
-
 /* #region  rounded-corners */
 
 /* adding rounded corners */
@@ -270,6 +283,7 @@ ul {
 .helper-icon-bottom {
   bottom: 10px;
   right: 0px;
+  -webkit-text-fill-color: var(--off-white);
 }
 #meme-notification {
   display: none;
@@ -279,3 +293,30 @@ ul {
   padding: 0.2em;
 }
 /* #endregion */
+
+.toggle-theme svg:hover,
+.toggle-theme svg:active {
+  cursor: pointer;
+}
+
+.image-to-edit:hover,
+.image-to-edit:focus {
+  /* filter: blur(1px); */
+}
+
+/* #region  .meme-view-container-form */
+
+.meme-view-container-form {
+  max-width: unset;
+}
+.meme-view-container-form:hover {
+  box-shadow: none;
+}
+.meme-view-container-form {
+  border-radius: none;
+  box-shadow: none;
+  transition: none;
+}
+
+/* #endregion */
+

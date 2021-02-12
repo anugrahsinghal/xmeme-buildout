@@ -28,37 +28,12 @@
     <link rel="stylesheet" href="src/main.css" />
     <link rel="stylesheet" href="src/header-footer.css" />
     <link rel="stylesheet" href="src/dark-style.css" />
+    <link rel="stylesheet" href="src/meme-view.css" />
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="src/app.js" defer></script>
+    <script src="src/meme-view.js" defer></script>
+    <script src="src/form-handling.js" defer></script>
     <script src="src/darkmode.js" defer></script>
-
-    <style>
-        .qr-code {
-          grid-column: 3/4;
-          visibility: hidden;
-        }
-        .less-rounded-corners {
-          border-radius: 8%;
-        }
-        .generate-qr {
-          width: 80%;
-          padding: 0.4em;
-          background-color: var(--primary-color-shade);
-        }
-        .create-update-form form {
-          grid-template-columns: 1fr 1fr;
-        }
-        .full {
-          grid-column: 1/3;
-        }
-        .share-to-social {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          grid-auto-flow: column;
-          column-gap: 0.1em;
-          row-gap: 1em;
-          margin-top: 1em;
-        }
-    </style>
   </head>
   <body>
     <nav class="navigation">
@@ -178,9 +153,7 @@
     </p>
 
     <p class="helper-icon-wrapper helper-icon-top" id="meme-notification">
-      <a class="helper-icon" id="meme-notification-message">
-        Lorem ipsum dolor sit amet consectetur.
-      </a>
+      <a class="helper-icon" id="meme-notification-message"> </a>
     </p>
 
     <footer class="footer">
@@ -197,43 +170,8 @@
               <i class="fa fa-linkedin"></i>linkedIn</a
             >
           </li>
-          <!-- <li>
-            <a class="link" href="/">social3</a>
-          </li> -->
         </ul>
       </div>
     </footer>
-    <script src="src/app.js"></script>
-    <script>
-      document
-        .querySelector(".generate-qr")
-        .addEventListener("click", generateAndRenderQrCode);
-      function generateAndRenderQrCode() {
-        let finalURL =
-          "https://chart.googleapis.com/chart?cht=qr&chl=" +
-          "Hey! Check out this cool meme I made! on " +
-          encodeURI(window.location.href) +
-          "&chs=160x160&chld=L|0";
-          log(finalURL)
-        document.querySelector(".qr-code").setAttribute("src", finalURL);
-        document.querySelector(".qr-code").style = "visibility: visible;";
-      }
-    </script>
-    <script name="theme toggle-theme">
-      function showMemeViewForm(data) {
-        console.table(data);
-        let inputs = memeForm.getElementsByTagName("input");
-
-        document.querySelector("#image-render").setAttribute("src", data.url);
-
-        inputs["name"].value = data.name;
-        inputs["url"].value = data.url;
-        inputs["caption"].value = data.caption;
-
-        inputs["name"].style = "cursor: not-allowed;";
-        inputs["url"].style = "cursor: not-allowed;";
-        inputs["caption"].style = "cursor: not-allowed;";
-      }
-    </script>
   </body>
 </html>

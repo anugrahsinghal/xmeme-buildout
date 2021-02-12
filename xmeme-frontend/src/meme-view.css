@@ -1,0 +1,26 @@
+.qr-code {
+  grid-column: 3/4;
+  visibility: hidden;
+}
+.less-rounded-corners {
+  border-radius: 8%;
+}
+.generate-qr {
+  width: 80%;
+  padding: 0.4em;
+  background-color: var(--primary-color-shade);
+}
+.create-update-form form {
+  grid-template-columns: 1fr 1fr;
+}
+.full {
+  grid-column: 1/3;
+}
+.share-to-social {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: column;
+  column-gap: 0.1em;
+  row-gap: 1em;
+  margin-top: 1em;
+}

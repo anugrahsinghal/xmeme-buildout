@@ -16,42 +16,12 @@
     <link rel="stylesheet" href="src/dark-style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="src/load-memes.js" defer></script>
+    <script src="src/form-handling.js" defer></script>
+    <script src="src/form-save-operations.js" defer></script>
     <script src="src/darkmode.js" defer></script>
     <style name="single meme view container styles">
-      .meme-view-container {
-        border-radius: 1em;
-        box-shadow: 0 4px 8px 0 rgba(128, 0, 128, 0.5);
-        transition: 0.3s;
-        outline: none;
-        border: none;
-        max-width: 350px;
-      }
-      .image-to-edit:hover,
-      .image-to-edit:focus {
-        filter: blur(1px);
-      }
-
-      .meme-view-container-form  {
-        max-width: unset;
-      }
-      .meme-view-container:hover, 
-      .meme-view-container:focus {
-        box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
-        background-color: var(--primary-color-shade);
-        /* filter: blur(2px); */
-        transition: background-color 0.5s ease-in-out;
-      }
-      .meme-view-container-form:hover {
-        box-shadow: none;
-      }
-      .meme-view-container-form {
-        border-radius: none;
-        box-shadow: none;
-        transition: none;
-      }
-      .wrapper {
-        box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5); 
-      }
+      
     </style>
     
   </head>
@@ -158,6 +128,5 @@
         </ul>
       </div>
     </footer>
-    <script src="src/app.js"></script>
   </body>
 </html>
