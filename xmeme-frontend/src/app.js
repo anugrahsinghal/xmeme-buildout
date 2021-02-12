@@ -1,9 +1,10 @@
 let log = console.log;
+const xmemeBackendUrl =
+  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
 let editFormWrapper = document.querySelector(".create-update-form-obj");
 let memeForm = document.forms["meme-create-update-form"];
 memeForm.addEventListener("click", (e) => e.preventDefault());
 memeForm["url"].addEventListener("change", renderPreview);
-
 function clearForm() {
   let inputs = memeForm.getElementsByTagName("input");
   inputs["name"].value = "";
@@ -26,8 +27,8 @@ function renderImageInForm(urlToRender) {
 }
 
 let editCreatePreview = document.querySelector(".form-container-with-preview");
-let cancelBtn = document.querySelector("#cancel-form");
-cancelBtn.addEventListener("click", () => {
+let closeFormButton = document.querySelector("#cancel-form");
+closeFormButton.addEventListener("click", () => {
   editCreatePreview.style.display = "none";
   document.querySelector("#create-meme-iframe").style.display = "unset";
   modifyElemenetsWithClassHidden("none");
@@ -50,7 +51,7 @@ function sendDataAndReload(event) {
 }
 
 function showEditForm(event) {
-  console.log(event);
+  console.log("show edit form" + event);
   /* save meme id to local storage */
   let memeToBeEdited = event.target.id;
   log("element captured = " + memeToBeEdited);
@@ -70,8 +71,6 @@ function renderPreviewOfImageToBeEdited(event) {
   renderImageInForm(existingImgUrl);
 }
 
-const xmemeBackendUrl =
-  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
 
 // "http://localhost:8082/memes";
 
@@ -157,12 +156,32 @@ function loadMemes() {
       log("rendering complete");
       attachButtonsToTheLoadedMemes();
       log("attached buttons");
+      setThemeForWindow();
     })
     .catch((error) => {
       console.error("Error while Loading memes:", error);
       //   location.reload();
     });
 }
+/* #region  blur-image-on-edit-actions */
+/* function doBlurImage(event) {
+  log('edit-meme-overlay mouseover')
+  log(event.target.parentNode.children[0])
+  event.target.parentNode.children[0].style.filter = 'blur(2px)';
+}
+function removeBlurImage(event) {
+  log('edit-meme-overlay mouseout')
+  log(event.target.parentNode.children[0])
+  // event.target.parentNode.children[0].style.filter = 'none';
+}
+
+function doBlurImageBtn(event) {
+  log('edit-meme-btn mouseover')
+  log(event.target.parentNode.children[0].style)
+  event.target.parentNode.children[0].style.filter = 'blur(2px)';
+} */
+/* #endregion */
+
 function attachButtonsToTheLoadedMemes() {
   log("attach buttons");
 
@@ -170,6 +189,21 @@ function attachButtonsToTheLoadedMemes() {
   let openMemeBtns = document.querySelectorAll(".open-meme-btn");
   log(editMemeBtns.length);
   log(openMemeBtns.length);
+  /* #region  blur image on edit */
+
+  // document.querySelectorAll('.image-edit-view-overlay').forEach((item) => {
+  //   // item.parentNode.children[0].style.filter = 'blur(2px)';
+  //   item.addEventListener('mouseover', doBlurImage);
+  //   item.addEventListener('mouseout', removeBlurImage);
+  //   // item.addEventListener('mouseenter', doBlurImage);
+  // }, false);
+
+  // editMemeBtns.forEach((item) => {
+  //   item.addEventListener('mouseover', doBlurImageBtn);
+  //   // item.addEventListener('mouseenter', doBlurImage);
+  // });
+
+  /* #endregion */
 
   editMemeBtns.forEach((item) => {
     item.addEventListener("click", showEditForm);
@@ -179,7 +213,7 @@ function attachButtonsToTheLoadedMemes() {
   });
 }
 function openMemeInNewPage(event) {
-  window.location.assign("single-meme-view.html?q=" + event.target.id);
+  window.location.assign("meme.html?q=" + event.target.id);
 }
 
 // add new meme

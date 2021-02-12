@@ -17,10 +17,10 @@ Todo - completed:
         [] https://stackoverflow.com/questions/41725725/access-css-variable-from-javascript
         [] https://www.google.com/search?q=how+to+access+%3Aroot+from+js&oq=how+to+access+%3Aroot+from+js&aqs=chrome..69i57.6433j0j1&sourceid=chrome&ie=UTF-8
         [] https://css-tricks.com/almanac/selectors/r/root/#:~:text=The%20%3Aroot%20selector%20allows%20you,with%20parent%20and%20sibling%20content.
-        [] migrate props from :root to body
-        [] choose colors for dark mode
         [] js for darkmode toggle
-        [] test to check if all buttons render correctly with dark mode on
+        ✔ migrate props from :root to body @done(21-02-12 16:26)
+        ✔ choose colors for dark mode @done(21-02-12 16:26)
+        ✔ test to check if all buttons render correctly with dark mode on @done(21-02-12 16:26)
     [] on open click
         ✔ new page @done(21-02-12 03:44)
         ✔ new page has all details @done(21-02-12 03:43)

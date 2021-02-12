@@ -77,7 +77,7 @@ ul {
   background: var(--primary-color);
   color: white;
   outline: 0;
-  transition: background-color 2s ease-out;
+  transition: background-color 1s ease-out;
 }
 .create-update-form h3 {
   text-align: center;
