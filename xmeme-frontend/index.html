@@ -24,15 +24,20 @@
         border: none;
         max-width: 350px;
       }
+      .image-to-edit:hover,
+      .image-to-edit:focus {
+        filter: blur(2px);
+      }
+
       .meme-view-container-form  {
         max-width: unset;
       }
       .meme-view-container:hover, 
       .meme-view-container:focus {
         box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
-        /* background: #000; */
-        /* color: blanchedalmond; */
-        /* transition: transform 0.5s ease-in-out; */
+        background-color: var(--primary-color-shade);
+        /* filter: blur(2px); */
+        transition: background-color 0.5s ease-in-out;
       }
       .meme-view-container-form:hover {
         box-shadow: none;
