@@ -24,6 +24,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
 	@Value("${swagger.port}")
+
 	private int swaggerPort;
 
 	@Value("${swagger.paths}")
