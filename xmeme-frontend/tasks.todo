@@ -1,0 +1,95 @@
+
+Todo - completed:
+    ✔ [DONE]set cursor to hand @done(21-02-12 00:59)
+    ✔ [DONE]pencil from caption @done(21-02-12 00:59)
+    ✔ [DONE]edit on image @done(21-02-12 00:59)
+    ✔ [DONE]name left-aligh @done(21-02-12 00:59)
+    ✔ [DONE]pencit to plus icon @done(21-02-12 00:59)
+    ✔ [DONE]btn to create on navbar @done(21-02-12 00:59)
+
+
+@critical Fixes:
+    [credential]
+	helper = /usr/bin/gp credential-helper
+    @critical EC2 Instance and credit cards:
+    @critical Documentation:
+        [] backend @started(21-02-13 16:04)
+        [] frontend
+    @critical work on exception handling
+    [] H2 index on id
+        [] h2 has a postgres mode
+        [] https://stackoverflow.com/questions/19603324/spring-boot-testing-using-in-memory-db
+    ✔ @JsonIgnoreProperties(ignoreUnknown = true) @done(21-02-13 15:59)
+    ✘ @Async and CompletableFuture<> for validating that post meme @cancelled(21-02-13 15:59)
+    ✔ remove create btn from meme-view page @done(21-02-13 16:00)
+    add delete mapping:
+        [] add to controller
+        ✔ add to service @done(21-02-13 16:02)
+    trigger loading overlay:
+        [] after loadmemes remove it
+    [] what to show when no memes
+    [] pre-populate data of image being edited
+        [] add validation to in function to check if same 
+            [] if yes then don't send that data
+    ✔ PATCH request - duplicate data not allowed @done(21-02-13 16:01)
+    validate and return 4xx for invalid url: @started(21-02-13 16:01)
+        [] The HyperText Transfer Protocol (HTTP) 400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). @started(21-02-13 16:01)
+        [] The 422 (Unprocessable Entity) status code means the server understands the content type of the request entity (hence a 415 (Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions. For example, this error condition may occur if an XML request body contains well-formed (i.e., syntactically correct), but semantically erroneous, XML instructions.
+    detect nudity in image: @started(21-02-13 16:01)
+        [] https://rapidapi.com/eyerecognize/api/deep-nsfw-detect
+        [] https://rapidapi.com/dnnboxcom/api/nudity-image-detection-nsfw-using-deep-learning-models
+        [] https://rapidapi.com/inferdo/api/nsfw-image-classification1
+        [] https://rapidapi.com/Netspark/api/nude-detect
+        [] https://xxxpornstar.net/wp-content/uploads/2020/07/Dani-Daniels.jpg
+    DOCKER:
+        [] docker run -d --net="host" xmeme_app [https://crio-community.slack.com/archives/C01L8830UA3/p1613131634285600]
+    
+    [] on wrong details show notification and dont time out and dont clear form
+    
+    [] find a 404 image
+        [] https://i.imgflip.com/265no1.jpg
+    ✔ text color for helper buttons @done(21-02-13 00:27)
+    [] font size of header and footer for phones
+    
+@high Priority 1 - Features that add value:
+    [] on create highlight create button
+    [] auth for the prod site
+    [] embed images from different site ?
+    [] Heroku 2 ports https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b
+    ✔ DARK MODE @done(21-02-13 01:21)
+        ✔ https://stackoverflow.com/questions/41725725/access-css-variable-from-javascript @done(21-02-13 01:21)
+        ✔ https://www.google.com/search?q=how+to+access+%3Aroot+from+js&oq=how+to+access+%3Aroot+from+js&aqs=chrome..69i57.6433j0j1&sourceid=chrome&ie=UTF-8 @done(21-02-13 01:21)
+        ✔ https://css-tricks.com/almanac/selectors/r/root/#:~:text=The%20%3Aroot%20selector%20allows%20you,with%20parent%20and%20sibling%20content. @done(21-02-13 01:21)
+        ✔ js for darkmode toggle @done(21-02-13 01:21)
+        ✔ migrate props from :root to body @done(21-02-12 16:26)
+        ✔ choose colors for dark mode @done(21-02-12 16:26)
+        ✔ test to check if all buttons render correctly with dark mode on @done(21-02-12 16:26)
+    ✔ on open click @done(21-02-13 01:22)
+        ✔ new page @done(21-02-12 03:44)
+        ✔ new page has all details @done(21-02-12 03:43)
+        ✔ on that give share, QR share @done(21-02-12 03:43)
+        ✔ share to insta/twitter @done(21-02-12 03:44)
+        
+    [] tool-tip - to show data on hover
+    [] card -> 
+        ✔ shadow @done(21-02-12 01:01)
+        ✔ width+height smaller @done(21-02-12 01:01)
+        [] on click -> 
+            [] expand -> square in
+            [] REDIRECT TO NEW PAGE
+
+
+@low Priority 2 - good to have:
+    [] on dbl click - > big oimage on click and clo   
+    [] on card click
+    [] hide all card and show info pf that card only
+    [] submit/cancel on the side
+    
+@low Priority 3 - Fixes:
+    [] image being edited should remain till form is open
+
+
+
+
+	
+

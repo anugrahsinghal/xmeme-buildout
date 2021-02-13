@@ -1,8 +1,9 @@
 package com.anugrah.projects.xmeme.crio.validation;
 
 import com.anugrah.projects.xmeme.crio.entity.Meme;
-import com.anugrah.projects.xmeme.crio.exceptions.MemeValidationException;
+import com.anugrah.projects.xmeme.crio.exceptions.DuplicateMemeException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
+import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.repository.MemeRepository;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
@@ -25,11 +26,26 @@ public class CombinationUniqueMemeValidationStrategyImpl implements MemeValidati
 	@Override
 	public void validateMeme(MemeDto memeDto) {
 		Meme meme = modelMapper.map(memeDto, Meme.class);
+		log.info("Validating Meme before create [{}]", meme);
 		final boolean memeExists = memeRepository.exists(Example.of(meme));
 		log.info("Meme already memeExists {}", memeExists);
 
 		if (memeExists) {
-			throw new MemeValidationException("Meme already exists");
+			throw new DuplicateMemeException("Meme already exists");
+		} else {
+			log.info("Meme is Unique");
+		}
+	}
+
+	@Override
+	public void validateMeme(UpdateMemeRequest updateMemeRequest) {
+		Meme meme = modelMapper.map(updateMemeRequest, Meme.class);
+		log.info("Validating Meme before update [{}]", meme);
+		final boolean memeExists = memeRepository.exists(Example.of(meme));
+		log.info("Meme already memeExists {}", memeExists);
+
+		if (memeExists) {
+			throw new DuplicateMemeException("Meme already exists");
 		} else {
 			log.info("Meme is Unique");
 		}

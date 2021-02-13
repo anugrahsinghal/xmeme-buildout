@@ -31,9 +31,12 @@ public class ExtendedMemesController {
 	@GetMapping("/memes")
 	// Query Params: latitude, longitude, searchFor(optional)
 	@ApiOperation(value = "retrieveMemesPaged", nickname = "retrieveMemesPaged")
-	@ApiImplicitParams( {@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0"),
-			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int", example = "20"),
-			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string", example = "id")})
+	@ApiImplicitParams( {
+			@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0", value = "Zero-based page index 0..N"),
+			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int", example = "20", value = "The size of the page to be returned"),
+			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string", example = "id",
+			value = "Sorting criteria in the format:property(,asc|desc). Default sort order id ascending. Multiple sort criteria are supported.")
+	})
 	public ResponseEntity<List<Meme>> retrieveMemesPaged(
 			@PageableDefault(size = 100, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		final List<Meme> memes = memeRetrievalService.retrieveMemes(pageable);

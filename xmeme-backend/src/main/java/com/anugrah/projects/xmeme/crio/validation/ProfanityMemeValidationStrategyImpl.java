@@ -13,7 +13,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
@@ -75,7 +74,7 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 	}
 
 	private void checkProfanity(String url) {
-		if (val.equalsIgnoreCase("dev")) {
+		if (val.equalsIgnoreCase("disable")) {
 			return;
 		}
 		boolean isNsfw = false;
@@ -95,7 +94,7 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 				log.info("NSFW Image detected");
 				isNsfw = true;
 			}
-		} catch (RestClientException e) {
+		} catch (Exception e) {
 			log.error(e);
 		}
 

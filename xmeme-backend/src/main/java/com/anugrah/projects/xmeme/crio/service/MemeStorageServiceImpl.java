@@ -1,5 +1,8 @@
 package com.anugrah.projects.xmeme.crio.service;
 
+import static org.springframework.util.ObjectUtils.isEmpty;
+
+
 import com.anugrah.projects.xmeme.crio.entity.Meme;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeNotFoundException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeCreatedResponse;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Service;
 public class MemeStorageServiceImpl implements MemeStorageService {
 
 	private static final Logger log = LogManager.getLogger(MemeStorageServiceImpl.class);
+	private static final Logger LOG = LogManager.getLogger(MemeStorageServiceImpl.class);
 
 	@Autowired
 	private MemeRepository memeRepository;
@@ -42,9 +46,7 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 
 	@Override
 	public MemeCreatedResponse createMeme(MemeDto memeDto) {
-		nonEmptyValidation.validateMeme(memeDto);
-		uniqueValuesValidation.validateMeme(memeDto);
-		profanityValidation.validateMeme(memeDto);
+		performValidations(memeDto);
 
 		final Meme meme = modelMapper.map(memeDto, Meme.class);
 
@@ -57,15 +59,15 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 
 	@Override
 	public void updateMeme(final Long id, UpdateMemeRequest updateMemeRequest) {
-		nonEmptyValidation.validateMeme(updateMemeRequest);
-		uniqueValuesValidation.validateMeme(updateMemeRequest);
-		profanityValidation.validateMeme(updateMemeRequest);
+		performValidations(updateMemeRequest);
 
 		final Optional<Meme> memeOptional = memeRepository.findById(id);
 		if (memeOptional.isPresent()) {
 			final Meme meme = memeOptional.get();
-
+			LOG.info("updateMemeRequest [{}]", updateMemeRequest);
 			Meme updatedMeme = updateMemeData(meme, updateMemeRequest);
+			LOG.info("updatedMeme [{}]", updatedMeme);
+			validateUpdatedMemeIsUnique(updatedMeme);
 
 			memeRepository.save(updatedMeme);
 		} else {
@@ -73,11 +75,23 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 		}
 	}
 
+	private void validateUpdatedMemeIsUnique(Meme updatedMeme) {
+		final MemeDto memeDto = modelMapper.map(updatedMeme, MemeDto.class);
+		log.info("memeDto [{}]", memeDto);
+		uniqueValuesValidation.validateMeme(memeDto);
+	}
+
+	/**
+	 * @param meme              entity fetched from db
+	 * @param updateMemeRequest request object with new values
+	 * @return updated meme entity to be persisted
+	 * @implSpec checks for null or empty values before assigning them to the Entity
+	 */
 	private Meme updateMemeData(Meme meme, UpdateMemeRequest updateMemeRequest) {
-		if (updateMemeRequest.getCaption() != null) {
+		if (!isEmpty(updateMemeRequest.getCaption())) {
 			meme.setCaption(updateMemeRequest.getCaption());
 		}
-		if (updateMemeRequest.getUrl() != null) {
+		if (!isEmpty(updateMemeRequest.getUrl())) {
 			meme.setUrl(updateMemeRequest.getUrl());
 		}
 		return meme;
@@ -85,7 +99,32 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 
 	@Override
 	public void deleteMeme(Long id) {
-		memeRepository.deleteById(id);
+		final Optional<Meme> memeOptional = memeRepository.findById(id);
+		if (memeOptional.isPresent()) {
+			memeRepository.deleteById(id);
+		} else {
+			throw new MemeNotFoundException(String.format("Meme for id %s not found", id));
+		}
 	}
+
+	/**
+	 * @param memeDto data to be validated against multiple conditions before we perform operations on it
+	 */
+	void performValidations(MemeDto memeDto) {
+		nonEmptyValidation.validateMeme(memeDto);
+		uniqueValuesValidation.validateMeme(memeDto);
+		profanityValidation.validateMeme(memeDto);
+	}
+
+	//	@SneakyThrows(value = {DuplicateMemeException.class, MemeValidationException.class})
+
+	/**
+	 * @param updateMemeRequest data to be validated against multiple conditions before we perform operations on it
+	 */
+	void performValidations(UpdateMemeRequest updateMemeRequest) {
+		nonEmptyValidation.validateMeme(updateMemeRequest);
+		profanityValidation.validateMeme(updateMemeRequest);
+	}
+
 
 }

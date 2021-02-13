@@ -8,7 +8,7 @@ public interface MemeRetrievalService {
 
 
 	/**
-	 * @param pageable - allows for pagination and sorting of meme data
+	 * @param pageable allows for pagination and sorting of meme data
 	 * @return List of Meme - finds and returns memes according to the pageable param
 	 */
 	List<Meme> retrieveMemes(Pageable pageable);
@@ -19,7 +19,7 @@ public interface MemeRetrievalService {
 	List<Meme> retrieveMemes();
 
 	/**
-	 * @param id - id of the meme to be found
+	 * @param id id of the meme to be found
 	 * @return meme - the meme with given id
 	 */
 	Meme retrieveMeme(Long id);

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
+import com.anugrah.projects.xmeme.crio.exceptions.DuplicateMemeException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeValidationException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
@@ -43,7 +44,7 @@ class MemeStorageServiceTest {
 		MemeDto memeDto = new MemeDto("Anugrah", "https://i.imgflip.com/265no1.jpg", "caption");
 		memeStorageService.createMeme(memeDto);
 		MemeDto copyOfMemeDto = new MemeDto("Anugrah", "https://i.imgflip.com/265no1.jpg", "caption");
-		assertThrows(MemeValidationException.class,
+		assertThrows(DuplicateMemeException.class,
 				() -> {
 					memeStorageService.createMeme(copyOfMemeDto);
 				});

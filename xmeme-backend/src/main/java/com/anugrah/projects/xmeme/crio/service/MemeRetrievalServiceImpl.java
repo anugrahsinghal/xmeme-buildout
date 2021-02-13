@@ -5,6 +5,7 @@ import com.anugrah.projects.xmeme.crio.exceptions.MemeNotFoundException;
 import com.anugrah.projects.xmeme.crio.repository.MemeRepository;
 import java.util.List;
 import java.util.Optional;
+import lombok.SneakyThrows;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ public class MemeRetrievalServiceImpl implements MemeRetrievalService {
 	@Override
 	public List<Meme> retrieveMemes(Pageable page) {
 		final Page<Meme> memes = memeRepository.findAll(page);
-
+		log.info("Memes size = {}", memes.getContent().size());
 		return memes.getContent();
 	}
 
@@ -31,6 +32,7 @@ public class MemeRetrievalServiceImpl implements MemeRetrievalService {
 	}
 
 	@Override
+	@SneakyThrows(value = {MemeNotFoundException.class})
 	public Meme retrieveMeme(Long id) {
 		Meme meme;
 		final Optional<Meme> memeOptional = memeRepository.findById(id);

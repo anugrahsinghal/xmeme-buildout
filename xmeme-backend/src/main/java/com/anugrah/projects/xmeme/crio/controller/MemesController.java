@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ import springfox.documentation.annotations.ApiIgnore;
 		allowedHeaders = "*",
 		methods = {RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST, RequestMethod.PUT}
 )
-@RestController/*(value = "/memes")*/
+@RestController
 public class MemesController {
 
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemesController.class);
@@ -50,17 +51,22 @@ public class MemesController {
 	}
 
 	/**
-	 * Endpoint to send a meme to the backend
+	 * Endpoint to send a meme
 	 * HTTP Method - POST
 	 * Endpoint - /memes
 	 * Attributes - name, url, caption
-	 * The backend should allocate a unique id for the meme and return it as a json response.
+	 * Return id allocated to meme as a json response.
 	 * Example request and sample response
-	 * curl --request POST
-	 * 'https://<Server_URL>/memes
-	 * ?name=ashok%20kumar&
-	 * url=https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg&
-	 * caption=This%20is%20a%20meme'
+	 * <p>
+	 * Endpoint: https://{Server_URL}/memes
+	 * <p>
+	 * Body:
+	 * {
+	 * "name":"new name"
+	 * "caption": “new caption”,
+	 * "url": “http://something.com/img/meme”
+	 * }
+	 * Response:
 	 * {
 	 * "id": "1"
 	 * }
@@ -77,6 +83,29 @@ public class MemesController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(memeCreated);
 	}
 
+	/**
+	 * Endpoint to get the latest 100 memes
+	 * HTTP Method - GET
+	 * Endpoint - /memes
+	 * Example request and sample response
+	 * <p>
+	 * Endpoint: https://{Server_URL}/memes
+	 * <p>
+	 * Body:
+	 * [
+	 * {
+	 * "id": "1",
+	 * "name":"new name",
+	 * "caption": “new caption”,
+	 * "url": “new url”
+	 * },{
+	 * "id": "2",
+	 * "name":"new name 2",
+	 * "caption": “new caption 2”,
+	 * "url": “new url 2”
+	 * }
+	 * ]
+	 */
 	@GetMapping("/memes")
 	@ApiOperation(value = "retrieveMemes", nickname = "retrieveMemes")
 	public ResponseEntity<List<Meme>> retrieveMemes() {
@@ -87,6 +116,24 @@ public class MemesController {
 	}
 
 
+	/**
+	 * Endpoint to get meme by specified id
+	 * HTTP Method - GET
+	 * Endpoint - /memes/{id}
+	 * Example request and sample response
+	 * <p>
+	 * Endpoint: https://{Server_URL}/memes/{id}
+	 * <p>
+	 * Response:
+	 * [
+	 * {
+	 * "id": "1",
+	 * "name":"new name",
+	 * "caption": “new caption”,
+	 * "url": “new url”
+	 * }
+	 * ]
+	 */
 	@GetMapping("memes/{id}")
 	public ResponseEntity<Meme> retrieveMemes(@PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
@@ -96,17 +143,15 @@ public class MemesController {
 	}
 
 	/**
-	 * Endpoint to update the caption or url for an existing meme at the backend
-	 * It shall be capable of changing both caption/url or one of them in a single call
-	 * Name of the meme creator shall not be allowed to change
-	 * Add an edit button next to the memes in the list where this can be triggered from
+	 * Endpoint to update the caption or url for an existing meme
+	 * Capable of changing both caption/url or one of them in a single call
 	 * <p>
 	 * Error:
 	 * If a meme with that Id doesn’t exist, a 404 HTTP response code should be returned.
 	 * Example request
 	 * <p>
 	 * HTTP Method: PATCH
-	 * Endpoint: 'https://<Server_URL>/memes/<id>'
+	 * Endpoint: 'https://{Server_URL}/memes/{id}'
 	 * Body:
 	 * {
 	 * "caption": “new caption”,
@@ -116,11 +161,30 @@ public class MemesController {
 	@PatchMapping("memes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
-			@ApiResponse(code = 404, message = "Meme Not Found")
+			@ApiResponse(code = 404, message = "Meme Not Found"),
+			@ApiResponse(code = 409, message = "Duplicate Meme")
 	})
 	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest, @PathVariable Long id) {
 		memeStorageService.updateMeme(id, updateMemeRequest);
 	}
 
+	/**
+	 * Endpoint to delete the meme
+	 * <p>
+	 * Error:
+	 * If a meme with that Id doesn’t exist, a 404 HTTP response code should be returned.
+	 * Example request
+	 * <p>
+	 * HTTP Method: DELETE
+	 * Endpoint: 'https://{Server_URL}/memes/{id}'
+	 */
+	@DeleteMapping("memes/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ApiResponses(value = {
+			@ApiResponse(code = 404, message = "Meme Not Found")
+	})
+	public void deleteMeme(@PathVariable Long id) {
+		memeStorageService.deleteMeme(id);
+	}
 }
 
