@@ -1,8 +1,7 @@
 package com.anugrah.projects.xmeme.crio.exchanges;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-//import io.swagger.annotations.ApiModel;
-//import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,14 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-//@ApiModel(description = "the object to send data to update the meme")
+@Schema(description = "the object to send data to update the meme")
 public class UpdateMemeRequest {
 
 	// param corresponding to Meme.url
-//	@ApiModelProperty(value = "url for image of the meme")
+	@Schema(description = "updated url for image of the meme")
 	private String url;
 	// param corresponding to Meme.caption
-//	@ApiModelProperty(value = "caption for meme")
+	@Schema(description = "updated caption for meme")
 	private String caption;
 
 

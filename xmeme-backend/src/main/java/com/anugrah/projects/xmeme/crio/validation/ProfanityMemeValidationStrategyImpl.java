@@ -2,9 +2,9 @@ package com.anugrah.projects.xmeme.crio.validation;
 
 import com.anugrah.projects.xmeme.crio.exceptions.MemeValidationException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
+import com.anugrah.projects.xmeme.crio.exchanges.ProfanityRequest;
+import com.anugrah.projects.xmeme.crio.exchanges.ProfanityResponse;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Checks Image URL to not contain NSFW images using the deep.ai api
+ */
 @Component
 @Qualifier("profanity")
 public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrategy {
@@ -23,7 +26,7 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 	public static final String API_URL = "https://api.deepai.org/api/nsfw-detector";
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(ProfanityMemeValidationStrategyImpl.class);
 	@Value("${profanity.check}")
-	private String val;
+	private String state;
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -74,23 +77,22 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 	}
 
 	private void checkProfanity(String url) {
-		if (val.equalsIgnoreCase("disable")) {
+		if (state.equalsIgnoreCase("disable")) {
 			return;
 		}
+
 		boolean isNsfw = false;
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("api-key", API_KEY);
 
-		Map<String, String> json = new HashMap<>();
-		json.put("image", url);
+		ProfanityRequest profanityRequest = new ProfanityRequest(url);
 
-		HttpEntity<Map> entity = new HttpEntity<>(json, headers);
+		HttpEntity<ProfanityRequest> entity = new HttpEntity<>(profanityRequest, headers);
 
 		try {
-			final ResponseEntity<Map> responseEntity = restTemplate.postForEntity(API_URL, entity, Map.class);
-			final Map body = responseEntity.getBody();
-			final Map<String, String> output = (Map<String, String>) body.get("output");
-			if (Double.parseDouble(output.get("nsfw_score")) > 0.5) {
+			final ResponseEntity<ProfanityResponse> responseEntity = restTemplate.postForEntity(API_URL, entity, ProfanityResponse.class);
+			final ProfanityResponse profanityResponse = responseEntity.getBody();
+			if (profanityResponse != null && profanityResponse.getOutput().getNsfwScore() > 0.25) {
 				log.info("NSFW Image detected");
 				isNsfw = true;
 			}

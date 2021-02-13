@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProfanityMemeValidationStrategyImplTest {
+class ProfanityResponseMemeValidationStrategyImplTest {
 
 	@Autowired
 	ProfanityMemeValidationStrategyImpl profanityMemeValidationStrategy;
@@ -24,7 +24,7 @@ class ProfanityMemeValidationStrategyImplTest {
 		assertThrows(MemeValidationException.class, () -> {
 			profanityMemeValidationStrategy.validateMeme(memeDto);
 		});
-		
+
 	}
 
 }

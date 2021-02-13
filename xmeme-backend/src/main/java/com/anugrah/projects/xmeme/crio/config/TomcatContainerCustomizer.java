@@ -1,31 +1,20 @@
 package com.anugrah.projects.xmeme.crio.config;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.catalina.connector.Connector;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
- * Configuration for: <br>
- * <ol>
- *     <li>Running swagger api on different port</li>
- *     <li>CORS configuration to enable client - server communications</li>
- * </ol>
- *
- * @implNote Swagger running on different port than application was accomplished by help of<br>
- * <a href="https://github.com/mafor/swagger-ui-port">Swagger Port</a>
+ * <li>CORS configuration to enable client - server communications</li>
  */
 @Component
 public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
@@ -57,6 +46,13 @@ public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<Tom
 //		return filterRegistrationBean;
 //	}
 
+	@Override
+	public void customize(TomcatServletWebServerFactory factory) {
+	}
+
+	/**
+	 * Config to Inject CorsBean to enable client-server communication
+	 */
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
 
@@ -68,13 +64,8 @@ public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<Tom
 		return filterRegistrationBean;
 	}
 
-	@Override
-	public void customize(TomcatServletWebServerFactory factory) {
-
-	}
-
 	/**
-	 * To enable CORS access
+	 * Config Class To enable CORS access
 	 */
 	private class CorsFilter extends OncePerRequestFilter {
 

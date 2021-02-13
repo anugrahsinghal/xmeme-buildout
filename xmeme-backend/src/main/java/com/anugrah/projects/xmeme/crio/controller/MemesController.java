@@ -7,9 +7,11 @@ import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.service.MemeRetrievalService;
 import com.anugrah.projects.xmeme.crio.service.MemeStorageService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -35,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 		methods = {RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST, RequestMethod.PUT}
 )
 @RestController
+@Tag(name = "memes", description = "The Meme API")
 @Validated
 public class MemesController {
 
@@ -45,11 +48,8 @@ public class MemesController {
 	@Autowired
 	private MemeRetrievalService memeRetrievalService;
 
-	@Autowired
-	private AppConfig appConfig;
-
 	@GetMapping("/ping")
-	@Operation(hidden = true)
+	@Hidden
 	public String ping() {
 		return "X-MEME is up and running";
 	}
@@ -110,8 +110,10 @@ public class MemesController {
 	 * }
 	 * ]
 	 */
-	@GetMapping("/memes")
+	@GetMapping(value = "/memes", produces = {"application/json"})
 	@Operation(description = "retrieveMemes", summary = "retrieveMemes")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Successful Operation")})
 	public ResponseEntity<List<Meme>> retrieveMemes() {
 		final List<Meme> memes = memeRetrievalService.retrieveMemes();
 		log.info("Memes Fetched Size {}", memes.size());
@@ -138,7 +140,7 @@ public class MemesController {
 	 * }
 	 * ]
 	 */
-	@GetMapping("memes/{id}")
+	@GetMapping(value = "memes/{id}", produces = {"application/json"})
 	public ResponseEntity<Meme> retrieveMemes(@NotNull @NotBlank @PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
 		log.info("meme found = {}", meme);
@@ -162,13 +164,13 @@ public class MemesController {
 	 * "url": “new url”
 	 * }
 	 */
-	@PatchMapping("memes/{id}")
+	@PatchMapping(value = "memes/{id}", produces = {"application/json"})
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "404", description = "Meme Not Found"),
 			@ApiResponse(responseCode = "409", description = "Duplicate Meme")
 	})
-	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest,@NotNull @NotBlank  @PathVariable Long id) {
+	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest, @NotNull @NotBlank @PathVariable Long id) {
 		memeStorageService.updateMeme(id, updateMemeRequest);
 	}
 
@@ -182,7 +184,7 @@ public class MemesController {
 	 * HTTP Method: DELETE
 	 * Endpoint: 'https://{Server_URL}/memes/{id}'
 	 */
-	@DeleteMapping("memes/{id}")
+	@DeleteMapping(value = "memes/{id}", produces = {"application/json"})
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "404", description = "Meme Not Found")

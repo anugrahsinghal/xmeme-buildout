@@ -14,10 +14,9 @@ import org.hibernate.validator.constraints.URL;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @JsonIgnoreProperties(ignoreUnknown = true)
-//@ApiModel(description = "the object to send data to create a meme")
+@Schema(description = "the object to send data to create a meme")
 public class MemeDto {
 	// param corresponding to Meme.name
-//	@ApiModelProperty(value = "name associated to the meme", required = true)
 	@NotBlank
 	@Schema(description = "Name of the user", example = "Anugrah", required = true)
 	@Size(max = 255)

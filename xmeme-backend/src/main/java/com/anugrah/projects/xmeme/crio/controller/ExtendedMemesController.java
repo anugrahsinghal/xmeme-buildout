@@ -4,6 +4,7 @@ import com.anugrah.projects.xmeme.crio.entity.Meme;
 import com.anugrah.projects.xmeme.crio.service.MemeRetrievalService;
 import com.anugrah.projects.xmeme.crio.service.MemeStorageService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/extended")
+@Tag(name = "memes", description = "The Meme API with pageable request support")
 public class ExtendedMemesController {
 
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(ExtendedMemesController.class);
