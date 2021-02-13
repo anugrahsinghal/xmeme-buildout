@@ -3,9 +3,7 @@ package com.anugrah.projects.xmeme.crio.controller;
 import com.anugrah.projects.xmeme.crio.entity.Meme;
 import com.anugrah.projects.xmeme.crio.service.MemeRetrievalService;
 import com.anugrah.projects.xmeme.crio.service.MemeStorageService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +28,13 @@ public class ExtendedMemesController {
 
 	@GetMapping("/memes")
 	// Query Params: latitude, longitude, searchFor(optional)
-	@ApiOperation(value = "retrieveMemesPaged", nickname = "retrieveMemesPaged")
-	@ApiImplicitParams( {
-			@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0", value = "Zero-based page index 0..N"),
-			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int", example = "20", value = "The size of the page to be returned"),
-			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string", example = "id",
-			value = "Sorting criteria in the format:property(,asc|desc). Default sort order id ascending. Multiple sort criteria are supported.")
-	})
+	@Operation(description = "retrieveMemesPaged", summary = "retrieveMemesPaged")
+//	@ApiImplicitParams( {
+//			@ApiImplicitParam(name = "page", paramType = "query", dataType = "int", example = "0", value = "Zero-based page index 0..N"),
+//			@ApiImplicitParam(name = "size", paramType = "query", dataType = "int", example = "20", value = "The size of the page to be returned"),
+//			@ApiImplicitParam(name = "sort", allowMultiple = true, paramType = "query", dataType = "string", example = "id",
+//			value = "Sorting criteria in the format:property(,asc|desc). Default sort order id ascending. Multiple sort criteria are supported.")
+//	})
 	public ResponseEntity<List<Meme>> retrieveMemesPaged(
 			@PageableDefault(size = 100, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		final List<Meme> memes = memeRetrievalService.retrieveMemes(pageable);

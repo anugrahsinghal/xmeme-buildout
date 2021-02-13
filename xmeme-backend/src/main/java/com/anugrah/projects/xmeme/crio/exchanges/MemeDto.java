@@ -1,27 +1,36 @@
 package com.anugrah.projects.xmeme.crio.exchanges;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ApiModel(description = "the object to send data to create a meme")
+//@ApiModel(description = "the object to send data to create a meme")
 public class MemeDto {
 	// param corresponding to Meme.name
-	@ApiModelProperty(value = "name associated to the meme", required = true)
+//	@ApiModelProperty(value = "name associated to the meme", required = true)
+	@NotBlank
+	@Schema(description = "Name of the user", example = "Anugrah", required = true)
+	@Size(max = 255)
 	private String name;
 	// param corresponding to Meme.url
-	@ApiModelProperty(value = "url for image of the meme", required = true)
+	@Schema(description = "Url for image of the meme", required = true, example = "http://www.google.com/funny-meme.jpg")
+	@NotBlank
+	@Size(max = 255)
 	private String url;
 	// param corresponding to Meme.caption
-	@ApiModelProperty(value = "caption for meme", required = true)
+	@Schema(description = "Caption for meme", required = true, example = "A sweet meme!")
+	@NotBlank
+	@Size(max = 255)
 	private String caption;
 
 }

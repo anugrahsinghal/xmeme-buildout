@@ -7,14 +7,18 @@ import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.service.MemeRetrievalService;
 import com.anugrah.projects.xmeme.crio.service.MemeStorageService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +29,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 @CrossOrigin(
 		allowedHeaders = "*",
 		methods = {RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST, RequestMethod.PUT}
 )
 @RestController
+@Validated
 public class MemesController {
 
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemesController.class);
@@ -45,7 +49,7 @@ public class MemesController {
 	private AppConfig appConfig;
 
 	@GetMapping("/ping")
-	@ApiIgnore
+	@Operation(hidden = true)
 	public String ping() {
 		return "X-MEME is up and running";
 	}
@@ -73,9 +77,9 @@ public class MemesController {
 	 */
 	@PostMapping("/memes")
 	@ApiResponses(value = {
-			@ApiResponse(code = 409, message = "Duplicate Meme")
+			@ApiResponse(responseCode = "409", description = "Duplicate Meme")
 	})
-	public ResponseEntity<MemeCreatedResponse> postMeme(@RequestBody MemeDto memeDto) {
+	public ResponseEntity<MemeCreatedResponse> postMeme(@Valid @RequestBody MemeDto memeDto) {
 
 		final MemeCreatedResponse memeCreated = memeStorageService.createMeme(memeDto);
 		log.info("Meme Created {}", memeCreated);
@@ -107,7 +111,7 @@ public class MemesController {
 	 * ]
 	 */
 	@GetMapping("/memes")
-	@ApiOperation(value = "retrieveMemes", nickname = "retrieveMemes")
+	@Operation(description = "retrieveMemes", summary = "retrieveMemes")
 	public ResponseEntity<List<Meme>> retrieveMemes() {
 		final List<Meme> memes = memeRetrievalService.retrieveMemes();
 		log.info("Memes Fetched Size {}", memes.size());
@@ -135,7 +139,7 @@ public class MemesController {
 	 * ]
 	 */
 	@GetMapping("memes/{id}")
-	public ResponseEntity<Meme> retrieveMemes(@PathVariable Long id) {
+	public ResponseEntity<Meme> retrieveMemes(@NotNull @NotBlank @PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
 		log.info("meme found = {}", meme);
 
@@ -161,10 +165,10 @@ public class MemesController {
 	@PatchMapping("memes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
-			@ApiResponse(code = 404, message = "Meme Not Found"),
-			@ApiResponse(code = 409, message = "Duplicate Meme")
+			@ApiResponse(responseCode = "404", description = "Meme Not Found"),
+			@ApiResponse(responseCode = "409", description = "Duplicate Meme")
 	})
-	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest, @PathVariable Long id) {
+	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest,@NotNull @NotBlank  @PathVariable Long id) {
 		memeStorageService.updateMeme(id, updateMemeRequest);
 	}
 
@@ -181,9 +185,9 @@ public class MemesController {
 	@DeleteMapping("memes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
-			@ApiResponse(code = 404, message = "Meme Not Found")
+			@ApiResponse(responseCode = "404", description = "Meme Not Found")
 	})
-	public void deleteMeme(@PathVariable Long id) {
+	public void deleteMeme(@NotNull @NotBlank @PathVariable Long id) {
 		memeStorageService.deleteMeme(id);
 	}
 }
