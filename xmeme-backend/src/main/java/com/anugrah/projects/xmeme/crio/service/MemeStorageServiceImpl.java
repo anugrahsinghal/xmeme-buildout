@@ -1,33 +1,50 @@
 package com.anugrah.projects.xmeme.crio.service;
 
 import com.anugrah.projects.xmeme.crio.entity.Meme;
-import com.anugrah.projects.xmeme.crio.exceptions.DuplicateMemeException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeNotFoundException;
-import com.anugrah.projects.xmeme.crio.exceptions.MemeUpdateException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeCreatedResponse;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
 import com.anugrah.projects.xmeme.crio.repository.MemeRepository;
+import com.anugrah.projects.xmeme.crio.validation.MemeValidationStrategy;
 import java.util.Optional;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class MemeStorageServiceImpl implements MemeStorageService {
 
-	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemeStorageServiceImpl.class);
+	private static final Logger log = LogManager.getLogger(MemeStorageServiceImpl.class);
+
 	@Autowired
 	private MemeRepository memeRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Qualifier("combination-unique")
+	@Autowired
+	private MemeValidationStrategy uniqueValuesValidation;
+
+	@Qualifier("profanity")
+	@Autowired
+	private MemeValidationStrategy profanityValidation;
+
+	@Qualifier("non-empty")
+	@Autowired
+	private MemeValidationStrategy nonEmptyValidation;
+
 	@Override
 	public MemeCreatedResponse createMeme(MemeDto memeDto) {
-		validateThatMemeIsUnique(memeDto);
+		nonEmptyValidation.validateMeme(memeDto);
+		uniqueValuesValidation.validateMeme(memeDto);
+		profanityValidation.validateMeme(memeDto);
 
 		final Meme meme = modelMapper.map(memeDto, Meme.class);
 
@@ -37,30 +54,12 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 		return new MemeCreatedResponse(savedMeme.getId());
 	}
 
-	private void validateThatMemeIsUnique(MemeDto memeDto) {
-		final boolean captionExists = memeRepository.existsMemeByCaption(memeDto.getCaption());
-		final boolean urlExists = memeRepository.existsMemeByUrl(memeDto.getUrl());
-		final boolean nameExists = memeRepository.existsMemeByName(memeDto.getName());
-		final boolean memeExists = captionExists || urlExists || nameExists;
-		if (memeExists) {
-			log.error("Meme already exists -> Caption [{}], URL [{}], Name [{}]", captionExists, urlExists, nameExists);
-			throw new DuplicateMemeException("Meme already exists");
-		}
-		log.info("Meme is unique");
-	}
-
-	private void validateThatMemeIsUnique(Meme meme) {
-		final boolean memeExists = memeRepository.exists(Example.of(meme));
-		log.info("Meme already memeExists {}", memeExists);
-
-		if (memeExists) {
-			throw new DuplicateMemeException("Meme already exists");
-		}
-	}
 
 	@Override
-	public void updateMeme(Long id, UpdateMemeRequest updateMemeRequest) {
-		validateUpdateRequest(updateMemeRequest);
+	public void updateMeme(final Long id, UpdateMemeRequest updateMemeRequest) {
+		nonEmptyValidation.validateMeme(updateMemeRequest);
+		uniqueValuesValidation.validateMeme(updateMemeRequest);
+		profanityValidation.validateMeme(updateMemeRequest);
 
 		final Optional<Meme> memeOptional = memeRepository.findById(id);
 		if (memeOptional.isPresent()) {
@@ -84,11 +83,9 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 		return meme;
 	}
 
-	private void validateUpdateRequest(UpdateMemeRequest updateMemeRequest) {
-		if (updateMemeRequest.getUrl() == null && updateMemeRequest.getCaption() == null) {
-			throw new MemeUpdateException("Both url and caption cannot be null");
-		}
+	@Override
+	public void deleteMeme(Long id) {
+		memeRepository.deleteById(id);
 	}
-
 
 }

@@ -1,6 +1,6 @@
 package com.anugrah.projects.xmeme.crio.controller;
 
-import com.anugrah.projects.xmeme.crio.exceptions.DuplicateMemeException;
+import com.anugrah.projects.xmeme.crio.exceptions.MemeValidationException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeNotFoundException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeUpdateException;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ public class MemeControllerExceptionHandler extends ResponseEntityExceptionHandl
 		response.setStatus(HttpStatus.BAD_REQUEST.value());
 	}
 
-	@ExceptionHandler( {DuplicateMemeException.class})
+	@ExceptionHandler( {MemeValidationException.class})
 	void conflict(HttpServletResponse response) {
 //		response.sendError(HttpStatus.BAD_REQUEST.value());
 		response.setStatus(HttpStatus.CONFLICT.value());

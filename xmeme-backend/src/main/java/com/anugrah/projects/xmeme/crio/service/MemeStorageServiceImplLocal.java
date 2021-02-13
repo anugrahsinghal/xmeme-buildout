@@ -1,9 +1,9 @@
 package com.anugrah.projects.xmeme.crio.service;
 
 import com.anugrah.projects.xmeme.crio.entity.Meme;
-import com.anugrah.projects.xmeme.crio.exceptions.DuplicateMemeException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeNotFoundException;
 import com.anugrah.projects.xmeme.crio.exceptions.MemeUpdateException;
+import com.anugrah.projects.xmeme.crio.exceptions.MemeValidationException;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeCreatedResponse;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
 import com.anugrah.projects.xmeme.crio.exchanges.UpdateMemeRequest;
@@ -12,12 +12,10 @@ import java.util.Optional;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
-@Primary
 public class MemeStorageServiceImplLocal implements MemeStorageService {
 
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemeStorageServiceImplLocal.class);
@@ -46,7 +44,7 @@ public class MemeStorageServiceImplLocal implements MemeStorageService {
 		final boolean memeExists = captionExists || urlExists || nameExists;
 		if (memeExists) {
 			log.error("Meme already exists -> Caption [{}], URL [{}], Name [{}]", captionExists, urlExists, nameExists);
-			throw new DuplicateMemeException("Meme already exists");
+			throw new MemeValidationException("Meme already exists");
 		}
 		log.info("Meme is unique");
 	}
@@ -56,7 +54,7 @@ public class MemeStorageServiceImplLocal implements MemeStorageService {
 		log.info("Meme already memeExists {}", memeExists);
 
 		if (memeExists) {
-			throw new DuplicateMemeException("Meme already exists");
+			throw new MemeValidationException("Meme already exists");
 		}
 	}
 
@@ -92,5 +90,8 @@ public class MemeStorageServiceImplLocal implements MemeStorageService {
 		}
 	}
 
+	@Override
+	public void deleteMeme(Long id) {
 
+	}
 }
