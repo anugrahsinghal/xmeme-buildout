@@ -30,52 +30,16 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 	@Autowired
 	private RestTemplate restTemplate;
 
-	/*
-{
-    "id": "02a6ac25-cf77-4768-b2de-231f055e07b2",
-    "output": {
-        "detections": [
-            {
-                "confidence": "0.91",
-                "bounding_box": [
-                    46,
-                    119,
-                    53,
-                    53
-                ],
-                "name": "Female Breast - Exposed"
-            },
-            {
-                "confidence": "0.89",
-                "bounding_box": [
-                    119,
-                    120,
-                    58,
-                    50
-                ],
-                "name": "Female Breast - Exposed"
-            },
-            {
-                "confidence": "0.67",
-                "bounding_box": [
-                    96,
-                    240,
-                    23,
-                    43
-                ],
-                "name": "Female Genitalia - Exposed"
-            }
-        ],
-        "nsfw_score": 0.9997634291648865
-    }
-	* */
-
 	@Override
 	public void validateMeme(MemeDto memeDto) {
 		String url = memeDto.getUrl();
 		checkProfanity(url);
 	}
 
+	/**
+	 * Checks the url from deepAi API for NSFW content
+	 * @param url the image url to check for profanity
+	 */
 	private void checkProfanity(String url) {
 		if (state.equalsIgnoreCase("disable")) {
 			return;

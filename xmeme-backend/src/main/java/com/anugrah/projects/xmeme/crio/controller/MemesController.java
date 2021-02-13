@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -75,7 +76,7 @@ public class MemesController {
 	 * "id": "1"
 	 * }
 	 */
-	@PostMapping("/memes")
+	@PostMapping(value = "/memes", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "409", description = "Duplicate Meme")
 	})
@@ -110,7 +111,7 @@ public class MemesController {
 	 * }
 	 * ]
 	 */
-	@GetMapping(value = "/memes", produces = {"application/json"})
+	@GetMapping(value = "/memes", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(description = "retrieveMemes", summary = "retrieveMemes")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Successful Operation")})
@@ -140,7 +141,7 @@ public class MemesController {
 	 * }
 	 * ]
 	 */
-	@GetMapping(value = "memes/{id}", produces = {"application/json"})
+	@GetMapping(value = "memes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Meme> retrieveMemes(@NotNull @NotBlank @PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
 		log.info("meme found = {}", meme);
@@ -164,7 +165,7 @@ public class MemesController {
 	 * "url": “new url”
 	 * }
 	 */
-	@PatchMapping(value = "memes/{id}", produces = {"application/json"})
+	@PatchMapping(value = "memes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "404", description = "Meme Not Found"),
@@ -184,7 +185,7 @@ public class MemesController {
 	 * HTTP Method: DELETE
 	 * Endpoint: 'https://{Server_URL}/memes/{id}'
 	 */
-	@DeleteMapping(value = "memes/{id}", produces = {"application/json"})
+	@DeleteMapping(value = "memes/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "404", description = "Meme Not Found")
