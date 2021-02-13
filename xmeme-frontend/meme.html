@@ -26,10 +26,10 @@
     <title>X Meme | Meme Stream</title>
     <link rel="stylesheet" href="src/style-common.css" />
     <link rel="stylesheet" href="src/main.css" />
-    <link rel="stylesheet" href="src/header-footer.css" />
     <link rel="stylesheet" href="src/dark-style.css" />
     <link rel="stylesheet" href="src/meme-view.css" />
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="src/shared.js" defer></script>
     <script src="src/app.js" defer></script>
     <script src="src/meme-view.js" defer></script>
     <script src="src/form-handling.js" defer></script>
@@ -106,8 +106,11 @@
                 readonly
               />
             </p>
-            <p id="cancel-form" class="full">
+            <p id="cancel-form">
               <button class="rounded-corners" type="reset">Close</button>
+            </p>
+            <p id="delete-meme">
+              <button class="rounded-corners" type="reset">Delete</button>
             </p>
           </form>
           <div class="share-to-social">

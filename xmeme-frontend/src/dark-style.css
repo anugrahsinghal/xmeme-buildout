@@ -1,26 +1,4 @@
-.tw-css-colors-gray {
-  --gray-10: #111827;
-  --gray-9: #1f2937;
-  --gray-8: #374151;
-  --gray-7: #4b5563;
-  --gray-6: #6b7280;
-  --gray-5: #9ca3af;
-  --gray-4: #d1d5db;
-  --gray-3: #e5e7eb;
-  --gray-2: #f3f4f6;
-  --gray-1: #f9fafb;
-}
-.original-colors {
-  --primary-color: #4c1d95;
-  --primary-color-shade: #c4b5fd;
-  --primary-color-light: #ede9fe;
-  --plain-white-form-color: #f9feff;
-  --off-white: #f3f4f6;
-  --dark-gray: #6b7280;
-  --scrollbarBG: var(var(--off-white));
-  --thumbBG: var(--dark-gray);
-}
-
+/* Color Theme For Dark mode */
 body.dark {
   --primary-color: #111827;
   --primary-color-shade: #4b5563;
@@ -31,10 +9,7 @@ body.dark {
   color: #d1d5db;
   background-color: #535353;
 }
-
-.meme-view-container.dark ul > * {
-  /* color: green; */
-}
+/* dark mode for meme-view-container */
 .meme-view-container.dark {
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 50%);
   background-color: #373737;

@@ -1,32 +1,27 @@
-let log = console.log;
-const xmemeBackendUrl =  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
-
 let editFormWrapper = document.querySelector(".create-update-form-obj");
-let memeForm = document.forms["meme-create-update-form"];
+
 let editOrCreateFormContainer = document.querySelector(
   ".form-container-with-preview"
 );
 let closeFormButton = document.querySelector("#cancel-form");
 attachCloseButtonToForm();
 
+// prevent form reload
 memeForm.addEventListener("click", (e) => e.preventDefault());
+
+// on image url entered , try to load it
 memeForm["url"].addEventListener("change", renderPreview);
 
 document.querySelectorAll(".create-meme-iframe-link").forEach((item) => {
   item.addEventListener("click", showFormToCreateMeme);
 });
 
-function clearForm() {
-  let inputs = memeForm.getElementsByTagName("input");
-  inputs["name"].value = "";
-  inputs["url"].value = "";
-  inputs["caption"].value = "";
-  let renderTarget = document.querySelector("#image-render");
-  renderTarget.setAttribute("src", "src/placeholder-xmeme.jpg");
-}
-
-/* #region  show/hide form */
-
+/**
+ * Removed hidden class from the form
+ * Sets form heading
+ * hides the floating create button
+ * scrolls screen to the top, where form is present
+ */
 function showFormToCreateMeme() {
   modifyElemenetsWithClassHidden("unset");
   editOrCreateFormContainer.style.display = "unset";
@@ -35,6 +30,15 @@ function showFormToCreateMeme() {
   scroll(0, 0); //  scroll to top
 }
 
+/**
+ * Saves id of meme to be edited to localStorage
+ * Sets form heading for edit
+ * sets/renders the image src to form of the meme being edited
+ * Shows the form
+ * scrolls screen to the top, where form is present
+ *
+ * @param {*} event helps to capture id of the meme that need to be edited
+ */
 function showFormToEditMeme(event) {
   console.log("show edit form" + event);
   saveMemeIdToLocalStorage(event);
@@ -44,6 +48,12 @@ function showFormToEditMeme(event) {
   scroll(0, 0); // scroll to top
 }
 
+/**
+ * This shows a non-editable view of the form
+ * sets the input fields as provide by data variable
+ * sets cursor style to not allowed
+ * @param {*} data the data to be renders in the form
+ */
 function showMemeViewForm(data) {
   console.table(data);
   let inputs = memeForm.getElementsByTagName("input");
@@ -60,10 +70,14 @@ function showMemeViewForm(data) {
 }
 
 /* #endregion */
-
+// hides the floating create button
 function hideFloatingCreateButton() {
   document.querySelector("#create-meme-iframe").style.display = "none";
 }
+/**
+ * Saves the id of the target to localStorage
+ * @param {*} event the meme/card target
+ */
 function saveMemeIdToLocalStorage(event) {
   let memeToBeEdited = event.target.id;
   log("element captured = " + memeToBeEdited);
@@ -71,11 +85,20 @@ function saveMemeIdToLocalStorage(event) {
   log("meme-id" + localStorage.getItem("memeId"));
 }
 
+/**
+ *
+ * @param {*} heading to Change heading of form
+ */
 function changeFormHeading(heading) {
   let formHeading = document.querySelector(".edit-create");
   formHeading.innerText = heading;
 }
 
+/**
+ *
+ * @param {*} event get image source of the target
+ * render that url to form
+ */
 function renderPreviewOfImageBeingEdited(event) {
   let children = event.target.parentNode.parentNode.children;
   let existingImgUrl = children[0].src;
@@ -83,6 +106,10 @@ function renderPreviewOfImageBeingEdited(event) {
   renderImageInForm(existingImgUrl);
 }
 
+/**
+ * sets form image src to the url provided
+ * @param {*} urlToRender the url to be rendered
+ */
 function renderImageInForm(urlToRender) {
   log("url to show" + urlToRender);
   let renderTarget = document.querySelector("#image-render");
@@ -90,46 +117,12 @@ function renderImageInForm(urlToRender) {
   renderTarget.setAttribute("src", urlToRender);
 }
 
+/**
+ * sets the form image to the new url when meme is being edited/created
+ * @param {*} event the url of the image being edited
+ */
 function renderPreview(event) {
   let urlToRender = event.target.value;
   renderImageInForm(urlToRender);
 }
 
-function attachSubmitButtonToForm() {
-  let submitBtn = document.querySelector("#submit-data");
-  submitBtn.addEventListener("click", sendDataAndReload);
-}
-
-function sendDataAndReload(event) {
-  memeForm.addEventListener("click", (e) => {
-    sendDataToPersist();
-    clearForm();
-  });
-}
-function sendDataToPersist() {
-  let inputs = memeForm.getElementsByTagName("input");
-  let inputname = inputs["name"].value;
-  log("inputname => " + inputname);
-  if (inputname === "") {
-    log("makePatchRequest");
-    makePatchRequest(inputs);
-  } else {
-    log("makePostRequest");
-    makePostRequest(inputs);
-  }
-}
-
-function attachCloseButtonToForm() {
-  closeFormButton.addEventListener("click", () => {
-    editOrCreateFormContainer.style.display = "none";
-    document.querySelector("#create-meme-iframe").style.display = "unset";
-    modifyElemenetsWithClassHidden("none");
-    clearForm();
-  });
-}
-
-function modifyElemenetsWithClassHidden(displayState) {
-  document.querySelectorAll(".hidden").forEach((item) => {
-    item.style.display = displayState;
-  });
-}

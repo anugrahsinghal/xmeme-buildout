@@ -15,11 +15,11 @@ ul {
   list-style: none;
   padding: 0;
 }
-
+/* hide element with class hidden */
 .hidden {
   display: none;
 }
-
+/* shadon on form view */
 .wrapper {
   box-shadow: 0 10px 16px 0 rgba(128, 0, 128, 0.5);
 }
@@ -27,7 +27,7 @@ ul {
 .wrapper > * {
   padding: 1em;
 }
-
+/* styles for meme-container i.e the cards */
 .meme-container {
   background-color: var(--primary-color);
 }
@@ -88,9 +88,11 @@ ul {
 @media (min-width: 700px) {
   .wrapper {
     display: grid;
+    /* change form view for larger screens */
     grid-template-columns: 1fr 2fr;
   }
   .wrapper > * {
+    /* more padding on larger screens */
     padding: 2em;
   }
 }

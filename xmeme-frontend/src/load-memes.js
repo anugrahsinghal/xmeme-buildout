@@ -1,3 +1,7 @@
+/**
+ * Template for each meme card
+ * uses templating engine from handlebar-js
+ */
 const cardTemplate = `
     {{#each memes}}
     <div class="meme-view-container">
@@ -38,9 +42,18 @@ const cardTemplate = `
       </div>
       {{/each}}
       `;
-
+/**
+ * compiling the template
+ */
 const template = Handlebars.compile(cardTemplate);
 
+loadMemes();
+/**
+ * This function calls the backend URL to get details of the meme
+ * gets latest 100 memes
+ * generates HTML for meme cards from template and inject/render to page
+ * after render - attach edit and open button to card
+ */
 function loadMemes() {
   fetch(encodeURI(xmemeBackendUrl))
     .then((response) => {
@@ -54,7 +67,7 @@ function loadMemes() {
       }
     })
     .then((data) => {
-      log(JSON.stringify(data));
+      log("Total Data Received = z" + data.length);
       let cards = template({ memes: data });
       // log(cards);
       document.querySelector(".meme-post-wrapper").innerHTML = cards;
@@ -67,9 +80,11 @@ function loadMemes() {
     })
     .catch((error) => {
       console.error("Error while Loading memes:", error);
-      //   location.reload();
     });
 }
+/**
+ * attaches click event listeners to edit and open button on each card view
+ */
 function attachButtonsToTheLoadedMemes() {
   log("attach buttons");
 
@@ -85,9 +100,10 @@ function attachButtonsToTheLoadedMemes() {
     item.addEventListener("click", openMemeInNewPage);
   });
 }
-
-loadMemes();
-
+/**
+ * used to get the meme id and redirect user to view page
+ * @param {*} event The target open button of card
+ */
 function openMemeInNewPage(event) {
   window.location.assign("meme.html?q=" + event.target.id);
 }

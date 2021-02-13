@@ -14,16 +14,21 @@ Todo - completed:
     @critical EC2 Instance and credit cards:
     @critical Documentation:
         [] backend @started(21-02-13 16:04)
-        [] frontend
+        frontend:
+            [] html
+            [] css
+            ✔ js @done(21-02-13 23:59)
+
     @critical work on exception handling
-    [] H2 index on id
+    ✔ H2 index on id @done(21-02-13 20:11)
         [] h2 has a postgres mode
         [] https://stackoverflow.com/questions/19603324/spring-boot-testing-using-in-memory-db
     ✔ @JsonIgnoreProperties(ignoreUnknown = true) @done(21-02-13 15:59)
     ✘ @Async and CompletableFuture<> for validating that post meme @cancelled(21-02-13 15:59)
     ✔ remove create btn from meme-view page @done(21-02-13 16:00)
     add delete mapping:
-        [] add to controller
+        [] add to front-end
+        ✔ add to controller @done(21-02-13 20:11)
         ✔ add to service @done(21-02-13 16:02)
     trigger loading overlay:
         [] after loadmemes remove it
@@ -32,7 +37,7 @@ Todo - completed:
         [] add validation to in function to check if same 
             [] if yes then don't send that data
     ✔ PATCH request - duplicate data not allowed @done(21-02-13 16:01)
-    validate and return 4xx for invalid url: @started(21-02-13 16:01)
+    ✔ validate and return 4xx for invalid url: @started(21-02-13 16:01) @done(21-02-13 20:12) @lasted(4h11m24s)
         [] The HyperText Transfer Protocol (HTTP) 400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). @started(21-02-13 16:01)
         [] The 422 (Unprocessable Entity) status code means the server understands the content type of the request entity (hence a 415 (Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions. For example, this error condition may occur if an XML request body contains well-formed (i.e., syntactically correct), but semantically erroneous, XML instructions.
     detect nudity in image: @started(21-02-13 16:01)

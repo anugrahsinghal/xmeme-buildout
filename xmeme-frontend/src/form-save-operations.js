@@ -1,3 +1,21 @@
+attachSubmitButtonToForm();
+/**
+ * attached click listener to submit button on meme create/edit form
+ */
+function attachSubmitButtonToForm() {
+  let submitBtn = document.querySelector("#submit-data");
+  submitBtn.addEventListener("click", sendDataAndClearForm);
+}
+/**
+ * This function calls the backend URL to create a new meme
+ * checks for validity of inputs
+ * on valid input sends data to backend
+ * get unique Id of the created data in response
+ * response 200 is a success
+ * response 409 tells duplicate data
+ * any other reponse code is assumed to be invalid data
+ * triggers notification for both success and failure scenarios
+ */
 function makePostRequest() {
   console.group("createMeme makePostRequest");
   let inputs = memeForm.getElementsByTagName("input");
@@ -42,17 +60,28 @@ function makePostRequest() {
       .then((data) => {
         console.log("Meme Posted Successfully:", JSON.stringify(data));
       })
-      .then(() => {
-        // location.reload();
-      })
       .catch((error) => {
         triggerIframe("Something went wrong! Please try again.");
         console.error("Error while posting meme:", error);
-        // location.reload();
       });
   }
   console.groupEnd();
 }
+
+/**
+ * This function calls the backend URL to update an existing meme
+ * The id of the meme is access from the localStorage of browser
+ *
+ * checks for validity of inputs
+ * on valid input sends data to backend
+ * response 204 is a success
+ * response 404 is a when a meme is not found in the backend
+ * response 409 is duplicate data
+ * any other reponse code is assumed to be invalid data
+ * triggers notification for both success and failure scenarios
+ * reloads page on successful request
+ * @param {*} inputs form inputs having updated caption and/or url;
+ */
 function makePatchRequest(inputs) {
   // take input
   console.group("patch");
@@ -84,30 +113,46 @@ function makePatchRequest(inputs) {
           triggerIframe("Meme Edited Successfully");
         } else if (response.status === 404 || response.status === "404") {
           console.error("Meme Not Found");
-          triggerIframe("Meme Not Found");
+          triggerIframe("Meme Not Found", false);
+          clearAndHideForm();
+        } else if (response.status === 409 || response.status === "409") {
+          console.error("Duplicate Data");
+          triggerIframe("Duplicate Data", false);
+          clearAndHideForm();
         }
-      })
-      .then(() => {
-        // location.reload();
       })
       .catch((error) => {
         console.error("Error while editing meme:", error);
-        triggerIframe(false);
-        // location.reload();
+        triggerIframe("Error Occurred!", false);
+        clearAndHideForm();
       });
   }
 
   console.groupEnd();
   console.log("patch end");
 }
+/**
+ * Clears form data
+ * hides the form
+ */
+function clearAndHideForm() {
+  clearForm();
+  hideForm();
+}
 
+/**
+ *
+ * @param {*} inputs the inputs name,caption,url from the create/edit form
+ * @param {*} operationType create or edit
+ * for create operation all three inputs are validated
+ */
 function checkDataValidity(inputs, operationType) {
   let inputname = inputs["name"].value;
   let inputcaption = inputs["caption"].value;
   let inputUrl = inputs["url"].value;
   if (operationType === "create") {
     if (inputname === "" || inputcaption === "" || inputUrl === "") {
-      triggerIframe("Invalid Data Provided. All feeds are required.");
+      triggerIframe("Invalid Data Provided. All fields are required.", false);
       return false;
     }
   } else {
@@ -123,21 +168,27 @@ function checkDataValidity(inputs, operationType) {
   return true;
 }
 
-function triggerIframe(message) {
-  console.log("IFRAME TRIGGER " + message);
-  let notification = document.querySelector("#meme-notification");
-  let notificationMsg = document.querySelector("#meme-notification-message");
-  notificationMsg.innerText = message + "[Page will reload]";
+/**
+ * send data to be create or edit the meme
+ * clear form after operation complete
+ */
+function sendDataAndClearForm() {
+  sendDataToPersist();
+  clearForm();
+}
 
-  notification.style.display = "unset";
-
-  console.log("END IFRAME TRIGGER " + message);
-
-  setTimeout(() => {
-    console.log("Hide I frame start");
-    let notification = document.querySelector("#meme-notification");
-    notification.style.display = "none";
-    console.log("Hide I frame complete");
-    location.reload();
-  }, 2500);
+/**
+ * Call POST or PATCH request based on presence of input name in form
+ */
+function sendDataToPersist() {
+  let inputs = memeForm.getElementsByTagName("input");
+  let inputname = inputs["name"].value;
+  log("inputname => " + inputname);
+  if (inputname === "") {
+    log("makePatchRequest");
+    makePatchRequest(inputs);
+  } else {
+    log("makePostRequest");
+    makePostRequest(inputs);
+  }
 }
