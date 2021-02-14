@@ -35,22 +35,26 @@ chmod +x sleep.sh
 
 
 # Execute the GET /memes endpoint using curl to ensure your DB is in a clean slate
-
-# Should return an empty array.
-
-curl --request GET 'http://localhost:8081/memes'
+curl --location --request GET 'http://localhost:8081/memes'
 
 
 # Execute the POST /memes endpoint using curl
 
-curl --request POST  'http://localhost:8081/memes?name=xyz&url=abc.com&caption=this%20is%20a%20tweet'
+curl --location --request POST 'http://localhost:8081/memes' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"name": "xyz",
+"url": "abc.com",
+"caption": "This is a meme"
+}'
 
 
 # Execute the GET /memes endpoint using curl
 
-curl --request GET 'http://localhost:8081/memes'
+curl --location --request GET 'http://localhost:8081/memes'
 
 
 # If you have swagger enabled, make sure it is exposed at localhost:8080
 
-curl --request GET 'http://localhost:8080/swagger-ui.html'
+curl --location --request GET 'http://localhost:8081/swagger-ui/'
+
