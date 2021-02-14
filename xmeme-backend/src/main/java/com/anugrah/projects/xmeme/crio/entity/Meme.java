@@ -12,7 +12,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
-@Table(indexes = {@Index(columnList = "id", name = "index_on_id")})
+@Table(indexes = {@Index(columnList = "id", name = "index_on_id")}, name = "meme_table")
 @Data
 @Schema(name = "meme", description = "The Meme Entity")
 public class Meme implements Serializable {
