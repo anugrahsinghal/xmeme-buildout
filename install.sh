@@ -9,6 +9,7 @@ echo "Starting postgres"
 pg_ctl start -l logfile
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE postgres;"
+sudo -u postgres psql -c "DROP TABLE meme_table;"
 echo "posgres done"
 
 
