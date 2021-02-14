@@ -5,6 +5,9 @@
 kill -9 `sudo lsof -t -i:8080`
 kill -9 `sudo lsof -t -i:8081`
 rm meme_db*
+time_stamp=$(date +%Y%m%d%H);
+sudo mv XMEME.log XMEME.log_${time_stamp}
+
 
 # git clone the repo
 # git clone https://gitlab.crio.do/COHORT_ME_BUILDOUT_XMEME_ENROLL_1612436694845/anugrahsinghal1-ME_BUILDOUT_XMEME
