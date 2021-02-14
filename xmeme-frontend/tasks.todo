@@ -1,3 +1,19 @@
+Final Day:
+    DOCKER:
+        [] docker run -d --net="host" xmeme_app [https://crio-community.slack.com/archives/C01L8830UA3/p1613131634285600]
+        [] connect with postgres on outside
+        [] passowrd on postgres
+    VIDEO:
+        [] write content
+        [] speak
+        [] record
+    Tests:
+        [] test for performance b/w h2 and postgres
+    Deploy:
+    [] work on property files
+    
+
+
 
 Todo - completed:
     ✔ [DONE]set cursor to hand @done(21-02-12 00:59)
@@ -13,12 +29,12 @@ Todo - completed:
 	helper = /usr/bin/gp credential-helper
     @critical EC2 Instance and credit cards:
     @critical Documentation:
-        [] backend @started(21-02-13 16:04)
+        ✔ backend @started(21-02-13 16:04) @done(21-02-14 02:51) @lasted(10h47m55s)
         frontend:
-            [] html
-            [] css
+            ✔ html @done(21-02-14 02:51)
+            ✔ css @done(21-02-14 00:35)
             ✔ js @done(21-02-13 23:59)
-
+    ✘ tool-tip - to show data on hover @cancelled(21-02-14 06:26)
     @critical work on exception handling
     ✔ H2 index on id @done(21-02-13 20:11)
         [] h2 has a postgres mode
@@ -27,27 +43,25 @@ Todo - completed:
     ✘ @Async and CompletableFuture<> for validating that post meme @cancelled(21-02-13 15:59)
     ✔ remove create btn from meme-view page @done(21-02-13 16:00)
     add delete mapping:
-        [] add to front-end
+        ✔ add to front-end @done(21-02-14 02:52)
         ✔ add to controller @done(21-02-13 20:11)
         ✔ add to service @done(21-02-13 16:02)
-    trigger loading overlay:
-        [] after loadmemes remove it
-    [] what to show when no memes
-    [] pre-populate data of image being edited
-        [] add validation to in function to check if same 
-            [] if yes then don't send that data
+    ✘ trigger loading overlay: @cancelled(21-02-14 02:59)
+        [] after loadmemes remove it @cancelled(21-02-14 02:59)
+    [] what to show when no memes @cancelled(21-02-14 02:59)
+    [] pre-populate data of image being edited @cancelled(21-02-14 02:59)
+        [] add validation to in function to check if same @cancelled(21-02-14 02:59)
+            [] if yes then don't send that data @cancelled(21-02-14 02:59)
     ✔ PATCH request - duplicate data not allowed @done(21-02-13 16:01)
     ✔ validate and return 4xx for invalid url: @started(21-02-13 16:01) @done(21-02-13 20:12) @lasted(4h11m24s)
-        [] The HyperText Transfer Protocol (HTTP) 400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). @started(21-02-13 16:01)
-        [] The 422 (Unprocessable Entity) status code means the server understands the content type of the request entity (hence a 415 (Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions. For example, this error condition may occur if an XML request body contains well-formed (i.e., syntactically correct), but semantically erroneous, XML instructions.
-    detect nudity in image: @started(21-02-13 16:01)
-        [] https://rapidapi.com/eyerecognize/api/deep-nsfw-detect
-        [] https://rapidapi.com/dnnboxcom/api/nudity-image-detection-nsfw-using-deep-learning-models
-        [] https://rapidapi.com/inferdo/api/nsfw-image-classification1
-        [] https://rapidapi.com/Netspark/api/nude-detect
-        [] https://xxxpornstar.net/wp-content/uploads/2020/07/Dani-Daniels.jpg
-    DOCKER:
-        [] docker run -d --net="host" xmeme_app [https://crio-community.slack.com/archives/C01L8830UA3/p1613131634285600]
+        ✔ The HyperText Transfer Protocol (HTTP) 400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). @started(21-02-13 16:01) @done(21-02-14 02:59) @lasted(10h58m30s)
+        ✔ The 422 (Unprocessable Entity) status code means the server understands the content type of the request entity (hence a 415 (Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions. For example, this error condition may occur if an XML request body contains well-formed (i.e., syntactically correct), but semantically erroneous, XML instructions. @done(21-02-14 02:59)
+    ✔ detect nudity in image: @started(21-02-13 16:01) @done(21-02-14 02:59) @lasted(10h58m38s)
+        ✔ https://rapidapi.com/eyerecognize/api/deep-nsfw-detect @done(21-02-14 06:26)
+        ✔ https://rapidapi.com/dnnboxcom/api/nudity-image-detection-nsfw-using-deep-learning-models @done(21-02-14 06:26)
+        ✔ https://rapidapi.com/inferdo/api/nsfw-image-classification1 @done(21-02-14 06:26)
+        ✔ https://rapidapi.com/Netspark/api/nude-detect @done(21-02-14 06:26)
+        ✔ https://xxxpornstar.net/wp-content/uploads/2020/07/Dani-Daniels.jpg @done(21-02-14 06:26)
     
     [] on wrong details show notification and dont time out and dont clear form
     
@@ -57,10 +71,10 @@ Todo - completed:
     [] font size of header and footer for phones
     
 @high Priority 1 - Features that add value:
-    [] on create highlight create button
-    [] auth for the prod site
-    [] embed images from different site ?
-    [] Heroku 2 ports https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b
+    ✘ on create highlight create button @cancelled(21-02-14 02:57)
+    ✘ auth for the prod site @cancelled(21-02-14 02:57)
+    ✘ embed images from different site ? @cancelled(21-02-14 02:58)
+    ✘ Heroku 2 ports https://medium.com/superhighfives/a-top-shelf-web-stack-rails-5-api-activeadmin-create-react-app-de5481b7ec0b @cancelled(21-02-14 02:58)
     ✔ DARK MODE @done(21-02-13 01:21)
         ✔ https://stackoverflow.com/questions/41725725/access-css-variable-from-javascript @done(21-02-13 01:21)
         ✔ https://www.google.com/search?q=how+to+access+%3Aroot+from+js&oq=how+to+access+%3Aroot+from+js&aqs=chrome..69i57.6433j0j1&sourceid=chrome&ie=UTF-8 @done(21-02-13 01:21)
@@ -75,23 +89,23 @@ Todo - completed:
         ✔ on that give share, QR share @done(21-02-12 03:43)
         ✔ share to insta/twitter @done(21-02-12 03:44)
         
-    [] tool-tip - to show data on hover
-    [] card -> 
+    
+    [] card -> @cancelled(21-02-14 02:58)
         ✔ shadow @done(21-02-12 01:01)
         ✔ width+height smaller @done(21-02-12 01:01)
-        [] on click -> 
-            [] expand -> square in
-            [] REDIRECT TO NEW PAGE
+        [] on click -> @cancelled(21-02-14 02:58)
+            [] expand -> square in @cancelled(21-02-14 02:58)
+            [] REDIRECT TO NEW PAGE @cancelled(21-02-14 02:58)
 
 
-@low Priority 2 - good to have:
-    [] on dbl click - > big oimage on click and clo   
-    [] on card click
-    [] hide all card and show info pf that card only
-    [] submit/cancel on the side
+✘ @low Priority 2 - good to have: @cancelled(21-02-14 02:58)
+    ✘ on dbl click - > big oimage on click and clo @cancelled(21-02-14 02:58)
+    [] on card click @cancelled(21-02-14 02:58)
+    [] hide all card and show info pf that card only @cancelled(21-02-14 02:58)
+    [] submit/cancel on the side @cancelled(21-02-14 02:58)
     
 @low Priority 3 - Fixes:
-    [] image being edited should remain till form is open
+    ✘ image being edited should remain till form is open @cancelled(21-02-14 02:58)
 
 
 
