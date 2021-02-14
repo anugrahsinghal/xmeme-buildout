@@ -35,7 +35,7 @@ function deleteMemeRequest() {
     })
     .catch((error) => {
       console.error("Error while editing meme:", error);
-      triggerIframe("Error Occured");
+      triggerIframe("Error Occurred");
     });
 }
 /**
@@ -79,7 +79,7 @@ function loadMeme(memeId) {
         log("Meme Loaded Successfully");
         return response.json();
       } else {
-        throw new Error(response.status);
+        throw new Error(response.statusText);
       }
     })
     .then((data) => {

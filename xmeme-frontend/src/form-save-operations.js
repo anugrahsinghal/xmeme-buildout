@@ -120,8 +120,8 @@ function makePatchRequest(inputs) {
           triggerIframe("Duplicate Data", false);
           clearAndHideForm();
         } else {
-					console.error("Error Occured");
-					throw new Error("Error Occured", response.status);
+					console.error("Error Occurred");
+					throw new Error("Error Occurred" + response.status);
 				}
       })
       .catch((error) => {
