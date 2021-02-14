@@ -20,31 +20,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(TomcatContainerCustomizer.class);
-//	@Value("${swagger.port}")
-//
-//	private int swaggerPort;
-//
-//	@Value("${swagger.paths}")
-//	private List<String> swaggerPaths;
-
-//	@Override
-//	public void customize(TomcatServletWebServerFactory factory) {
-//
-//		Connector swaggerConnector = new Connector();
-//		swaggerConnector.setPort(swaggerPort);
-//		factory.addAdditionalTomcatConnectors(swaggerConnector);
-//	}
-
-//	@Bean
-//	public FilterRegistrationBean<SwaggerFilter> swaggerFilterRegistrationBean() {
-//
-//		FilterRegistrationBean<SwaggerFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-//		filterRegistrationBean.setFilter(new SwaggerFilter());
-//		filterRegistrationBean.setOrder(-100);
-//		filterRegistrationBean.setName("SwaggerFilter");
-//
-//		return filterRegistrationBean;
-//	}
 
 	@Override
 	public void customize(TomcatServletWebServerFactory factory) {
@@ -87,30 +62,6 @@ public class TomcatContainerCustomizer implements WebServerFactoryCustomizer<Tom
 			}
 		}
 	}
-
-	/**
-	 * To enable Swagger Access
-	 */
-//	private class SwaggerFilter extends OncePerRequestFilter {
-//
-//		private final AntPathMatcher pathMatcher = new AntPathMatcher();
-//
-//		@Override
-//		protected void doFilterInternal(HttpServletRequest httpServletRequest,
-//		                                HttpServletResponse httpServletResponse,
-//		                                FilterChain filterChain) throws ServletException, IOException {
-//
-//			boolean isSwaggerPath = swaggerPaths.stream()
-//					.anyMatch(path -> pathMatcher.match(path, httpServletRequest.getServletPath()));
-//			boolean isSwaggerPort = httpServletRequest.getLocalPort() == swaggerPort;
-//
-//			if (isSwaggerPath == isSwaggerPort) {
-//				filterChain.doFilter(httpServletRequest, httpServletResponse);
-//			} else {
-//				httpServletResponse.sendError(404);
-//			}
-//		}
-//	}
 
 
 }
