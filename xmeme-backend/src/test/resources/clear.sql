@@ -1,1 +1,1 @@
-TRUNCATE TABLE meme;
+TRUNCATE TABLE meme_table;

@@ -78,6 +78,17 @@
             <artifactId>springdoc-openapi-data-rest</artifactId>
             <version>1.5.2</version>
         </dependency>
+        <!--        cache-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>

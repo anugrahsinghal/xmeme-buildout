@@ -2,18 +2,22 @@ package com.anugrah.projects.xmeme.crio.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.Table;
 import lombok.Data;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name = "meme_table")
 @Data
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE) //Provide cache strategy.
 @Schema(name = "meme", description = "The Meme Entity")
 public class Meme implements Serializable {
 

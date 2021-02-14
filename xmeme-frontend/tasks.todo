@@ -1,17 +1,20 @@
 Final Day:
     DOCKER:
         ✔ passowrd on postgres @done(21-02-14 14:28)
-        [] password postgres from script
-        [] docker run -d --net="host" xmeme_app [https://crio-community.slack.com/archives/C01L8830UA3/p1613131634285600]
-        [] connect with postgres on outside
+        ✔ password postgres from script @done(21-02-14 15:07)
+        ✔ docker run -d --net="host" xmeme_app [https://crio-community.slack.com/archives/C01L8830UA3/p1613131634285600] @done(21-02-14 15:07)
+        ✔ connect with postgres on outside @done(21-02-14 15:07)
     VIDEO:
         [] write content
         [] speak
         [] record
     Tests:
-        [] test for performance b/w h2 and postgres
+        [] test for performance b/w h2 and postgres @started(21-02-14 15:07)
     Deploy:
-        [] work on property files
+        ✔ work on property files @done(21-02-14 15:07)
+        [] backend https deploy
+        [] frontend deploy
+        [] check if accessible
     
 
 
