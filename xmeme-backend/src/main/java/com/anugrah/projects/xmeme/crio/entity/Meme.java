@@ -26,7 +26,6 @@ public class Meme implements Serializable {
 	private String name;
 
 	@Schema(description = "Url for image of the meme", example = "http://www.google.com/funny-meme.jpg")
-	@URL
 	private String url;
 
 	@Schema(description = "Caption for meme", example = "A sweet meme!")
@@ -41,4 +40,12 @@ public class Meme implements Serializable {
 		this.caption = caption;
 	}
 
+	@URL
+	String getUrl() {
+		return (url != null &&
+		        !url.startsWith("http://") &&
+		        !url.startsWith("https://")) ?
+				"http://" + url :
+				url;
+	}
 }
