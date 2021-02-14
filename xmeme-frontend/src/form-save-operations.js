@@ -119,7 +119,10 @@ function makePatchRequest(inputs) {
           console.error("Duplicate Data");
           triggerIframe("Duplicate Data", false);
           clearAndHideForm();
-        }
+        } else {
+					console.error("Error Occured");
+					throw new Error("Error Occured", response.status);
+				}
       })
       .catch((error) => {
         console.error("Error while editing meme:", error);

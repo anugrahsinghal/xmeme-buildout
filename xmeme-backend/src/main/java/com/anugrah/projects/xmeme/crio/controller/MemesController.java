@@ -13,8 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -140,7 +138,7 @@ public class MemesController {
 	 * ]
 	 */
 	@GetMapping(value = "memes/{id}")
-	public ResponseEntity<Meme> retrieveMemes(@NotNull @NotBlank @PathVariable Long id) {
+	public ResponseEntity<Meme> retrieveMemes(@PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
 		log.info("meme found = {}", meme);
 
@@ -169,7 +167,7 @@ public class MemesController {
 			@ApiResponse(responseCode = "404", description = "Meme Not Found"),
 			@ApiResponse(responseCode = "409", description = "Duplicate Meme")
 	})
-	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest, @NotNull @NotBlank @PathVariable Long id) {
+	public void updateMeme(@RequestBody UpdateMemeRequest updateMemeRequest, @PathVariable Long id) {
 		memeStorageService.updateMeme(id, updateMemeRequest);
 	}
 
@@ -188,7 +186,7 @@ public class MemesController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "404", description = "Meme Not Found")
 	})
-	public void deleteMeme(@NotNull @NotBlank @PathVariable Long id) {
+	public void deleteMeme(@PathVariable Long id) {
 		memeStorageService.deleteMeme(id);
 	}
 }
