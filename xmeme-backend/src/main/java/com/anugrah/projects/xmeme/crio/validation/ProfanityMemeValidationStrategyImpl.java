@@ -28,7 +28,7 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 	public static final String API_URL = "https://api.deepai.org/api/nsfw-detector";
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(ProfanityMemeValidationStrategyImpl.class);
 	@Value("${spring.profiles.active:dev}")
-	private String state;
+	private String active;
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -44,7 +44,8 @@ public class ProfanityMemeValidationStrategyImpl implements MemeValidationStrate
 	 * @param url the image url to check for profanity
 	 */
 	private void checkProfanity(String url) {
-		if (state.equalsIgnoreCase("dev")) {
+		// if not prod env don't validate
+		if (!active.equalsIgnoreCase("prod")) {
 			return;
 		}
 
