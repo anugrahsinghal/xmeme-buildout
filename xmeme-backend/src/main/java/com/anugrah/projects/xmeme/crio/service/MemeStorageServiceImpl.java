@@ -47,8 +47,18 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 	@Override
 	public MemeCreatedResponse createMeme(MemeDto memeDto) {
 		performValidations(memeDto);
+		log.info("now using model mapper");
+		Meme meme;
+		try {
+			meme = modelMapper.map(memeDto, Meme.class);
+		} catch (Exception e) {
+			log.info("Exception in model mapper", e);
+			log.info("Tryign using constructor");
+			meme = new Meme(memeDto.getName(), memeDto.getUrl(), memeDto.getCaption());
+			log.info("meme made");
+		}
+		log.info("after model mapper try catch block [{}]", meme);
 
-		final Meme meme = modelMapper.map(memeDto, Meme.class);
 
 		final Meme savedMeme = memeRepository.save(meme);
 		log.info("MEME SAVED {}", savedMeme.getId());
@@ -114,6 +124,7 @@ public class MemeStorageServiceImpl implements MemeStorageService {
 		nonEmptyValidation.validateMeme(memeDto);
 		uniqueValuesValidation.validateMeme(memeDto);
 		profanityValidation.validateMeme(memeDto);
+		log.info("validation done");
 	}
 
 	//	@SneakyThrows(value = {DuplicateMemeException.class, MemeValidationException.class})
