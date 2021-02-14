@@ -1,6 +1,5 @@
 package com.anugrah.projects.xmeme.crio.controller;
 
-import com.anugrah.projects.xmeme.crio.config.AppConfig;
 import com.anugrah.projects.xmeme.crio.entity.Meme;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeCreatedResponse;
 import com.anugrah.projects.xmeme.crio.exchanges.MemeDto;
@@ -19,7 +18,6 @@ import javax.validation.constraints.NotNull;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -76,7 +74,7 @@ public class MemesController {
 	 * "id": "1"
 	 * }
 	 */
-	@PostMapping(value = "/memes", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/memes")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "409", description = "Duplicate Meme")
 	})
@@ -111,7 +109,7 @@ public class MemesController {
 	 * }
 	 * ]
 	 */
-	@GetMapping(value = "/memes", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/memes")
 	@Operation(description = "retrieveMemes", summary = "retrieveMemes")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Successful Operation")})
@@ -141,7 +139,7 @@ public class MemesController {
 	 * }
 	 * ]
 	 */
-	@GetMapping(value = "memes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "memes/{id}")
 	public ResponseEntity<Meme> retrieveMemes(@NotNull @NotBlank @PathVariable Long id) {
 		final Meme meme = memeRetrievalService.retrieveMeme(id);
 		log.info("meme found = {}", meme);
