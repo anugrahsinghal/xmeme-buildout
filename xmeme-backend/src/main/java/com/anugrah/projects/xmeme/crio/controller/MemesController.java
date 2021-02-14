@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemesController {
 
 	private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(MemesController.class);
+
 	@Autowired
 	private MemeStorageService memeStorageService;
 
