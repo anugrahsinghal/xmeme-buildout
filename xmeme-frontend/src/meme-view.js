@@ -93,5 +93,5 @@ function loadMeme(memeId) {
 }
 
 function redirectToHomepage() {
-
+    window.location.assign('/')
 }
