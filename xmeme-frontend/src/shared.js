@@ -2,7 +2,8 @@
  * URL to communicate with the backend server
  */
 const xmemeBackendUrl =
-  "https://pettywaterycookie.anugrahsinghal.repl.co/memes";
+  "https://infinite-beach-28510.herokuapp.com/memes";
+
 /**
  * the meme for to edit or create meme
  */

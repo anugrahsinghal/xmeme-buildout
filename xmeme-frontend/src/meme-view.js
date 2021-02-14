@@ -28,9 +28,10 @@ function deleteMemeRequest() {
       log(response);
       if (response.status === 204 || response.status === "204") {
         triggerIframe("Meme Deleted");
+        redirectToHomepage();
         log("Meme Deleted Successfully");
       } else {
-        throw new Error(response.status);
+        throw new Error(response.statusText);
       }
     })
     .catch((error) => {
@@ -89,4 +90,8 @@ function loadMeme(memeId) {
     .catch((error) => {
       console.error("Error while Loading memes:", error);
     });
+}
+
+function redirectToHomepage() {
+
 }
