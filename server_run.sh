@@ -1,2 +1,1 @@
-
-java -jar xmeme-backend/target/xmeme-backend.jar
+java -jar xmeme-backend/target/xmeme-backend.jar >> xmeme-run.log 2> xmeme-run-error.log
